@@ -2,12 +2,47 @@
 import Base from '../../layouts/Base.astro';
 ---
 <Base title="SEO/AEO/GEO Optimization Case Study | Federica Iengo" description="Independent SEO, AEO and GEO optimization case study using Notion's public site as a reproducible research subject.">
-<p class="eyebrow">Independent case study · Notion public-site baseline</p><h1>SEO/AEO/GEO Optimization Case Study</h1>
-<p>This independent study uses Notion as a real B2B SaaS research subject. It is not client work and is not affiliated with Notion.</p>
-<h2>Research question</h2><p>Which page, entity and evidence signals make a brand easier to retrieve, summarize, cite and compare — and where does a conventional SEO audit fail to capture those signals?</p>
-<h2>Baseline v1</h2><p>The public site gives us unusually clear evidence to test: explicit workspace positioning, project-management capabilities, AI agents, enterprise search, connector coverage and structured pricing. That makes it suitable for testing different intent families rather than reducing visibility to one score.</p>
-<div class="grid"><article class="card"><h3>Discovery</h3><p>Can the brand surface for category-level workspace and project-management questions?</p></article><article class="card"><h3>Comparison</h3><p>Can systems retrieve enough explicit evidence to compare capabilities and trade-offs?</p></article><article class="card"><h3>Pricing & value</h3><p>Are plan boundaries and AI packaging answerable without inference?</p></article><article class="card"><h3>AI capabilities</h3><p>Can agents, enterprise search and connected-app capabilities be retrieved accurately?</p></article></div>
-<h2>Prompt dataset</h2><p>Baseline v1 contains 12 controlled prompts across category discovery, alternatives, comparisons, capabilities, pricing/value, implementation and recommendation intent. Raw prompt definitions are versioned in the repository before observations are scored.</p>
-<h2>Evidence standard</h2><p>Observed public evidence, interpretation and proposed intervention are reported separately. No traffic, ranking, citation or revenue improvement is claimed unless it can be measured after an intervention.</p>
-<h2>Next measurement layer</h2><p>Each observation will record prompt family, brand mention, citation presence, recommendation inclusion, source URL and notes. Python aggregation is already versioned, but it deliberately refuses to produce results until real observations exist.</p>
+<p class="eyebrow">Independent case study · Notion public-site baseline</p>
+<h1>SEO/AEO/GEO Optimization Case Study</h1>
+<p>This independent study uses Notion as a real B2B SaaS research subject. It is not client work and is not affiliated with Notion. The goal is not to award a single visibility score, but to test how well public information supports discovery, retrieval, comparison and answer generation across different search intents.</p>
+
+<h2>Research question</h2>
+<p>Which page, entity and evidence signals make a brand easier to retrieve, summarize, cite and compare, and where does a conventional SEO audit fail to capture those signals?</p>
+
+<h2>Baseline v1</h2>
+<p>The public site provides a useful mix of evidence: workspace positioning, project-management capabilities, AI agents, enterprise search, connector coverage and structured pricing. Those signals can be tested separately instead of being collapsed into a vague claim that a page is "AI optimized".</p>
+
+<div class="grid">
+<article class="card"><h3>Discovery</h3><p>Can the brand be matched to category-level workspace, knowledge and project-management needs?</p></article>
+<article class="card"><h3>Comparison</h3><p>Is there enough explicit evidence to compare capabilities and trade-offs without filling gaps by inference?</p></article>
+<article class="card"><h3>Pricing & value</h3><p>Are plan boundaries, included capabilities and AI packaging clear enough to answer buyer questions accurately?</p></article>
+<article class="card"><h3>AI capabilities</h3><p>Can agents, enterprise search and connected-app capabilities be retrieved with precise scope and terminology?</p></article>
+</div>
+
+<h2>Audit framework</h2>
+<p>The optimization audit separates conventional search signals from answer-engine and generative-search requirements. This prevents GEO from becoming a relabelled SEO checklist.</p>
+<div class="grid">
+<article class="card"><h3>1 · Intent & query fan-out</h3><p>Map the original buyer question to the related sub-questions a retrieval system may need: category, capability, integration, price, implementation and comparison.</p></article>
+<article class="card"><h3>2 · Entity clarity</h3><p>Check whether product, feature, audience and integration entities are named consistently enough to be resolved without relying on brand familiarity.</p></article>
+<article class="card"><h3>3 · Answerability</h3><p>Identify whether important questions have direct, self-contained answers close to the supporting evidence rather than scattered across marketing copy.</p></article>
+<article class="card"><h3>4 · Citability</h3><p>Look for specific claims, definitions, constraints and first-party evidence that can support an answer. Clear evidence matters more than simply repeating keywords.</p></article>
+<article class="card"><h3>5 · Comparison readiness</h3><p>Test whether capabilities, limits, pricing and integrations can be compared on equivalent dimensions without guessing what a plan or feature includes.</p></article>
+<article class="card"><h3>6 · Evidence freshness</h3><p>Date volatile evidence such as pricing, AI packaging and beta features so later observations can distinguish a real change from stale source material.</p></article>
+</div>
+
+<h2>Controlled prompt dataset</h2>
+<p>Baseline v1 contains 12 frozen prompts across category discovery, alternatives, comparisons, capabilities, pricing/value, implementation and recommendation intent. Prompt definitions are versioned before observations are collected, which reduces the temptation to rewrite the test after seeing an answer.</p>
+
+<h2>Intervention design</h2>
+<p>The next optimization layer will turn audit findings into page-level proposals. Each proposed change must identify the intent it serves, the evidence it clarifies and the metric it could plausibly affect. Examples include tighter entity definitions, explicit capability boundaries, concise answer blocks, clearer comparison dimensions and dated evidence for volatile claims.</p>
+<p>A proposed intervention is not a result. It becomes evidence only after publication and a new controlled measurement cycle.</p>
+
+<h2>Measurement model</h2>
+<p>Observed public evidence, analysis, proposed intervention and post-intervention measurement remain separate throughout the study. AI visibility is also decomposed rather than treated as a ranking: mention coverage, citation coverage, recommendation inclusion, source patterns and consistency are measured independently.</p>
+
+<h2>What this case study will not claim</h2>
+<p>No traffic, ranking, citation, conversion or revenue improvement will be attributed to an intervention unless it is actually observed. Correlation will not be presented as causation, and missing evidence will be recorded as missing rather than converted into a negative product claim.</p>
+
+<h2>Current status</h2>
+<p>The public baseline, controlled prompts and Python analysis layer are versioned. The audit framework and intervention rules are now frozen. Real AI observations and post-intervention results remain unpublished until they can be collected reproducibly and audited.</p>
 </Base>
