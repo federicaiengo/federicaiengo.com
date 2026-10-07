@@ -1,4 +1,40 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="Federica Iengo | Data Analytics & AI Search" description="Federica Iengo works across Data Analytics, AI Search, GEO, AEO and SEO, turning fragmented information into measurable, useful insight."><p class="eyebrow">Data Analytics · AI Search · GEO · AEO · SEO</p><h1>Turning fragmented information into structured, measurable insight.</h1><p>I work at the intersection of Data Analytics and AI Search: understanding data, retrieval, citations, entities and why information becomes visible — or remains absent — in search and generative systems.</p><h2>Selected work</h2><div class="grid"><article class="card"><h3>AI Search Visibility Lab</h3><p>A reproducible Python framework for structured query sets, brand visibility measurement, citation and retrieval analysis, automated reporting and testing.</p></article><article class="card"><h3>E-Commerce Revenue & Operations Analytics</h3><p>Snowflake, dbt and Python analysis spanning data quality, warehousing, lifecycle anomalies and financial reconciliation.</p></article><article class="card"><h3>Insurance Claims Analytics</h3><p>PostgreSQL and Tableau analysis of exposure, severity, concentration and data quality.</p></article></div></Base>
+<Base title="Federica Iengo | Data Analytics & AI Search" description="Federica Iengo works across Data Analytics, AI Search, GEO, AEO and SEO, turning fragmented information into measurable, useful insight.">
+<section class="hero">
+<p class="eyebrow">Data Analytics · AI Search · GEO · AEO · SEO</p>
+<h1>I make complex information easier to understand, measure and use.</h1>
+<p class="lead">My work sits between data analysis and AI search. I use SQL and Python to investigate data, and I study how search and generative systems retrieve, interpret, cite and recommend information.</p>
+<div class="actions"><a class="button primary" href="/projects">Explore projects</a><a class="button" href="/about">About me</a></div>
+</section>
+
+<section class="proof">
+<p class="eyebrow">Current focus</p>
+<div class="grid">
+<article class="card"><h3>Measure</h3><p>Build reproducible datasets and metrics for AI visibility, citations, retrieval and competitive analysis.</p></article>
+<article class="card"><h3>Diagnose</h3><p>Find content, entity, evidence and data-quality gaps instead of reducing a problem to a single score.</p></article>
+<article class="card"><h3>Improve</h3><p>Turn findings into testable changes, then keep proposed interventions separate from measured outcomes.</p></article>
+</div>
+</section>
+
+<section>
+<div class="section-heading"><div><p class="eyebrow">Selected work</p><h2>Projects built around evidence</h2></div><a href="/projects">View all projects →</a></div>
+<div class="grid featured">
+<a class="card project-card" href="/projects/seo-aeo-geo-optimization"><span class="project-type">AI Search · Case study</span><h3>SEO/AEO/GEO Optimization</h3><p>An independent Notion case study moving from public baseline and query fan-out to diagnosis, proposed optimization and controlled measurement design.</p><span class="project-link">Read case study →</span></a>
+<a class="card project-card" href="/projects/ai-search-competitive-intelligence"><span class="project-type">AI Search · Competitive intelligence</span><h3>AI Search Competitive Intelligence</h3><p>A controlled benchmark across Notion, Asana, ClickUp and monday.com using 35 frozen prompts, first-party evidence and auditable scoring rules.</p><span class="project-link">Explore benchmark →</span></a>
+<article class="card project-card"><span class="project-type">Data · Snowflake · dbt</span><h3>E-Commerce Revenue & Operations Analytics</h3><p>Nine related datasets audited with Python, modelled through Snowflake and dbt, then investigated for lifecycle anomalies and financial reconciliation.</p></article>
+<article class="card project-card"><span class="project-type">Data · PostgreSQL · Tableau</span><h3>Insurance Claims Analytics</h3><p>Analysis of financial exposure, claim severity, portfolio concentration and data quality with an executive reporting layer.</p></article>
+</div>
+</section>
+
+<section class="principle">
+<p class="eyebrow">Working principle</p>
+<h2>Evidence first. Claims second.</h2>
+<p>I keep observed facts, analysis, proposed changes and measured outcomes separate. That matters in data work, and it matters just as much when evaluating visibility in AI-generated answers.</p>
+</section>
+</Base>
+
+<style>
+.hero{max-width:1000px;padding-bottom:3rem}.lead{font-size:clamp(1.08rem,2vw,1.28rem);max-width:760px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:2rem}.button{display:inline-flex;align-items:center;justify-content:center;border:1px solid #38352c;border-radius:999px;padding:11px 17px;text-decoration:none;font-size:.9rem;font-weight:700}.button.primary{background:#d6b86a;color:#111;border-color:#d6b86a}.button:hover{border-color:#d6b86a}.button.primary:hover{color:#000;background:#e1c77f}.proof,section+section{margin-top:5.5rem}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:1.6rem}.section-heading h2{margin:.25rem 0 0}.section-heading>a{color:#bcb8ac;font-size:.9rem;white-space:nowrap}.featured{grid-template-columns:repeat(2,minmax(0,1fr))}.project-card{text-decoration:none;display:block}.project-card:hover{color:inherit}.project-type{display:block;color:#d6b86a;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;font-weight:750;margin-bottom:.8rem}.project-link{display:block;margin-top:1.15rem;color:#d2c49c;font-size:.84rem;font-weight:700}.principle{border-top:1px solid #222;padding-top:3.5rem}.principle h2{margin:.35rem 0 .8rem}@media(max-width:680px){.proof,section+section{margin-top:4rem}.section-heading{align-items:flex-start;flex-direction:column;gap:8px}.featured{grid-template-columns:1fr}}
+</style>
