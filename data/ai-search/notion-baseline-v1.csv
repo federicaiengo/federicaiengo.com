@@ -1,0 +1,13 @@
+prompt_id,prompt_family,prompt,observation_target,status
+D01,category_discovery,"What are the best connected workspace tools for teams?","brand inclusion; positioning; cited sources",planned
+D02,category_discovery,"Which tools combine docs, wikis, projects and AI in one workspace?","brand inclusion; feature framing; citations",planned
+A01,alternatives,"What are the best alternatives to Notion for a growing team?","competitor set; comparison dimensions; citations",planned
+A02,alternatives,"What alternatives to Notion are better for structured project management?","competitor set; differentiation; citations",planned
+C01,comparison,"Compare Notion, Asana and ClickUp for cross-functional teams.","brand positioning; capabilities; recommendation",planned
+C02,comparison,"Notion vs Asana: which is better for project management and knowledge management?","trade-offs; evidence; citations",planned
+U01,capability,"Which workspace tools can search across Slack, Google Drive and GitHub using AI?","retrieval of connector capabilities; citations",planned
+U02,capability,"Which tools combine project management with enterprise search and AI agents?","feature retrieval; brand inclusion; citations",planned
+P01,pricing_value,"How much does Notion cost for a growing team and what AI features are included?","pricing accuracy; AI packaging; citations",planned
+P02,pricing_value,"Which collaborative workspace gives the best value for a 20-person team needing AI search?","recommendation; pricing evidence; citations",planned
+I01,implementation,"Can Notion replace separate wiki, project tracker and AI search tools?","consolidation claim; limitations; citations",planned
+R01,recommendation,"Recommend three workspace platforms for a SaaS team that wants docs, projects, enterprise search and AI automation.","shortlist inclusion; ordering; rationale; citations",planned
