@@ -1,10 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
 ---
-<Base title="AI Search Competitive Intelligence | Federica Iengo" description="A reproducible competitive intelligence benchmark for AI Search visibility, citations and retrieval.">
+<Base title="AI Search Competitive Intelligence | Federica Iengo" description="A reproducible AI Search benchmark comparing Notion, Asana, ClickUp and monday.com across controlled buyer-intent prompts.">
 <p class="eyebrow">Python · AI Search · Competitive intelligence</p><h1>AI Search Competitive Intelligence</h1>
-<p>A reproducible benchmark designed to compare brands across the same buyer-intent prompt set without treating a single AI answer as a ranking.</p>
-<h2>Measurement model</h2><div class="grid"><article class="card"><h3>Mention coverage</h3><p>Share of prompts in which each brand is explicitly mentioned.</p></article><article class="card"><h3>Citation coverage</h3><p>Share of prompts for which owned or relevant third-party sources are cited.</p></article><article class="card"><h3>Recommendation inclusion</h3><p>Frequency of inclusion in shortlists and recommendation contexts.</p></article><article class="card"><h3>Consistency</h3><p>Stability of brand positioning across prompt families and repeated observations.</p></article></div>
-<h2>Prompt families</h2><p>Category discovery · alternatives · brand-vs-brand comparison · capability/use-case · pricing/value · implementation/integration · buyer-stage recommendation.</p>
-<h2>Output</h2><p>Python-generated scorecards, prompt-level evidence, source analysis, topical/entity gaps and prioritized recommendations. Raw observations remain auditable so interpretation can be challenged or reproduced.</p>
+<p>An independent benchmark comparing Notion, Asana, ClickUp and monday.com across the same controlled buyer-intent prompt set. This is research, not client work for any benchmarked company.</p>
+<h2>Dataset v1</h2><p><strong>35 frozen prompts</strong> across seven intent families: category discovery, alternatives, comparison, capability, pricing/value, implementation and recommendation. Prompt definitions are versioned before observations are scored.</p>
+<h2>Measurement model</h2><div class="grid"><article class="card"><h3>Mention coverage</h3><p>Share of eligible prompts in which each brand is explicitly mentioned.</p></article><article class="card"><h3>Citation coverage</h3><p>Share of eligible prompts with evidence cited for the brand.</p></article><article class="card"><h3>Recommendation coverage</h3><p>Share of recommendation prompts in which a brand is included.</p></article><article class="card"><h3>Intent consistency</h3><p>Family-level visibility is preserved so a strong result in one intent cannot hide weakness in another.</p></article></div>
+<h2>Audit trail</h2><p>Every observation records engine/run, prompt, brand, mention, citation, recommendation inclusion, ordered position where meaningful, source type, source URL and an evidence note. Repeated runs append evidence instead of overwriting history.</p>
+<h2>Scoring guardrail</h2><p>Mean position is calculated only for explicitly ordered shortlists and is never presented as a universal AI-search rank. Missing observations are never imputed. The Python pipeline refuses to invent results.</p>
+<h2>Status</h2><p>Protocol and dataset are ready. Results remain unpublished until real observations are collected and auditable.</p>
 </Base>
