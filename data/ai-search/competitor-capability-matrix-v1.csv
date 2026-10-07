@@ -1,5 +1,5 @@
-brand,category_positioning,project_management,knowledge_docs,ai_search,ai_agents,integrations,pricing_public,measurement_role
-Notion,"connected workspace","yes","yes","Enterprise Search","yes","Slack; Google Drive; GitHub; Jira; Microsoft ecosystem","yes","primary optimization subject"
-Asana,"work management","yes","supporting knowledge/context","AI/work intelligence","AI features","broad app ecosystem","yes","structured-work competitor"
-ClickUp,"all-in-one productivity","yes","yes","connected search","AI/automation features","broad app ecosystem","yes","all-in-one competitor"
-monday.com,"work platform","yes","work docs","AI/search capabilities","AI features","broad app ecosystem","yes","work-platform competitor"
+brand,primary_positioning,structured_project_work,knowledge_docs,cross_source_search,agentic_ai,comparison_strength,evidence_status
+Notion,"connected workspace","yes","yes","yes","yes","knowledge + projects + enterprise retrieval","first-party baseline captured 2026-10-07"
+Asana,"work management","yes","supporting context","not scored yet","yes","structured Work Graph + workflows + agents","first-party baseline captured 2026-10-07"
+ClickUp,"productivity/work platform","yes","yes","yes","yes","broad native work objects + connected search","first-party baseline captured 2026-10-07"
+monday.com,"AI work platform","yes","not scored yet","not scored yet","yes","structured execution + portfolio/work management","first-party baseline captured 2026-10-07"
