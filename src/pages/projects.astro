@@ -1,4 +1,54 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="Projects | Federica Iengo" description="Data Analytics and AI Search projects by Federica Iengo."><p class="eyebrow">Projects</p><h1>Evidence, not just claims.</h1><div class="grid"><article class="card"><h2>AI Search Visibility Lab</h2><p>Measurement framework for AI-search visibility, retrieval and citations.</p></article><article class="card"><h2><a href="/projects/seo-aeo-geo-optimization">SEO/AEO/GEO Optimization Case Study</a></h2><p>Independent public-site audit: technical/content baseline, query fan-out, entities, answerability, citability and proposed optimization.</p></article><article class="card"><h2><a href="/projects/ai-search-competitive-intelligence">AI Search Competitive Intelligence</a></h2><p>Cross-brand prompt benchmark combining Python analysis with mentions, citations, retrieval sources and topical gaps.</p></article></div></Base>
+<Base title="Projects | Federica Iengo" description="Data Analytics and AI Search projects by Federica Iengo, spanning GEO/AEO research, Python, SQL, Snowflake, dbt, PostgreSQL and Tableau.">
+<section class="intro">
+<p class="eyebrow">Projects</p>
+<h1>Work that can be inspected, not just described.</h1>
+<p class="lead">These projects cover two sides of my work: understanding how information behaves in search and generative systems, and investigating structured data with reproducible analytical methods.</p>
+</section>
+
+<section class="project-group">
+<div class="group-heading"><p class="eyebrow">AI Search · GEO · AEO</p><h2>Visibility, retrieval and optimization</h2></div>
+<div class="grid featured">
+<article class="card project-card">
+<span class="status">Framework · Python</span>
+<h3>AI Search Visibility Lab</h3>
+<p>A reproducible framework for controlled query sets, brand visibility measurement, citation and retrieval analysis, automated reporting and testing.</p>
+<ul><li>Structured prompt/query datasets</li><li>Visibility and citation metrics</li><li>Evidence provenance</li><li>Python reporting and tests</li></ul>
+</article>
+<a class="card project-card" href="/projects/seo-aeo-geo-optimization">
+<span class="status">Independent case study · Notion</span>
+<h3>SEO/AEO/GEO Optimization</h3>
+<p>A real public-site research subject taken from baseline through diagnosis, query fan-out, entity analysis and proposed optimization.</p>
+<ul><li>12 frozen baseline prompts</li><li>Answerability and citability audit</li><li>Six intervention candidates</li><li>Before → proposed redesign examples</li></ul>
+<span class="open">Read case study →</span>
+</a>
+<a class="card project-card" href="/projects/ai-search-competitive-intelligence">
+<span class="status">Benchmark · 4 real brands</span>
+<h3>AI Search Competitive Intelligence</h3>
+<p>A controlled comparison of Notion, Asana, ClickUp and monday.com designed to keep first-party evidence separate from AI observations.</p>
+<ul><li>35 frozen prompts</li><li>Seven intent families</li><li>Capability and pricing baselines</li><li>Auditable scoring rules</li></ul>
+<span class="open">Explore benchmark →</span>
+</a>
+</div>
+</section>
+
+<section class="project-group">
+<div class="group-heading"><p class="eyebrow">Data Analytics</p><h2>Data quality, modelling and business analysis</h2></div>
+<div class="grid data-grid">
+<article class="card project-card"><span class="status">Python · Snowflake · dbt</span><h3>E-Commerce Revenue & Operations Analytics</h3><p>Nine related datasets audited with Python/pandas, loaded into a Snowflake RAW layer and developed through dbt staging and intermediate models.</p><ul><li>Automated data tests</li><li>Order lifecycle anomalies</li><li>Geographic performance</li><li>Order-level financial reconciliation</li></ul></article>
+<article class="card project-card"><span class="status">PostgreSQL · SQL · Tableau</span><h3>Insurance Claims Analytics</h3><p>Analysis of portfolio exposure, claim severity, concentration and data quality, with an executive Tableau reporting layer.</p><ul><li>Financial exposure</li><li>Severity analysis</li><li>Portfolio concentration</li><li>Executive reporting</li></ul></article>
+</div>
+</section>
+
+<section class="method">
+<p class="eyebrow">Method</p>
+<h2>Reproducibility is part of the deliverable.</h2>
+<p>Where a project uses a benchmark, the prompts and scoring rules are fixed before results are interpreted. Where it uses public evidence, observations and inference stay separate. Where it uses data, transformations and quality checks are documented rather than hidden behind a final chart.</p>
+</section>
+</Base>
+
+<style>
+.intro{max-width:920px}.lead{font-size:clamp(1.08rem,2vw,1.25rem)}.project-group{margin-top:5.5rem}.group-heading{max-width:800px;margin-bottom:1.8rem}.group-heading h2{margin:.3rem 0}.featured{grid-template-columns:repeat(3,minmax(0,1fr))}.data-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.project-card{text-decoration:none;display:block}.project-card:hover{color:inherit}.project-card h3{font-size:1.25rem}.status{display:block;color:#d6b86a;font-size:.65rem;line-height:1.45;text-transform:uppercase;letter-spacing:.12em;font-weight:750;margin-bottom:.9rem}.project-card ul{margin:1.15rem 0 0;padding-left:1.1rem;color:#8f8d87;font-size:.86rem;line-height:1.7}.open{display:block;color:#d2c49c;font-size:.84rem;font-weight:700;margin-top:1.25rem}.method{margin-top:6rem;padding-top:3.5rem;border-top:1px solid #222}.method h2{margin:.35rem 0 .8rem}@media(max-width:900px){.featured{grid-template-columns:1fr 1fr}.featured .project-card:first-child{grid-column:1/-1}}@media(max-width:680px){.project-group{margin-top:4rem}.featured,.data-grid{grid-template-columns:1fr}.featured .project-card:first-child{grid-column:auto}.method{margin-top:4.5rem}}
+</style>
