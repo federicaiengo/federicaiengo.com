@@ -1,0 +1,2 @@
+run_id,prompt_id,prompt_family,brand,mentioned,cited,recommended,source_url,notes
+example,D01,category_discovery,ExampleBrand,false,false,false,,Example schema only - not a measured result
