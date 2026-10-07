@@ -1,5 +1,5 @@
 brand,primary_positioning,structured_project_work,knowledge_docs,cross_source_search,agentic_ai,comparison_strength,evidence_status
 Notion,"connected workspace","yes","yes","yes","yes","knowledge + projects + enterprise retrieval","first-party baseline captured 2026-10-07"
-Asana,"work management","yes","supporting context","not scored yet","yes","structured Work Graph + workflows + agents","first-party baseline captured 2026-10-07"
+Asana,"work management","yes","supporting context","external AI access to Work Graph via AI Connectors/MCP","yes","structured Work Graph + workflows + agents","first-party baseline deepened 2026-10-07"
 ClickUp,"productivity/work platform","yes","yes","yes","yes","broad native work objects + connected search","first-party baseline captured 2026-10-07"
-monday.com,"AI work platform","yes","not scored yet","not scored yet","yes","structured execution + portfolio/work management","first-party baseline captured 2026-10-07"
+monday.com,"AI work platform","yes","yes: workspaces group boards, dashboards and docs","integrations connect external tools; cross-source semantic search not established in current evidence","yes","structured execution + portfolio oversight + AI workflows/agents","first-party baseline deepened 2026-10-07"
