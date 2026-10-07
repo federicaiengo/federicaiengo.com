@@ -11,7 +11,6 @@ import Base from '../../layouts/Base.astro';
 
 <h2>Baseline v1</h2>
 <p>The public site provides a useful mix of evidence: workspace positioning, project-management capabilities, AI agents, enterprise search, connector coverage and structured pricing. Those signals can be tested separately instead of being collapsed into a vague claim that a page is "AI optimized".</p>
-
 <div class="grid">
 <article class="card"><h3>Discovery</h3><p>Can the brand be matched to category-level workspace, knowledge and project-management needs?</p></article>
 <article class="card"><h3>Comparison</h3><p>Is there enough explicit evidence to compare capabilities and trade-offs without filling gaps by inference?</p></article>
@@ -20,29 +19,38 @@ import Base from '../../layouts/Base.astro';
 </div>
 
 <h2>Audit framework</h2>
-<p>The optimization audit separates conventional search signals from answer-engine and generative-search requirements. This prevents GEO from becoming a relabelled SEO checklist.</p>
+<p>The audit separates conventional search signals from answer-engine and generative-search requirements. GEO is not treated as a relabelled SEO checklist.</p>
 <div class="grid">
-<article class="card"><h3>1 · Intent & query fan-out</h3><p>Map the original buyer question to the related sub-questions a retrieval system may need: category, capability, integration, price, implementation and comparison.</p></article>
-<article class="card"><h3>2 · Entity clarity</h3><p>Check whether product, feature, audience and integration entities are named consistently enough to be resolved without relying on brand familiarity.</p></article>
-<article class="card"><h3>3 · Answerability</h3><p>Identify whether important questions have direct, self-contained answers close to the supporting evidence rather than scattered across marketing copy.</p></article>
-<article class="card"><h3>4 · Citability</h3><p>Look for specific claims, definitions, constraints and first-party evidence that can support an answer. Clear evidence matters more than simply repeating keywords.</p></article>
-<article class="card"><h3>5 · Comparison readiness</h3><p>Test whether capabilities, limits, pricing and integrations can be compared on equivalent dimensions without guessing what a plan or feature includes.</p></article>
-<article class="card"><h3>6 · Evidence freshness</h3><p>Date volatile evidence such as pricing, AI packaging and beta features so later observations can distinguish a real change from stale source material.</p></article>
+<article class="card"><h3>1 · Intent & query fan-out</h3><p>Map the original buyer question to related sub-questions: category, capability, integration, price, implementation and comparison.</p></article>
+<article class="card"><h3>2 · Entity clarity</h3><p>Check whether product, feature, audience and integration entities are named consistently enough to resolve without relying on brand familiarity.</p></article>
+<article class="card"><h3>3 · Answerability</h3><p>Check whether important questions have direct, self-contained answers close to the supporting evidence.</p></article>
+<article class="card"><h3>4 · Citability</h3><p>Look for specific claims, definitions and constraints that can support an answer. Clear evidence matters more than keyword repetition.</p></article>
+<article class="card"><h3>5 · Comparison readiness</h3><p>Test whether capabilities, limits, pricing and integrations can be compared on equivalent dimensions without guessing.</p></article>
+<article class="card"><h3>6 · Evidence freshness</h3><p>Date volatile evidence such as pricing, AI packaging and beta features to reduce stale-answer risk.</p></article>
 </div>
 
-<h2>Controlled prompt dataset</h2>
-<p>Baseline v1 contains 12 frozen prompts across category discovery, alternatives, comparisons, capabilities, pricing/value, implementation and recommendation intent. Prompt definitions are versioned before observations are collected, which reduces the temptation to rewrite the test after seeing an answer.</p>
+<h2>From diagnosis to optimization</h2>
+<p>The baseline produced six intervention candidates. Four are high-priority: clarify category boundaries, make capabilities comparison-ready, separate AI capability definitions, and connect pricing evidence to the questions buyers actually ask.</p>
 
-<h2>Intervention design</h2>
-<p>The next optimization layer will turn audit findings into page-level proposals. Each proposed change must identify the intent it serves, the evidence it clarifies and the metric it could plausibly affect. Examples include tighter entity definitions, explicit capability boundaries, concise answer blocks, clearer comparison dimensions and dated evidence for volatile claims.</p>
-<p>A proposed intervention is not a result. It becomes evidence only after publication and a new controlled measurement cycle.</p>
+<div class="grid">
+<article class="card"><p class="eyebrow">Example 01 · Entity clarity</p><h3>Define the category without flattening the product</h3><p><strong>Retrieval problem:</strong> Notion can be described as a workspace, knowledge tool, project-management system, enterprise-search product and AI platform. A discovery answer may have to assemble that definition from several contexts.</p><p><strong>Proposed pattern:</strong> lead with one direct definition, then name the major jobs and capability entities in a compact, self-contained passage.</p><p><strong>Test:</strong> D01, D02, C01 and C02.</p></article>
+<article class="card"><p class="eyebrow">Example 02 · Capability boundaries</p><h3>Keep search and agentic action distinct</h3><p><strong>Retrieval problem:</strong> Agent, Enterprise Search and connectors are related but not interchangeable. An answer can overgeneralize what is searched or what an agent can do.</p><p><strong>Proposed pattern:</strong> answer "What does Enterprise Search search?" separately from "How is that different from an AI agent?", with permission and source boundaries stated explicitly.</p><p><strong>Test:</strong> U01, U02 and I01.</p></article>
+<article class="card"><p class="eyebrow">Example 03 · Comparison readiness</p><h3>Expose equivalent buyer dimensions</h3><p><strong>Retrieval problem:</strong> broad product claims are difficult to compare when evidence for project work, knowledge, search, integrations and AI is scattered.</p><p><strong>Proposed pattern:</strong> structure evidence around buyer questions: projects/tasks, team knowledge, connected search, AI functions and plan inclusion.</p><p><strong>Test:</strong> C01, C02 and R01.</p></article>
+<article class="card"><p class="eyebrow">Example 04 · Pricing & value</p><h3>Answer the decision, not only the seat price</h3><p><strong>Retrieval problem:</strong> a pricing table cannot by itself answer what a 20-person team should choose. Required capabilities, AI packaging and billing assumptions matter.</p><p><strong>Proposed pattern:</strong> start with the required capabilities, verify the current plan that includes them, state billing assumptions and date volatile packaging.</p><p><strong>Test:</strong> P01, P02 and R01.</p></article>
+</div>
+
+<h2>Why these examples are not "results"</h2>
+<p>The proposed patterns are original redesign examples based on the public baseline; they are not changes made by Notion and they are not presented as verbatim Notion copy. They demonstrate optimization design. Performance can only be discussed after a controlled observation cycle.</p>
+
+<h2>Controlled prompt dataset</h2>
+<p>Baseline v1 contains 12 frozen prompts across category discovery, alternatives, comparisons, capabilities, pricing/value, implementation and recommendation intent. Prompt definitions are versioned before observations are collected, reducing the temptation to rewrite the test after seeing an answer.</p>
 
 <h2>Measurement model</h2>
-<p>Observed public evidence, analysis, proposed intervention and post-intervention measurement remain separate throughout the study. AI visibility is also decomposed rather than treated as a ranking: mention coverage, citation coverage, recommendation inclusion, source patterns and consistency are measured independently.</p>
+<p>Observed public evidence, analysis, proposed intervention and post-intervention measurement remain separate throughout the study. AI visibility is decomposed rather than treated as a ranking: mention coverage, citation coverage, recommendation inclusion, source patterns and consistency are measured independently.</p>
 
 <h2>What this case study will not claim</h2>
 <p>No traffic, ranking, citation, conversion or revenue improvement will be attributed to an intervention unless it is actually observed. Correlation will not be presented as causation, and missing evidence will be recorded as missing rather than converted into a negative product claim.</p>
 
 <h2>Current status</h2>
-<p>The public baseline, controlled prompts and Python analysis layer are versioned. The audit framework and intervention rules are now frozen. Real AI observations and post-intervention results remain unpublished until they can be collected reproducibly and audited.</p>
+<p>The public baseline, controlled prompts, intervention register, optimization examples and Python analysis layer are versioned. Real AI observations and post-intervention results remain unpublished until they can be collected reproducibly and audited.</p>
 </Base>
