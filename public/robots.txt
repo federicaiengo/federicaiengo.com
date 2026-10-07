@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://federicaiengo.com/sitemap-index.xml
