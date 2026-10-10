@@ -1,2 +1,2 @@
-run_id,prompt_id,prompt_family,brand,mentioned,cited,recommended,source_url,notes
-example,D01,category_discovery,ExampleBrand,false,false,false,,Example schema only - not a measured result
+run_id,run_date,engine,prompt_id,prompt_family,brand,mentioned,cited,recommended,position,owned_source_cited,third_party_source_cited,source_url,evidence_note
+EXAMPLE_NOT_MEASURED,,DemoEngine,D01,category_discovery,ExampleBrand,false,false,false,,,,,ILLUSTRATIVE FORMAT ONLY - do not score as a real observation

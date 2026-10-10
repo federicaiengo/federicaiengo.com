@@ -8,24 +8,38 @@ import Base from '../layouts/Base.astro';
 <p class="lead">These projects cover two sides of my work: understanding how information behaves in search and generative systems, and investigating structured data with reproducible analytical methods.</p>
 </section>
 
+<section class="evidence-note" aria-label="Project evidence and status"><p class="eyebrow">Reading guide</p><h2>What is demonstrated, and what is still being tested.</h2><p>These are independent portfolio projects, not client engagements. A research protocol, working analysis pipeline or proposed optimization is not evidence of improved search visibility or commercial performance. Each case study identifies its current status and distinguishes source material, analysis and measured outcomes.</p></section>
+
+<section class="reader-path" aria-label="How to read these projects">
+<p class="eyebrow">For recruiters and curious readers</p>
+<h2>What does this work actually demonstrate?</h2>
+<p>You do not need to know SQL, Python or dbt to evaluate the outcomes. Each project starts with the practical question, then explains what was built, what can be checked and what remains uncertain.</p>
+<div class="grid">
+<article class="card"><h3>1 · The problem</h3><p>What decision, information gap or reliability issue motivated the work?</p></article>
+<article class="card"><h3>2 · The evidence</h3><p>Which data, source code, tests or documented observations support the findings?</p></article>
+<article class="card"><h3>3 · The limits</h3><p>What was verified, what is still a proposal and what cannot yet be concluded?</p></article>
+</div>
+<p class="reader-link"><a href="/research/">Explore the research method →</a></p>
+</section>
+
 <section class="project-group">
 <div class="group-heading"><p class="eyebrow">AI Search · GEO · AEO</p><h2>Visibility, retrieval and optimization</h2></div>
 <div class="grid featured">
 <article class="card project-card">
-<span class="status">Framework · Python</span>
+<span class="status">Research framework · Python · Demonstration</span>
 <h3>AI Search Visibility Lab</h3>
 <p>A reproducible framework for controlled query sets, brand visibility measurement, citation and retrieval analysis, automated reporting and testing.</p>
 <ul><li>Structured prompt/query datasets</li><li>Visibility and citation metrics</li><li>Evidence provenance</li><li>Python reporting and tests</li></ul><a class="repo-link" href="https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/ai-search-visibility-lab" target="_blank" rel="noopener noreferrer">Inspect source code ↗</a>
 </article>
-<a class="card project-card" href="/projects/seo-aeo-geo-optimization">
-<span class="status">Independent case study · Notion</span>
+<a class="card project-card" href="/projects/seo-aeo-geo-optimization/">
+<span class="status">Independent case study · Proposed interventions</span>
 <h3>SEO/AEO/GEO Optimization</h3>
 <p>A real public-site research subject taken from baseline through diagnosis, query fan-out, entity analysis and proposed optimization.</p>
 <ul><li>12 frozen baseline prompts</li><li>Answerability and citability audit</li><li>Six intervention candidates</li><li>Before → proposed redesign examples</li></ul>
 <span class="open">Read case study →</span>
 </a>
-<a class="card project-card" href="/projects/ai-search-competitive-intelligence">
-<span class="status">Benchmark · 4 real brands</span>
+<a class="card project-card" href="/projects/ai-search-competitive-intelligence/">
+<span class="status">Benchmark protocol · Observations pending</span>
 <h3>AI Search Competitive Intelligence</h3>
 <p>A controlled comparison of Notion, Asana, ClickUp and monday.com designed to keep first-party evidence separate from AI observations.</p>
 <ul><li>35 frozen prompts</li><li>Seven intent families</li><li>Capability and pricing baselines</li><li>Auditable scoring rules</li></ul>
@@ -37,8 +51,9 @@ import Base from '../layouts/Base.astro';
 <section class="project-group">
 <div class="group-heading"><p class="eyebrow">Data Analytics</p><h2>Data quality, modelling and business analysis</h2></div>
 <div class="grid data-grid">
-<article class="card project-card"><span class="status">Python · Snowflake · dbt</span><h3>E-Commerce Revenue & Operations Analytics</h3><p>Nine related datasets audited with Python/pandas, loaded into a Snowflake RAW layer and developed through dbt staging and intermediate models.</p><ul><li>Automated data tests</li><li>Order lifecycle anomalies</li><li>Geographic performance</li><li>Order-level financial reconciliation</li></ul><a class="repo-link" href="https://github.com/federicaiengo/data-analytics-portfolio" target="_blank" rel="noopener noreferrer">Browse data portfolio ↗</a></article>
-<article class="card project-card"><span class="status">PostgreSQL · SQL · Tableau</span><h3>Insurance Claims Analytics</h3><p>Analysis of portfolio exposure, claim severity, concentration and data quality, with an executive Tableau reporting layer.</p><ul><li>Financial exposure</li><li>Severity analysis</li><li>Portfolio concentration</li><li>Executive reporting</li></ul><a class="repo-link" href="https://github.com/federicaiengo/data-analytics-portfolio" target="_blank" rel="noopener noreferrer">Browse data portfolio ↗</a></article>
+<article class="card project-card"><span class="status">Python · Snowflake · dbt · Power BI</span><h3>E-Commerce Revenue & Operations Analytics</h3><p>End-to-end pipeline from Python/pandas and Snowflake ingestion through 28 dbt models to a four-page Power BI report.</p><ul><li>249/249 passing dbt regression tests</li><li>99,441 modeled orders</li><li>303 payment-value mismatches investigated</li><li>Incremental MERGE and idempotent reruns</li></ul><a class="repo-link" href="/projects/ecommerce-technical-evidence/">Read the evidence-led case study →</a><br><a class="repo-link" href="https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/ecommerce-revenue-operations-analytics" target="_blank" rel="noopener noreferrer">Inspect project, code & report ↗</a></article>
+<article class="card project-card"><span class="status">PostgreSQL · SQL · Tableau</span><h3>Insurance Claims Analytics</h3><p>PostgreSQL and SQL audit of 10,000 insurance claims, covering financial exposure, severity, concentration and referential integrity. Includes an executive Tableau dashboard.</p><ul><li>10,000 claims across related datasets</li><li>Data quality and referential integrity</li><li>Agent and vendor exposure</li><li>Executive Tableau dashboard</li></ul><a class="repo-link" href="/projects/insurance-claims-evidence/">Read the evidence-led case study →</a><br><a class="repo-link" href="https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/insurance-claims-analytics" target="_blank" rel="noopener noreferrer">Inspect project & dashboard ↗</a></article>
+<article class="card project-card"><span class="status">SQL · HR analytics · In progress</span><h3>HR Analytics: Employee Attrition</h3><p>What can employee data tell us about turnover? An analysis of 1,470 records explores overtime, job roles and job satisfaction, while distinguishing patterns in a sample dataset from proven causes.</p><ul><li>30.53% attrition among overtime employees versus 10.44% without overtime</li><li>Role and department comparisons</li><li>Documented limitations and next investigations</li><li>Source-audited 1,470-row cleaned dataset (32 columns)</li><li>Static Excel dashboard; desktop compatibility QA pending</li></ul><a class="repo-link" href="/projects/hr-attrition-evidence/">Read the work-in-progress findings →</a><br><a class="repo-link" href="https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/hr-analytics-employee-attrition" target="_blank" rel="noopener noreferrer">Inspect project evidence ↗</a></article>
 </div>
 </section>
 
@@ -50,5 +65,5 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <style>
-.intro{max-width:920px}.lead{font-size:clamp(1.08rem,2vw,1.25rem)}.project-group{margin-top:5.5rem}.group-heading{max-width:800px;margin-bottom:1.8rem}.group-heading h2{margin:.3rem 0}.featured{grid-template-columns:repeat(3,minmax(0,1fr))}.data-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.project-card{text-decoration:none;display:block}.project-card:hover{color:inherit}.project-card h3{font-size:1.25rem}.status{display:block;color:#d6b86a;font-size:.65rem;line-height:1.45;text-transform:uppercase;letter-spacing:.12em;font-weight:750;margin-bottom:.9rem}.project-card ul{margin:1.15rem 0 0;padding-left:1.1rem;color:#8f8d87;font-size:.86rem;line-height:1.7}.open{display:block;color:#d2c49c;font-size:.84rem;font-weight:700;margin-top:1.25rem}.method{margin-top:6rem;padding-top:3.5rem;border-top:1px solid #222}.method h2{margin:.35rem 0 .8rem}@media(max-width:900px){.featured{grid-template-columns:1fr 1fr}.featured .project-card:first-child{grid-column:1/-1}}@media(max-width:680px){.project-group{margin-top:4rem}.featured,.data-grid{grid-template-columns:1fr}.featured .project-card:first-child{grid-column:auto}.method{margin-top:4.5rem}}
+.reader-path{margin-top:3rem;padding:1.7rem;border:1px solid #3c3528;border-radius:14px;background:#0e0d0a}.reader-path h2{font-size:clamp(1.5rem,3vw,2rem);margin:.5rem 0 1rem}.reader-path .grid{margin:1.4rem 0}.reader-path .card{min-height:0}.reader-link a{color:#e1c77f;font-weight:700}.intro{max-width:920px}.lead{font-size:clamp(1.08rem,2vw,1.25rem)}.evidence-note{margin-top:3.5rem;padding:1.6rem 1.9rem;border:1px solid #3c3528;border-radius:14px;background:#12110e}.evidence-note h2{font-size:1.5rem;margin:.4rem 0 .8rem}.evidence-note p:last-child{margin-bottom:0}.project-group{margin-top:5.5rem}.group-heading{max-width:800px;margin-bottom:1.8rem}.group-heading h2{margin:.3rem 0}.featured{grid-template-columns:repeat(3,minmax(0,1fr))}.data-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.project-card{text-decoration:none;display:block}.project-card:hover{color:inherit}.project-card h3{font-size:1.25rem}.status{display:block;color:#d6b86a;font-size:.65rem;line-height:1.45;text-transform:uppercase;letter-spacing:.12em;font-weight:750;margin-bottom:.9rem}.project-card ul{margin:1.15rem 0 0;padding-left:1.1rem;color:#8f8d87;font-size:.86rem;line-height:1.7}.open{display:block;color:#d2c49c;font-size:.84rem;font-weight:700;margin-top:1.25rem}.method{margin-top:6rem;padding-top:3.5rem;border-top:1px solid #222}.method h2{margin:.35rem 0 .8rem}@media(max-width:900px){.featured{grid-template-columns:1fr 1fr}.featured .project-card:first-child{grid-column:1/-1}}@media(max-width:680px){.project-group{margin-top:4rem}.featured,.data-grid{grid-template-columns:1fr}.featured .project-card:first-child{grid-column:auto}.method{margin-top:4.5rem}}
 .repo-link{display:inline-block;margin-top:1.2rem;color:#d6b86a;font-size:.86rem;font-weight:700;text-decoration:none}.repo-link:hover{text-decoration:underline}</style>

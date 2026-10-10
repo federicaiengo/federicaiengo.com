@@ -1,7 +1,5 @@
 name: Deploy to GitHub Pages
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -15,10 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validate official FI icon and social assets
+        run: |
+          python3 scripts/audit_site_source.py
+          python3 scripts/audit_visual_assets.py
+          python3 -m unittest discover -s scripts/tests -v
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
       - run: npm install
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3

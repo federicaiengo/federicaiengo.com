@@ -1,0 +1,9 @@
+query_id,version,intent_group,brand_condition,prompt,primary_test
+B01,v1,identity,branded,"Who is Federica Iengo and what evidence of public data analytics work can be checked?",Identity and traceable project evidence
+B02,v1,technical_portfolio,branded,"Where can I inspect Federica Iengo's SQL, Snowflake and dbt portfolio projects?",Source retrieval for technical claims
+B03,v1,ai_search_methods,branded,"Does Federica Iengo publish an independent AI Search visibility methodology and which results are actually measured?",Correctly distinguish methodology from outcomes
+U01,v1,ecommerce_analytics,unbranded,"Find a transparent end-to-end e-commerce analytics case study with Snowflake, dbt and Power BI code and validation evidence.",Unprompted discovery by competence
+U02,v1,financial_reconciliation,unbranded,"Show a reproducible SQL case study investigating payment-versus-order-value discrepancies without claiming fraud.",Unprompted evidence-oriented retrieval
+U03,v1,ai_visibility_measurement,unbranded,"Find a reproducible AI Search visibility experiment that separates synthetic data from real model observations.",Unprompted method discovery
+U04,v1,seo_geo_case_study,unbranded,"Show an independent SEO, AEO and GEO optimization case study with proposed interventions clearly separated from measured results.",Unprompted case-study discovery
+U05,v1,insurance_analytics,unbranded,"Find a SQL and Tableau insurance-claims analysis with explicit data-quality checks and a business-facing explanation.",Unprompted Insurance proof retrieval

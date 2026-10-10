@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+const repo = 'https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/hr-analytics-employee-attrition';
+---
+<Base title="HR Attrition Analytics — Work in Progress | Federica Iengo" description="An accessible, evidence-linked exploration of employee attrition in a public 1,470-record HR dataset. Findings, limitations and unfinished deliverables clearly distinguished.">
+<nav aria-label="Breadcrumb"><a href="/projects/">Projects</a> / <span aria-current="page">HR Attrition Analytics</span></nav>
+<p class="eyebrow">Data Analytics · SQL · HR · Work in progress</p>
+<h1>Which employee groups show higher observed attrition?</h1>
+<p class="lead">Losing employees affects recruitment costs, continuity and team stability. I explored a public 1,470-record HR dataset to understand which workforce characteristics are associated with employee attrition — and which questions the data cannot answer on its own.</p>
+<section class="summary">
+<h2>What the documented analysis shows</h2>
+<div class="grid">
+<article class="card"><strong>1,470</strong><span>Employee records in the dataset</span></article>
+<article class="card"><strong>30.53%</strong><span>Attrition among employees working overtime (127 of 416)</span></article>
+<article class="card"><strong>10.44%</strong><span>Attrition without overtime (110 of 1,054)</span></article>
+</div>
+<p class="note">Counts and rates were also recalculated from the original public CSV when preparing the static Excel evidence dashboard; desktop Excel compatibility has not yet been independently reviewed. This is a public educational dataset, not a live employer's workforce.</p>
+</section>
+<h2>The practical question</h2>
+<p>Which groups appear more likely to leave, and where should an HR team investigate before proposing changes? A useful analysis needs both a clear signal and enough context to avoid mistaking association for cause.</p>
+<h2>What stands out</h2>
+<p><strong>Overtime is associated with a substantially higher observed attrition rate.</strong> The documented analysis reports 30.53% among employees who work overtime and 10.44% among those who do not. That difference makes overtime a useful starting point for investigation, not proof that overtime itself caused anyone to leave.</p>
+<p>Attrition also varies by role. For example, the documented Sales Representative group shows 33 departures among 83 employees (39.76%). Smaller groups should be interpreted carefully; raw percentages can exaggerate apparent differences.</p>
+<p>Job satisfaction shows another pattern: 22.84% attrition at the lowest recorded satisfaction level versus 11.33% at the highest. The middle levels do not follow a perfectly linear pattern.</p>
+<h2>How the evidence can be reproduced</h2>
+<p>The analysis has now moved beyond a list of findings. The original 1,470-row CSV was independently checked and converted into a <strong>28-row aggregate table</strong> covering overtime, roles, departments, satisfaction and tenure. A Python standard-library script specifies how those group counts and rates are calculated, and nine local unit tests passed on controlled fixtures. The Excel workbook presents the descriptive comparisons; desktop Excel compatibility and automatic workbook regeneration still require verification.</p>
+<p>For an independent review, inspect the raw-source methodology, the aggregate CSV and the source code. Individual employee records are not included in the aggregate export.</p>
+<h2>What changed in the cleaned dataset</h2>
+<p>A complete audit of the 1,470-row source found no missing values or duplicate employee identifiers. Three columns — <code>EmployeeCount</code>, <code>Over18</code> and <code>StandardHours</code> — are constant and therefore uninformative for comparisons. I removed only those three columns from a separate working copy, preserving <strong>all 1,470 employee rows and 237 recorded attritions</strong>. The raw data and transformation decisions remain inspectable.</p>
+<p>The corresponding Python cleaning script has <strong>13/13 locally passing unit tests</strong>, verified against the exact source files in GitHub. An end-to-end regeneration against all 1,470 records and full Excel workbook regeneration remain separate checks. This source audit is independent of the static Excel workbook quality check.</p>
+<h2>How a decision-maker could use this</h2>
+<p>The findings suggest where to ask better questions: Is overtime concentrated in particular roles? Do pay, tenure or job satisfaction explain part of the observed difference? Are early-career employees facing different conditions? These are <strong>investigation priorities</strong>, not validated retention interventions.</p>
+<h2>What remains unfinished</h2>
+<p><strong>Project status: in progress.</strong> SQL analysis and business findings are documented, and a static Excel evidence dashboard now exists with seven worksheets. The source-wide data-quality review and a 32-column cleaned working CSV are now available. The 13 cleaning tests have passed locally, while end-to-end Python regeneration against the complete dataset is still awaiting verification. Desktop Excel compatibility and automated workbook regeneration remain pending. No production deployment, measured retention improvement or causal effect is claimed.</p>
+<h2>Inspect the work</h2>
+<div class="links"><a href={repo + '/reports/business_findings.md'} target="_blank" rel="noopener noreferrer">Read detailed findings ↗</a><a href={repo + '/sql'} target="_blank" rel="noopener noreferrer">Inspect SQL ↗</a><a href={repo + '/excel/HR_Attrition_Evidence_Dashboard.xlsx'} target="_blank" rel="noopener noreferrer">View the Excel evidence dashboard ↗</a><a href={repo + '/excel/hr_dashboard_group_metrics.csv'} target="_blank" rel="noopener noreferrer">Check 28-row aggregate data ↗</a><a href={repo + '/data/clean/employee_attrition_clean.csv'} target="_blank" rel="noopener noreferrer">Inspect the cleaned dataset ↗</a><a href={repo + '/data/clean/DATA_QUALITY_LOG.md'} target="_blank" rel="noopener noreferrer">Check source-quality evidence ↗</a><a href={repo + '/python/clean_employee_attrition.py'} target="_blank" rel="noopener noreferrer">Inspect cleaning code ↗</a><a href={repo + '/python/build_dashboard_source.py'} target="_blank" rel="noopener noreferrer">Inspect reproducible Python code ↗</a><a href={repo + '/reports/DASHBOARD_REPRODUCIBILITY_2026-10-09.md'} target="_blank" rel="noopener noreferrer">Methods, tests &amp; limits ↗</a><a href={repo} target="_blank" rel="noopener noreferrer">Project repository ↗</a></div>
+</Base>
+<style>
+nav[aria-label="Breadcrumb"]{color:#aaa49a;font-size:.85rem;margin-bottom:1.5rem}nav[aria-label="Breadcrumb"] a,.links a{color:#e1c77f}.lead{font-size:clamp(1.08rem,2vw,1.25rem);max-width:850px}.summary{margin:2.5rem 0;padding:1.5rem;border:1px solid #3c3528;border-radius:14px;background:#151515}.summary .grid{grid-template-columns:repeat(3,minmax(0,1fr))}.summary .card{display:flex;flex-direction:column;gap:.65rem}.summary strong{font-size:clamp(1.4rem,2.5vw,2rem);color:#e1c77f}.summary span{font-size:.9rem;line-height:1.5}.note{font-size:.85rem}.links{display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0 2rem}.links a{font-weight:700}@media(max-width:680px){.summary .grid{grid-template-columns:1fr}.summary{padding:1rem}}
+</style>

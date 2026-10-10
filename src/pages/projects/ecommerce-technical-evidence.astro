@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+const source = 'https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/ecommerce-revenue-operations-analytics';
+---
+<Base title="E-Commerce Analytics: Technical Evidence | Federica Iengo" description="An accessible, evidence-linked explanation of financial reconciliation, 303 discrepancies, dbt quality checks and the limits of an e-commerce analytics case study.">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/projects/">Projects</a><span aria-hidden="true"> / </span><span aria-current="page">E-Commerce Technical Evidence</span></nav>
+<p class="eyebrow">Data Analytics · Evidence-led case study</p>
+<h1>When payment totals and order values disagree</h1>
+<p class="lead">A dashboard can look convincing even when two measures that appear equivalent tell different stories. In this independent e-commerce analysis, I kept payment totals separate from the value of items and shipping, then investigated where they did not reconcile.</p>
+<section class="evidence-summary" aria-label="Evidence at a glance">
+<h2>At a glance</h2>
+<div class="grid">
+<article class="card"><strong>98,665</strong><span>Orders with both values available for comparison</span></article>
+<article class="card"><strong>303</strong><span>Orders with a difference greater than BRL 0.01</span></article>
+<article class="card"><strong>0.3071%</strong><span>Mismatch rate among comparable orders</span></article>
+<article class="card"><strong>249 / 249</strong><span>dbt regression checks reported passing after the pipeline upgrade</span></article>
+</div>
+<p class="note">These figures are documented outputs of the project, not live metrics or a claim of production business impact.</p>
+</section>
+<h2>The business question</h2>
+<p>Can a reporting team treat recorded payment value and item value plus freight as the same financial measure? If not, how many orders differ, by how much, and what patterns deserve investigation?</p>
+<h2>How the comparison was made</h2>
+<p>Item and payment records were each summarized at <strong>one row per order</strong> before joining. This matters: directly joining multiple items to multiple payments can multiply rows and create misleading totals. The reconciliation model preserves missing summaries as missing, rather than counting them as financial matches or mismatches.</p>
+<p>Of 99,441 modeled orders, 98,665 had both summaries; 98,362 matched and 303 did not. The remaining orders cannot be compared on both measures: 775 lack an item summary and one lacks a payment summary.</p>
+<h2>What the investigation found</h2>
+<p>The differences were not limited to tiny rounding effects. Among mismatching orders, the median absolute difference was <strong>BRL 5.90</strong> and the maximum was <strong>BRL 182.81</strong>. Of the 303 mismatches, 299 concerned delivered orders.</p>
+<p>A more specific pattern emerged for <strong>credit-card orders with exactly one payment record</strong>: mismatch incidence increased across installment groups. This is a filtered comparison, not a statement about every order or payment method.</p>
+<div class="table-wrap" role="region" aria-label="Credit-card installment mismatch comparison table" tabindex="0"><table><caption>Mismatch rate by installments — single-payment-record credit-card orders</caption><thead><tr><th>Installments</th><th>Comparable orders</th><th>Mismatches</th><th>Mismatch rate</th></tr></thead><tbody>
+<tr><th scope="row">1</th><td>23,591</td><td>8</td><td>0.034%</td></tr>
+<tr><th scope="row">2–5</th><td>34,216</td><td>120</td><td>0.351%</td></tr>
+<tr><th scope="row">6–10</th><td>15,348</td><td>113</td><td>0.736%</td></tr>
+<tr><th scope="row">11+</th><td>325</td><td>24</td><td>7.385%</td></tr>
+</tbody></table></div>
+<p class="note">On smaller screens, scroll the table horizontally to inspect all columns.</p>
+<h2>What the evidence does <em>not</em> prove</h2>
+<p>The association with installment count does not establish why the differences occurred. The available data do not identify whether they reflect interest, processing fees, adjustments or source-system errors. I therefore kept the two financial measures distinct and left discrepancies visible for further investigation instead of silently correcting them.</p>
+<h2>What was tested</h2>
+<p>The broader Snowflake/dbt pipeline includes 28 models and a documented regression result of 249 passing dbt checks, covering structural and business-rule integrity. Those checks are not equivalent to 249 independent scientific experiments, nor do they establish the economic cause of the differences. Incremental loading and idempotent reruns were also documented in the project.</p>
+<h2>Inspect the evidence</h2>
+<p>Technical reviewers can trace the numbers to the underlying SQL model, diagnostic queries and written findings. Readers without a technical background can start with the findings report.</p>
+<div class="source-links">
+<a href={source + '/reports/07_financial_reconciliation_findings.md'} target="_blank" rel="noopener noreferrer">Read financial findings ↗</a>
+<a href={source + '/sql/06_financial_reconciliation_analysis.sql'} target="_blank" rel="noopener noreferrer">Inspect diagnostic SQL ↗</a>
+<a href={source + '/dbt/ecommerce_revenue_operations/models/intermediate/int_order_financial_reconciliation.sql'} target="_blank" rel="noopener noreferrer">Inspect reconciliation model ↗</a>
+<a href={source + '/README.md'} target="_blank" rel="noopener noreferrer">Full project and Power BI report ↗</a>
+</div>
+<p class="note">Independent portfolio analysis of a public e-commerce dataset. No client engagement, financial-loss estimate or production intervention is claimed.</p>
+</Base>
+<style>
+.breadcrumbs{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap;margin-bottom:1.6rem;font-size:.84rem;color:#aaa49a}.breadcrumbs a{color:#e1c77f}.breadcrumbs span[aria-current]{color:#c6c2b8}.table-wrap:focus-visible{outline:2px solid #e1c77f;outline-offset:4px}
+.lead{font-size:clamp(1.08rem,2vw,1.25rem);max-width:850px}.evidence-summary{margin:2.5rem 0;padding:1.5rem;border:1px solid #3c3528;border-radius:14px;background:#12110e}.evidence-summary .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}.evidence-summary .card{display:flex;flex-direction:column;gap:.65rem}.evidence-summary strong{color:#e1c77f;font-size:clamp(1.4rem,2.5vw,2rem)}.evidence-summary span{font-size:.87rem;line-height:1.5}.note{font-size:.85rem;color:#aaa49a}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;margin:1.2rem 0 2rem;min-width:560px}caption{text-align:left;color:#bcb8ac;margin-bottom:.75rem}th,td{padding:.8rem;border-bottom:1px solid #39342b;text-align:left}thead th{color:#e1c77f}.source-links{display:flex;flex-wrap:wrap;gap:1rem;margin:1.2rem 0 2rem}.source-links a{color:#e1c77f;font-weight:700}@media(max-width:850px){.evidence-summary .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.evidence-summary .grid{grid-template-columns:1fr}.evidence-summary{padding:1.1rem}}
+</style>

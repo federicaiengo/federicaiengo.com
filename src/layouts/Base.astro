@@ -1,6 +1,37 @@
 ---
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const siteUrl = new URL(Astro.site);
+// These identity claims are limited to already public, verifiable information.
+// Structured data supports unambiguous attribution; it does not imply ranking.
+const personId = new URL("/#person", siteUrl).href;
+const personStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": personId,
+  name: "Federica Iengo",
+  url: siteUrl.href,
+  sameAs: ["https://github.com/federicaiengo"]
+};
+const pageStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: title,
+  description,
+  url: canonical.href,
+  inLanguage: "en",
+  author: { "@id": personId },
+  isPartOf: { "@type": "WebSite", url: siteUrl.href, name: "Federica Iengo — Professional Portfolio" }
+};
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Federica Iengo — Professional Portfolio",
+  url: siteUrl.href,
+  inLanguage: "en",
+  description: "Data Analytics and AI Search research portfolio by Federica Iengo.",
+  about: { "@id": personId }
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -10,18 +41,53 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 <title>{title}</title>
 <meta name="description" content={description}>
 <link rel="canonical" href={canonical}>
+<link rel="icon" type="image/png" sizes="32x32" href="/fi-eclipse-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/fi-eclipse-favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/fi-eclipse-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<meta name="theme-color" content="#050505">
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Federica Iengo">
+<meta property="og:image" content={new URL("/social-preview.png", Astro.site)}>
+<meta property="og:image:alt" content="Federica Iengo — Data Analytics & AI Search, professional portfolio">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={new URL("/social-preview.png", Astro.site)}>
+<meta name="twitter:image:alt" content="Federica Iengo — Data Analytics & AI Search, professional portfolio">
+<script type="application/ld+json" set:html={JSON.stringify(personStructuredData)} />
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+<script type="application/ld+json" set:html={JSON.stringify(pageStructuredData)} />
 <meta property="og:url" content={canonical}>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header class="site-header">
 <a class="brand" href="/" aria-label="Federica Iengo home"><span>Federica</span> Iengo</a>
-<nav aria-label="Primary navigation"><a href="/projects">Projects</a><a href="/research">Research</a><a href="/ai-search">AI Search</a><a href="/about">About</a></nav>
+<nav aria-label="Primary navigation"><a href="/projects/">Projects</a><a href="/research/">Research</a><a href="/ai-search/">AI Search</a><a href="/about/">About</a></nav>
 </header>
-<main><slot /></main>
-<footer><span>Federica Iengo</span><span>Data Analytics & AI Search</span></footer>
+<main id="main-content"><slot /></main>
+<footer><span>Federica Iengo</span><span>Data Analytics & AI Search</span><button class="copy-link" type="button" data-copy-link>Copy page link</button></footer>
+<script>
+  const button = document.querySelector<HTMLButtonElement>("[data-copy-link]");
+  button?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(new URL(window.location.pathname, window.location.origin).href);
+      button.textContent = "Link copied!";
+      window.setTimeout(() => { button.textContent = "Copy page link"; }, 2500);
+    } catch {
+      button.textContent = "Copy unavailable";
+      window.setTimeout(() => { button.textContent = "Copy page link"; }, 2500);
+    }
+  });
+</script>
 </body>
 </html>
 <style is:global>
@@ -33,7 +99,7 @@ a{color:inherit;text-decoration-color:var(--gold-soft);text-underline-offset:.22
 a:hover{color:#fff;text-decoration-color:var(--gold)}
 .site-header{min-height:92px;display:flex;align-items:center;justify-content:space-between;gap:28px;border-bottom:1px solid #171717}
 .brand{font-weight:700;letter-spacing:-.025em;text-decoration:none;font-size:1.08rem}.brand span{color:var(--gold)}
-nav{display:flex;gap:24px;flex-wrap:wrap}nav a{text-decoration:none;color:#aaa;font-size:.92rem;font-weight:600}nav a:hover{color:var(--text)}
+.site-header nav{display:flex;gap:24px;flex-wrap:wrap}.site-header nav a{text-decoration:none;color:#aaa;font-size:.92rem;font-weight:600}.site-header nav a:hover{color:var(--text)}
 main{min-height:75vh;padding:clamp(64px,9vw,116px) 0 110px}
 h1,h2,h3{letter-spacing:-.035em;text-wrap:balance}
 h1{font-size:clamp(3.1rem,7.7vw,6.8rem);line-height:.93;max-width:1000px;margin:.22em 0 .35em;font-weight:750}
@@ -48,8 +114,11 @@ strong{color:#dedbd2;font-weight:650}
 .card:hover{transform:translateY(-2px);border-color:#4a4432;background:#0e0e0d}
 .card p{font-size:.94rem;margin-bottom:0}
 .card .eyebrow{font-size:.64rem;margin:0 0 .75rem}
+ .copy-link{font:inherit;color:var(--gold);background:transparent;border:1px solid var(--line);border-radius:8px;padding:7px 11px;cursor:pointer}.copy-link:hover{border-color:var(--gold)}
 footer{border-top:1px solid #1d1d1d;padding:30px 0 38px;color:#777;display:flex;justify-content:space-between;gap:18px;font-size:.83rem}
 ::selection{background:#6f5c2c;color:#fff}
-@media(max-width:680px){body{padding:0 20px}.site-header{min-height:78px;align-items:flex-start;padding:22px 0;flex-direction:column;gap:15px}nav{gap:16px}main{padding-top:64px}h1{font-size:clamp(2.7rem,14vw,4.5rem)}h2{margin-top:2.7rem}.grid{grid-template-columns:1fr}.card{padding:21px;min-height:0}.card:before{left:21px}footer{flex-direction:column}}
+.skip-link{position:absolute;left:12px;top:-80px;z-index:10;padding:12px 18px;background:var(--gold);color:#111;border-radius:8px;font-weight:700}.skip-link:focus{top:12px}
+a:focus-visible,.copy-link:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:3px}
+@media(max-width:680px){body{padding:0 20px}.site-header{min-height:78px;align-items:flex-start;padding:22px 0;flex-direction:column;gap:15px}nav{gap:16px}main{padding-top:38px}h1{font-size:clamp(2.7rem,14vw,4.5rem)}h2{margin-top:2.7rem}.grid{grid-template-columns:1fr}.card{padding:21px;min-height:0}.card:before{left:21px}footer{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}.card:hover{transform:none}}
 </style>

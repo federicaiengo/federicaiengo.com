@@ -1,0 +1,1 @@
+run_id,observed_at_utc,platform,model,location_context,language,query_id,query_version,prompt_text,target_domain,mentioned,cited,recommended,cited_urls,response_location,provenance,review_status,notes
