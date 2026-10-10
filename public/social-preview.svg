@@ -1,15 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-<title id="title">Federica Iengo — Data Analytics &amp; AI Search</title>
-<desc id="desc">Professional portfolio cover in black and warm gold.</desc>
+<title id="title">Federica Iengo - Data Engineering and AI Search</title>
+<desc id="desc">Personal portfolio. FI mark in gold and ivory; engineering and search on black.</desc>
+<defs><linearGradient id="gold" x1="0" y1="0" x2=".25" y2="1"><stop offset="0" stop-color="#FFF6AE"/><stop offset=".23" stop-color="#FFD63E"/><stop offset=".50" stop-color="#E6A916"/><stop offset=".69" stop-color="#FFE66D"/><stop offset="1" stop-color="#B77800"/></linearGradient><linearGradient id="warmBorder" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#826016"/><stop offset=".58" stop-color="#3c3019"/><stop offset="1" stop-color="#A26E0D"/></linearGradient><linearGradient id="bodyBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111009"/><stop offset=".50" stop-color="#080808"/><stop offset="1" stop-color="#050505"/></linearGradient></defs>
 <rect width="1200" height="630" fill="#050505"/>
-<rect x="42" y="42" width="1116" height="546" rx="24" fill="#0b0b0b" stroke="#5b4e30" stroke-width="2"/>
-<path d="M88 134h1024" stroke="#302a1e" stroke-width="2"/>
-<rect x="90" y="77" width="48" height="48" rx="11" fill="#050505" stroke="#d6b86a" stroke-width="2"/>
-<path d="M102 88h15v4h-11v9h10v4h-10v10h-4z" fill="#d6b86a"/><path d="M122 88h4v27h-4z" fill="#f3f1ec"/>
-<text x="157" y="111" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#d6b86a">FEDERICA IENGO</text>
-<text x="94" y="256" font-family="Arial,Helvetica,sans-serif" font-size="66" font-weight="700" fill="#f3f1ec">Data Analytics</text>
-<text x="94" y="342" font-family="Arial,Helvetica,sans-serif" font-size="66" font-weight="700" fill="#d6b86a">&amp; AI Search</text>
-<text x="96" y="418" font-family="Arial,Helvetica,sans-serif" font-size="29" fill="#bcb8ac">Evidence-led research · SEO · AEO · GEO</text>
-<path d="M94 480h1012" stroke="#302a1e" stroke-width="2"/>
-<text x="96" y="532" font-family="Arial,Helvetica,sans-serif" font-size="24" fill="#d6b86a">federicaiengo.com</text>
-</svg>
+<rect x="36" y="36" width="1128" height="558" rx="22" fill="url(#bodyBg)" stroke="url(#warmBorder)" stroke-width="2"/>
+<rect x="56" y="56" width="1088" height="5" rx="2.5" fill="url(#gold)" opacity=".82"/>
+<g transform="translate(82 92) scale(.27)"><rect width="256" height="256" rx="42" fill="#050505"/><rect x="7" y="7" width="242" height="242" rx="37" fill="none" stroke="#A57512" stroke-width="5"/><path d="M45 54H138V73H68V120H124V139H68V202H45Z" fill="url(#gold)"/><path d="M157 54H223V73H201V183H223V202H157V183H179V73H157Z" fill="#F3F1EC"/></g>
+<text x="171" y="132" font-family="DejaVu Sans Mono,monospace" font-weight="bold" font-size="30" fill="#F3F1EC">FEDERICA IENGO</text>
+<text x="174" y="163" font-family="DejaVu Sans,sans-serif" font-size="17" letter-spacing="2" fill="#F2C12E">PROFESSIONAL PORTFOLIO</text>
+<path d="M82 192 H1118" stroke="#343026" stroke-width="2"/>
+<text x="83" y="305" font-family="DejaVu Sans,sans-serif" font-weight="bold" font-size="70" fill="#F3F1EC">Data Engineering</text>
+<text x="83" y="405" font-family="DejaVu Sans,sans-serif" font-weight="bold" font-size="80" fill="url(#gold)">&amp; AI Search</text>
+<text x="85" y="471" font-family="DejaVu Sans,sans-serif" font-size="26" fill="#C7C4BA">SEO · AEO · GEO    |    SQL · Python · Snowflake</text>
+<path d="M82 511 H1118" stroke="#343026" stroke-width="2"/>
+<text x="86" y="554" font-family="DejaVu Sans Mono,monospace" font-weight="bold" font-size="23" fill="#F2C12E">federicaiengo.com</text></svg>
