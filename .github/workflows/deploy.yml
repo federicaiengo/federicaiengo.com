@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Render the canonical SVG social card to its LinkedIn-compatible PNG
+        run: |
+          python3 -m venv /tmp/fi-social-venv
+          /tmp/fi-social-venv/bin/pip install --quiet cairosvg
+          /tmp/fi-social-venv/bin/python -c "import cairosvg; cairosvg.svg2png(url='public/social-preview.svg', write_to='public/social-preview.png', output_width=1200, output_height=630)"
       - name: Validate official FI icon and social assets
         run: |
           python3 scripts/audit_site_source.py
