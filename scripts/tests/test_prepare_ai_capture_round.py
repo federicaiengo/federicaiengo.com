@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from prepare_ai_capture_round import BRANDS, prepare_round, read_frozen_prompts
@@ -70,6 +71,29 @@ class PrepareRoundTests(unittest.TestCase):
         for run in ("example-data", "demo-abc", "test_01", "=DANGEROUS", "bad name"):
             with self.subTest(run=run), self.assertRaises(ValueError):
                 self.generate(run_id=run)
+
+    def test_mid_batch_write_failure_rolls_back_all_new_files(self):
+        real_dump = json.dump
+        calls = 0
+
+        def fail_on_second(data, stream, **kwargs):
+            nonlocal calls
+            calls += 1
+            if calls == 2:
+                raise OSError("simulated write failure")
+            return real_dump(data, stream, **kwargs)
+
+        with patch("prepare_ai_capture_round.json.dump", side_effect=fail_on_second):
+            with self.assertRaisesRegex(OSError, "simulated write failure"):
+                self.generate()
+        self.assertTrue(self.out.is_dir())
+        self.assertEqual(list(self.out.iterdir()), [])
+
+    def test_first_write_failure_leaves_no_partial_json(self):
+        with patch("prepare_ai_capture_round.json.dump", side_effect=ValueError("bad serialization")):
+            with self.assertRaisesRegex(ValueError, "bad serialization"):
+                self.generate()
+        self.assertEqual(list(self.out.iterdir()), [])
 
     def test_reject_wrong_prompt_schema_and_count(self):
         self.prompts.write_text("prompt_id,prompt_family,prompt,primary_measure\nA,a,hi,x\n")
