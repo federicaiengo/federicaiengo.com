@@ -27,8 +27,16 @@ def read_frozen_prompts(source: Path) -> dict[str, str]:
     prompts = {row["prompt_id"]: row["prompt"] for row in rows}
     if len(rows) != 35 or len(prompts) != 35 or len({row["prompt_family"] for row in rows}) != 7:
         raise ValueError("Expected 35 unique prompts in seven intent families")
+    families = {family: sum(row["prompt_family"] == family for row in rows)
+                for family in {row["prompt_family"] for row in rows}}
+    if any(count != 5 for count in families.values()):
+        raise ValueError("Frozen protocol requires five prompts per intent family")
+    if any(not re.fullmatch(r"[A-Za-z0-9_-]+", identifier) for identifier in prompts):
+        raise ValueError("Unsafe frozen prompt identifier")
     if any(not p.strip() for p in prompts.values()):
         raise ValueError("Missing frozen prompt text")
+    if len({p.strip() for p in prompts.values()}) != len(prompts):
+        raise ValueError("Frozen prompts must have distinct question text")
     return prompts
 
 
