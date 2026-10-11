@@ -44,8 +44,12 @@ def capture_to_rows(capture: dict, frozen: dict[str, tuple[str, str]]) -> list[d
     run_id, engine, prompt_id = (capture[key] for key in ("run_id", "engine", "prompt_id"))
     if any(not isinstance(v, str) or not v.strip() for v in (run_id, engine, prompt_id)):
         raise ValueError("run_id, engine, prompt_id must be nonempty strings")
-    if run_id.upper().startswith(("EXAMPLE", "DEMO", "TEST")):
+    if run_id != run_id.strip() or engine != engine.strip():
+        raise ValueError("run_id and engine must not contain surrounding whitespace")
+    if run_id.casefold().startswith(("example", "demo", "test", "sample", "synthetic")):
         raise ValueError("Demonstration run IDs cannot enter real observations")
+    if any(value.lstrip().startswith(("=", "+", "-", "@")) for value in (run_id, engine)):
+        raise ValueError("Unsafe CSV formula prefix in run_id or engine")
     if prompt_id not in frozen or capture["prompt"] != frozen[prompt_id][1]:
         raise ValueError("Prompt absent or different from frozen v1 text")
     raw_answer = capture["answer_text"]
@@ -99,7 +103,7 @@ def capture_to_rows(capture: dict, frozen: dict[str, tuple[str, str]]) -> list[d
             **{flag: "" if label[flag] is None else str(label[flag]).lower() for flag in FLAGS},
             "position": "" if position is None else str(position),
             "source_url": urls,
-            "evidence_note": f"sha256:{answer_digest}; {note.strip()}",
+            "evidence_note": f"observed_at_utc:{stamp}; sha256:{answer_digest}; {note.strip()}",
         })
     return [{key: item[key] for key in REQUIRED} for item in result]
 
