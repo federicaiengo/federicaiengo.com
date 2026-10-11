@@ -60,8 +60,12 @@ def validate_observations(rows: list[dict[str, str]], prompts: dict[str, str],
         for field in ("run_id", "run_date", "engine", "prompt_id", "brand"):
             if not (row.get(field) or "").strip():
                 raise ValueError(f"Missing {field} on line {idx}")
-        if row["run_id"].startswith("EXAMPLE"):
+        if row["run_id"] != row["run_id"].strip() or row["engine"] != row["engine"].strip():
+            raise ValueError(f"Whitespace-padded run or engine on line {idx}")
+        if row["run_id"].casefold().startswith(("example", "demo", "test", "sample", "synthetic")):
             raise ValueError("Illustrative example must not be scored as a real run")
+        if any(row[field].lstrip().startswith(("=", "+", "-", "@")) for field in ("run_id", "engine")):
+            raise ValueError(f"Unsafe CSV formula prefix on line {idx}")
         try:
             date.fromisoformat(row["run_date"])
         except ValueError:
