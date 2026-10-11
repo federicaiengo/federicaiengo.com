@@ -10,6 +10,7 @@ import csv
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 INPUT = ROOT / "data/ai-search/observations.csv"
@@ -78,8 +79,20 @@ def validate_observations(rows: list[dict[str, str]], prompts: dict[str, str],
                      "owned_source_cited", "third_party_source_cited"):
             if row.get(flag, "").strip().lower() not in BOOLEAN:
                 raise ValueError(f"Invalid {flag} value on line {idx}; use true/false/blank")
-        if row["cited"].strip().lower() == "true" and not row["source_url"].strip():
+        cited = row["cited"].strip().lower() == "true"
+        urls = row["source_url"].strip()
+        if cited and not urls:
             raise ValueError(f"Cited answer without source URL on line {idx}")
+        if urls:
+            if not cited:
+                raise ValueError(f"Source URL without cited=true on line {idx}")
+            for value in urls.split("|"):
+                parsed = urlsplit(value.strip())
+                if parsed.scheme not in ("http", "https") or not parsed.hostname or parsed.username:
+                    raise ValueError(f"Invalid cited source URL on line {idx}")
+        if any(row[k].strip().lower() == "true" for k in
+               ("owned_source_cited", "third_party_source_cited")) and not cited:
+            raise ValueError(f"Source type declared without citation on line {idx}")
         if row["position"]:
             if not row["position"].isdigit() or int(row["position"]) < 1:
                 raise ValueError(f"Invalid ordered-shortlist position on line {idx}")
