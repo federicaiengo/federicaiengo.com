@@ -142,5 +142,21 @@ class CompetitiveVisibilityTests(unittest.TestCase):
             self.validate([record(engine="=HYPERLINK(1,2)")])
 
 
+    def test_source_urls_require_real_http_citations(self):
+        for invalid in ("javascript:alert(1)", "not a url", "https://user:pass@example.org"):
+            with self.subTest(url=invalid), self.assertRaises(ValueError):
+                self.validate([record(cited="true", source_url=invalid)])
+        self.validate([record(cited="true", source_url="https://notion.com/help|https://asana.com")])
+
+    def test_source_url_without_citation_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Source URL without cited"):
+            self.validate([record(cited="false", source_url="https://example.org")])
+
+    def test_source_type_without_citation_rejected(self):
+        for label in ("owned_source_cited", "third_party_source_cited"):
+            with self.subTest(label=label), self.assertRaisesRegex(ValueError, "Source type"):
+                self.validate([record(**{label: "true"})])
+
+
 if __name__ == "__main__":
     unittest.main()
