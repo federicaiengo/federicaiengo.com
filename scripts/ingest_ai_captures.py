@@ -40,6 +40,10 @@ def capture_to_rows(capture: dict, frozen: dict[str, tuple[str, str]]) -> list[d
     required = ("run_id", "observed_at_utc", "engine", "prompt_id", "prompt", "answer_text", "labels")
     if not isinstance(capture, dict) or any(key not in capture for key in required):
         raise ValueError("Capture missing mandatory fields")
+    # Legacy captures without a status remain supported, but new templates
+    # must be explicitly marked reviewed before scoring.
+    if "capture_status" in capture and capture["capture_status"] != "REVIEWED_OBSERVATION":
+        raise ValueError("Capture template has not been marked reviewed")
     run_id, engine, prompt_id = (capture[key] for key in ("run_id", "engine", "prompt_id"))
     if any(not isinstance(v, str) or not v.strip() for v in (run_id, engine, prompt_id)):
         raise ValueError("run_id, engine, prompt_id must be nonempty strings")
