@@ -14,7 +14,7 @@ import os
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from source_url_validation import valid_source_url
 
 from analyze_ai_visibility import (
     BRANDS, PROMPTS, REQUIRED, read_csv, load_frozen_prompts,
@@ -27,8 +27,7 @@ FLAGS = ("mentioned", "cited", "recommended", "owned_source_cited", "third_party
 
 
 def real_http_url(value: str) -> bool:
-    parsed = urlparse(value)
-    return parsed.scheme in ("https", "http") and bool(parsed.netloc) and not parsed.username
+    return valid_source_url(value)
 
 
 def load_prompt_texts(path: Path = PROMPTS) -> dict[str, tuple[str, str]]:
