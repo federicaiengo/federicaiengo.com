@@ -12,7 +12,9 @@
 | Pricing | https://www.notion.com/it/pricing | Plan boundaries, billing assumptions, Notion AI packaging, agent credits |
 | Notion AI | https://www.notion.com/product/ai | Included AI features vs separately metered Custom Agents |
 | Enterprise Search | https://www.notion.com/help/enterprise-search | Availability on Business/Enterprise, source citations, scope and model selection |
-| AI Connectors | https://www.notion.com/help/notion-ai-connectors | Connector eligibility, connected systems, exceptions |
+| AI Connectors | https://www.notion.com/help/notion-ai-connectors | Connector eligibility and explicit personal-Gmail exception |
+| Personal Gmail AI Connector | https://www.notion.com/help/notion-mail-ai-connector | Individual Gmail inbox on any Notion plan; account-email requirement |
+| Organizational Gmail AI Connector | https://www.notion.com/help/notion-ai-connector-for-gmail | Workspace/admin requirements and Business/Enterprise eligibility |
 | Notion Agent | https://www.notion.com/help/notion-agent | Agent operates with the user's existing permissions |
 | Custom Agent permissions | https://www.notion.com/help/custom-agents-sharing-and-permissions | Separate access grants and distinct agent permission model |
 
@@ -24,7 +26,9 @@ These pages were consulted on the date above. Website copy, plan names, prices, 
 
 **Search versus action.** Enterprise Search documentation describes retrieving content from the workspace and connected applications, with source citations, and lets users select search scope. The Notion Agent help page describes editing pages/databases within the acting user's permissions. Custom Agents are documented as having separately granted resource permissions rather than simply inheriting the requester's access. These are materially different behaviors; a comparison that treats “search,” “agent,” and “connected tool” as synonyms risks unsupported claims.
 
-**Connector permissions and exceptions.** The general AI Connectors documentation lists Business/Enterprise as the requirement for connecting third-party apps, while explicitly identifying **Notion Mail** and **Notion Calendar** as available on all plans. **Do not confuse Notion Mail with the separate Gmail AI Connector**, which falls under the documented Business/Enterprise rule. Plan and connector details should therefore be checked **per connector and per use case**, not reduced to a universal “all integrations require Business” statement. “Basic connections” in a plan table should not automatically be treated as equivalent to AI-enabled indexed search.
+**Connector permissions and exceptions.** Notion's AI Connectors overview specifies Business/Enterprise for most third-party connectors **but explicitly exempts the Personal Gmail AI Connector, which is available on all Notion plans**. The personal connector is for an individual Gmail inbox and requires the Gmail address to match the Notion account email. The distinct **organization-wide Gmail AI Connector** requires Business/Enterprise, Google Workspace organizational access and administrative permissions. These two Gmail integrations must not be conflated; see the overview and both connector-specific help pages below. Plan and connector capabilities must be checked **per integration and use case** rather than summarized as “all AI connectors require Business”. “Basic connections” in a plan table should not automatically be equated with AI-enabled indexed search.
+
+**Correction recorded 2026-10-11:** A prior revision incorrectly claimed that Gmail was always restricted to Business/Enterprise and confused Notion Mail with the Personal Gmail AI Connector. That claim has been withdrawn on verification of the first-party documentation.
 
 **Localized prices and usage assumptions.** The Italian-language pricing page observed in USD displays Free, Plus, Business and Enterprise tiers and lists Plus at USD 10/member/month, Business at USD 20/member/month, with Enterprise quote-based. The pricing page also has monthly/annual and currency selectors; another locale/currency can differ. For a hypothetical 20-person team, a published seat price is not a complete total-cost estimate without billing period, geography, plan, number of billable members, AI feature eligibility and any extra usage credits.
 
