@@ -1,0 +1,21 @@
+# Generated/local files must not enter Federica's public professional portfolio.
+# Especially never commit unreviewed AI responses, account context or personal metadata.
+/data/ai-search/observations.csv
+/data/ai-search/raw-captures/
+/data/ai-search/private-captures/
+/data/ai-search/*-local.json
+/data/ai-search/*-raw.json
+/data/ai-search/*-unreviewed.csv
+
+# Local credentials and machine state.
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+dist/
+.astro/
+.DS_Store
