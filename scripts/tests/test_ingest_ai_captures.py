@@ -27,6 +27,21 @@ def capture():
 
 
 class CaptureIngestTests(unittest.TestCase):
+    def test_new_templates_must_be_marked_reviewed(self):
+        item = capture()
+        item["capture_status"] = "UNOBSERVED_TEMPLATE"
+        with self.assertRaisesRegex(ValueError, "not been marked reviewed"):
+            capture_to_rows(item, FROZEN)
+        item["capture_status"] = "REVIEWED_OBSERVATION"
+        self.assertEqual(len(capture_to_rows(item, FROZEN)), 4)
+
+    def test_url_with_empty_username_cannot_be_cited(self):
+        item = capture()
+        item["labels"]["Notion"]["cited"] = True
+        item["labels"]["Notion"]["source_url"] = "https://:secret@example.org/help"
+        with self.assertRaisesRegex(ValueError, "valid http"):
+            capture_to_rows(item, FROZEN)
+
     def test_four_brand_rows_with_provenance_digest(self):
         rows = capture_to_rows(capture(), FROZEN)
         self.assertEqual(len(rows), 4)
