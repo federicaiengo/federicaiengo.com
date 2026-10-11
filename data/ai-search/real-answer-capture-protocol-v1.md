@@ -50,6 +50,16 @@ The compact brand placeholders above explain the structure; they are not ready-t
 
 ## Execute
 
+Before capturing any response, generate local blank forms from the unchanged frozen prompt IDs D01, U01, P01 and R01:
+
+```bash
+python scripts/prepare_ai_capture_round.py --run-id pilot-20261011-a --engine "Exact model / actual search mode" --output-dir "../fi-private-ai-observations"
+```
+
+The output directory MUST be outside the public website repository. The forms start with `capture_status: UNOBSERVED_TEMPLATE`, empty timestamps and answers, and `null` evidence classifications. No model is queried and no answers are invented.
+
+After acquiring each real unedited answer and deliberately reviewing every brand and citation, set `capture_status` to `REVIEWED_OBSERVATION`. Unreviewed generated forms are rejected by ingestion; legacy captures without this optional status remain supported. Record real collection context in the corresponding evidence notes. Source URLs must use valid public HTTP(S) forms without embedded account credentials, local addresses or control characters. Validation of URL syntax does NOT establish that an AI engine used or displayed that citation.
+
 From the website repository root, with Python 3.10+:
 
 ```bash
