@@ -95,6 +95,29 @@ class PrepareRoundTests(unittest.TestCase):
                 self.generate()
         self.assertEqual(list(self.out.iterdir()), [])
 
+    def test_reject_uneven_intent_families(self):
+        lines = self.prompts.read_text(encoding="utf-8").splitlines()
+        lines[1] = lines[1].replace("category_discovery", "alternatives", 1)
+        self.prompts.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "five prompts per intent"):
+            self.generate()
+
+    def test_reject_duplicate_question_and_unsafe_prompt_id(self):
+        with self.prompts.open(newline="", encoding="utf-8") as stream:
+            rows = list(csv.reader(stream))
+        rows[2][2] = rows[1][2]
+        with self.prompts.open("w", newline="", encoding="utf-8") as stream:
+            csv.writer(stream).writerows(rows)
+        with self.assertRaisesRegex(ValueError, "distinct question"):
+            self.generate()
+        rows[2][2] = "Restored unique question?"
+        rows[2][0] = "../bad"
+        with self.prompts.open("w", newline="", encoding="utf-8") as stream:
+            csv.writer(stream).writerows(rows)
+        with self.assertRaisesRegex(ValueError, "Unsafe frozen prompt"):
+            self.generate()
+        self.assertFalse(self.out.exists())
+
     def test_reject_wrong_prompt_schema_and_count(self):
         self.prompts.write_text("prompt_id,prompt_family,prompt,primary_measure\nA,a,hi,x\n")
         with self.assertRaisesRegex(ValueError, "Expected 35"):
