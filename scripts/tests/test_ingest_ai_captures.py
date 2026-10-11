@@ -30,7 +30,7 @@ class CaptureIngestTests(unittest.TestCase):
     def test_four_brand_rows_with_provenance_digest(self):
         rows = capture_to_rows(capture(), FROZEN)
         self.assertEqual(len(rows), 4)
-        self.assertTrue(rows[0]["evidence_note"].startswith("sha256:"))
+        self.assertTrue(rows[0]["evidence_note"].startswith("observed_at_utc:2026-10-11T12:00:00Z; sha256:"))
         self.assertEqual(rows[0]["run_date"], "2026-10-11")
         self.assertEqual(rows[0]["mentioned"], "false")
 
@@ -97,6 +97,28 @@ class CaptureIngestTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "Duplicate"):
                     ingest([source], output)
                 self.assertEqual(snapshot, output.read_bytes())
+
+
+    def test_reserved_and_whitespace_padded_run_ids_rejected(self):
+        for run_id in ("example-1", "DEMO-first", "Sample-1", "sYntheTic_01", " EXAMPLE-bypass"):
+            item = capture()
+            item["run_id"] = run_id
+            with self.subTest(run_id=run_id), self.assertRaises(ValueError):
+                capture_to_rows(item, FROZEN)
+
+    def test_csv_formula_identifiers_rejected(self):
+        for field, value in (("run_id", "=HYPERLINK('bad','click')"),
+                             ("engine", "+DDE(...)"), ("engine", "@SUM(1,1)")):
+            item = capture()
+            item[field] = value
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, "Unsafe CSV"):
+                capture_to_rows(item, FROZEN)
+
+    def test_utc_provenance_retained_in_existing_schema(self):
+        rows = capture_to_rows(capture(), FROZEN)
+        from analyze_ai_visibility import REQUIRED
+        self.assertEqual(list(rows[0]), list(REQUIRED))
+        self.assertIn("observed_at_utc:2026-10-11T12:00:00Z", rows[0]["evidence_note"])
 
 
 if __name__ == "__main__":
