@@ -11,7 +11,7 @@ import Base from '../../layouts/Base.astro';
 <h2>Audit trail</h2><p>Every observation records engine/run, prompt, brand, mention, citation, recommendation inclusion, ordered position where meaningful, source type, source URL and an evidence note. Repeated runs append evidence instead of overwriting history.</p>
 <h2>Scoring guardrail</h2><p>Mean position is calculated only for explicitly ordered shortlists and is never presented as a universal AI-search rank. Missing observations are never imputed. The Python pipeline refuses to invent results.</p>
 <h2>What the code actually verifies</h2>
-<p>The benchmark now includes a working Python validation and scoring pipeline, with <strong>15 locally passing unit tests</strong>. It rejects invalid observation values, duplicate run cells, mismatched prompt families and citations without a source URL. Comparisons use only complete four-brand rounds sharing the same date, engine and prompt: incomplete rounds are counted but not misclassified as brand absence. Unmeasured metrics remain unmeasured.</p>
+<p>The benchmark includes a working Python validation and scoring pipeline with regression tests for evidence quality, citation URLs and comparison integrity. It rejects invalid observation values, duplicate run cells, mismatched prompt families and citations without a source URL. Comparisons use only complete four-brand rounds sharing the same date, engine and prompt: incomplete rounds are counted but not misclassified as brand absence. Unmeasured metrics remain unmeasured.</p>
 <p>These tests demonstrate measurement and data-quality engineering. <strong>They do not demonstrate that any of the four products currently ranks, receives citations or is recommended by an AI system.</strong></p>
 <div class="evidence-links">
 <a href="https://github.com/federicaiengo/federicaiengo.com/blob/main/data/ai-search/competitive-prompts-v1.csv" target="_blank" rel="noopener noreferrer">Inspect 35 frozen prompts ↗</a>
@@ -20,6 +20,9 @@ import Base from '../../layouts/Base.astro';
 <a href="https://github.com/federicaiengo/federicaiengo.com/blob/main/data/ai-search/competitive-protocol-v1.md" target="_blank" rel="noopener noreferrer">Read full methodology ↗</a>
 <a href="https://github.com/federicaiengo/federicaiengo.com/blob/main/data/ai-search/real-answer-capture-protocol-v1.md" target="_blank" rel="noopener noreferrer">Review the real-answer capture protocol ↗</a>
 </div>
+<h2>Preparing the first observation round</h2><p>A local-only Python helper now prepares unobserved answer-capture templates for four frozen prompts: D01 (discovery), U01 (capability), P01 (pricing) and R01 (recommendation). It refuses to store captures inside the public site repository and does not generate AI answers.</p>
+<p>Each future answer needs an exact prompt, recorded model and search mode, UTC timestamp, verbatim response, reviewed citations and four-brand classifications before ingestion. <strong>Real AI response collection and any performance conclusions are still pending.</strong></p>
+<p><a href="https://github.com/federicaiengo/federicaiengo.com/blob/main/scripts/prepare_ai_capture_round.py" target="_blank" rel="noopener noreferrer">Inspect the observation-template generator ↗</a></p>
 <h2>Status</h2><p>Protocol and dataset are ready. Results remain unpublished until real observations are collected and auditable.</p>
 
 <style>
