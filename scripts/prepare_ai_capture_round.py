@@ -73,10 +73,10 @@ def prepare_round(output_dir: Path, run_id: str, engine: str,
                 } for brand in BRANDS}
             }
             with path.open("x", encoding="utf-8") as stream:
+                created.append(path)  # Include the currently opened file in rollback.
                 json.dump(data, stream, ensure_ascii=False, indent=2)
                 stream.write("\n")
-            created.append(path)
-    except OSError:
+    except (OSError, ValueError, TypeError):
         for path in created:
             path.unlink(missing_ok=True)
         raise
