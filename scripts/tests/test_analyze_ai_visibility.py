@@ -132,5 +132,15 @@ class CompetitiveVisibilityTests(unittest.TestCase):
             self.assertEqual(len(load_frozen_prompts(path)), 35)
 
 
+    def test_reserved_case_whitespace_and_csv_formula_run_ids(self):
+        for run_id in ("example-1", " sample-2", "@HYPERLINK(1,2)", "+CMD"):
+            with self.subTest(run_id=run_id), self.assertRaises(ValueError):
+                self.validate([record(run=run_id)])
+
+    def test_csv_formula_engine_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Unsafe CSV"):
+            self.validate([record(engine="=HYPERLINK(1,2)")])
+
+
 if __name__ == "__main__":
     unittest.main()
