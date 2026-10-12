@@ -78,7 +78,10 @@ def audit(root: Path = ROOT) -> dict:
                     excluded_dynamic += 1
             if tag != "a":
                 continue
-            if attrs.get("target", "").lower() == "_blank":
+            target = attrs.get("target")
+            if "target" in attrs and target is None:
+                errors.append(f"{route}: a target attribute without a value")
+            if target is not None and target.lower() == "_blank":
                 checked_blank += 1
                 rel = attrs.get("rel")
                 if rel is None:
