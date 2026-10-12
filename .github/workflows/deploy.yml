@@ -21,6 +21,7 @@ jobs:
       - name: Validate official FI icon and social assets
         run: |
           python3 scripts/audit_site_source.py
+          python3 scripts/audit_site_references.py
           python3 scripts/audit_visual_assets.py
           python3 -m unittest discover -s scripts/tests -v
       - uses: actions/setup-node@v4
