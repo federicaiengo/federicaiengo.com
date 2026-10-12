@@ -63,6 +63,11 @@ class ReferenceAuditTests(unittest.TestCase):
         self.page("index.astro", '<a href="https://example.com" target="_blank">Offsite</a>')
         self.assertTrue(any("without noopener" in e for e in audit(self.root)["errors"]))
 
+    def test_valueless_target_reports_error_without_crashing(self):
+        self.page("index.astro", '<a target href="/">Malformed target</a>')
+        self.assertTrue(any("target attribute without a value" in e
+                            for e in audit(self.root)["errors"]))
+
     def test_dynamic_expressions_are_not_false_claims(self):
         self.page("index.astro", '<a href={source + "/x/#unknown"} target="_blank" '
                   'rel="noopener noreferrer">Dynamic</a><div id={variable}></div>')
