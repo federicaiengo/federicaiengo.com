@@ -1,6 +1,13 @@
 name: Deploy to GitHub Pages
 on:
   workflow_dispatch:
+  # A deploy runs on push ONLY when this dedicated request file changes.
+  # Normal source commits do not publish the site.
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/pages-deploy-request.txt'
 permissions:
   contents: read
   pages: write
