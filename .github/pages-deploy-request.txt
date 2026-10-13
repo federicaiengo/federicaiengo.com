@@ -1,6 +1,6 @@
 # On-demand GitHub Pages deploy request
 
-Release: 2026-10-13 HR case-study evidence update
+Release: 2026-10-13 HR final analytical-review link and evidence update
 Scope: published website content and existing design only
 Trigger: this file is the sole push path watched by deploy.yml
 Approval: user requested deploying the prepared website changes
