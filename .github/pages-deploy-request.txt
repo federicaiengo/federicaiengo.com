@@ -4,3 +4,9 @@ Release: 2026-10-13 HR final analytical-review link and evidence update
 Scope: published website content and existing design only
 Trigger: this file is the sole push path watched by deploy.yml
 Approval: user requested deploying the prepared website changes
+
+Release: 2026-10-14 independent cybersecurity GRC/IAM portfolio case study
+Scope: new Astro case-study route and Projects card, linked to vetted synthetic-only public Python evidence
+Authorization: user explicitly approved publication with 'Puoi pubblicare se pensi sia ora' on 2026-10-14
+Verification: public repo source+link+privacy preflight passed; existing deployment workflow must pass audits, site unit tests and npm run build before Pages release
+Exclusions: no LinkedIn/CV edits, no production IAM claims, no private checkpoint disclosure
