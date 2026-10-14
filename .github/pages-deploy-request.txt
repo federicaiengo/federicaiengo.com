@@ -10,3 +10,8 @@ Scope: new Astro case-study route and Projects card, linked to vetted synthetic-
 Authorization: user explicitly approved publication with 'Puoi pubblicare se pensi sia ora' on 2026-10-14
 Verification: public repo source+link+privacy preflight passed; existing deployment workflow must pass audits, site unit tests and npm run build before Pages release
 Exclusions: no LinkedIn/CV edits, no production IAM claims, no private checkpoint disclosure
+
+Release: 2026-10-14 cyber case study smartphone readability refinement
+Scope: one approved public case-study page only; mobile label fit, vertical rhythm, paragraph clarity, and duplication cleanup
+QA: static source review passed; GitHub Pages workflow required to pass Python source/reference/asset audits and Astro build before deployment
+Authorization context: user provided smartphone screenshot review after the previously approved public case-study release; no changes to CV, LinkedIn, global styles, or unrelated projects
