@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Cyber Risk & IAM: Independent Case Study | Federica Iengo" description="An independent educational cyber risk and access-governance case study using a fictional SaaS supplier, synthetic scenarios and reproducible tests with explicit limitations.">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/projects/">Projects</a><span aria-hidden="true"> / </span><span aria-current="page">Cyber Risk &amp; IAM</span></nav>
+<p class="eyebrow">Independent Research · Cybersecurity GRC · Access Governance</p>
+<h1>A valid login is not a trust decision</h1>
+<p class="lead">A supplier can be authorized to connect to a service without being entitled to every document or instruction. Using a fully fictional SaaS integration, I explored what would justify access, which safeguards would need evidence, and when the defensible answer is to withhold approval.</p>
+
+<section aria-labelledby="question">
+<h2 id="question">The business decision</h2>
+<p>Should a document-processing vendor receive access to selected customer files? The exercise maps 12 synthetic assets and 12 hypothetical risk scenarios, then requests evidence through a 12-question supplier due-diligence checklist. The simulated decision remains <strong>HOLD</strong>, because the proposed safeguards have not been validated against any real system or vendor.</p>
+</section>
+
+<section aria-labelledby="approach">
+<h2 id="approach">How the assessment was structured</h2>
+<div class="grid">
+<article class="card"><h3>Define risk</h3><p>Document imagined failure paths, assets, assumptions and qualitative severity. Ordinal 1–5 scores are an illustration, not measured probabilities.</p></article>
+<article class="card"><h3>Constrain access</h3><p>Reason about identities, roles, individual tenant documents, authorized purpose, expiry and the provenance of external data.</p></article>
+<article class="card"><h3>Ask for evidence</h3><p>Require scoped approvals, offboarding, auditability, subcontractor transparency and recovery evidence before treating a control as effective.</p></article>
+</div>
+</section>
+
+<section aria-labelledby="verification">
+<h2 id="verification">What I checked</h2>
+<p>The project uses 20 synthetic identities across five roles and 24 illustrative IAM access scenarios. Its Python regression suites, executed on the published synthetic files on 14 October 2026, passed <strong>51 of 51 unittest methods</strong>: 11 risk/vendor-fixture checks, 16 IAM tests and 24 tenant/document-scoping tests. These tests validate a <strong>fictional decision model</strong>, not deployed IAM controls or an actual supplier.</p>
+<p>A critical review uncovered an overbroad simulated approval check: initially, any nonempty approval identifier could satisfy a requirement. I revised the example to bind mock approvals to a subject, tenant, specific document, operation and expiration, then added negative regression cases. The approval registry is itself invented; it is <strong>not an authoritative identity or approval system</strong>.</p>
+<p class="source-link"><a href="https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/cyber-risk-iam-decision-study" target="_blank" rel="noopener noreferrer">Inspect the synthetic data, Python tests and methodology ↗</a></p>
+</section>
+
+<section aria-labelledby="limits">
+<h2 id="limits">What the results do not establish</h2>
+<p>This is independent educational work, not an external audit, customer engagement, ISO/NIST certification or demonstrated production protection. No real credentials, suppliers, customer records, identity providers or live systems were tested. Hypothetical inputs about authentication, contracts and source integrity are not independent security evidence.</p>
+<p>Passing a synthetic test is useful when it confirms the logic matches its documented rules. It does not prove those rules are complete, that the inputs are trustworthy, or that the design would resist a real attacker.</p>
+</section>
+
+<section aria-labelledby="takeaway">
+<h2 id="takeaway">The lesson</h2>
+<p>The distinction worth preserving is between a technically possible action and one justified by current, verifiable evidence. A legitimate login is one input to an authorization decision, not a substitute for that decision.</p>
+<p class="note">This is independent educational research, not professional security work performed for a client. The linked public repository contains only fictional data, a toy evaluator and reproducible tests; no private checkpoints or customer information are included.</p>
+</section>
+</Base>
+<style>
+.breadcrumbs{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1.6rem;font-size:.84rem;color:#aaa49a}.breadcrumbs a{color:#FFD554}.lead{font-size:clamp(1.08rem,2vw,1.24rem);max-width:850px}section{margin-top:3.4rem}h2{margin-bottom:1rem}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1.2rem 0}.card{padding:1.4rem;border:1px solid #3c3528;border-radius:12px;background:#12110e}.card h3{color:#eee1c1;margin-top:0}.card p{line-height:1.7}.note{color:#a9a59b;font-size:.85rem}.source-link{margin:1.4rem 0}.source-link a{color:#FFD554;font-weight:700}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
