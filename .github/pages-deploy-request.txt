@@ -27,3 +27,9 @@ Scope: homepage cross-disciplinary project link; Projects business-brief link; C
 Privacy: synthetic supplier scenario only; no private checkpoints, recruiters, credentials, CV, LinkedIn or real customer/vendor data
 Verification: source preflight PASS 10/10; CI must pass source/reference/assets audits, Python tests, Astro build and GitHub Pages deploy; visual mobile follow-up remains separately required
 Owner authorization: continue projects and website, with prior approval to publish polished case study
+
+Release: 2026-10-15 six business evidence/privacy regression tests QA
+Scope: test-only website source update; six source-regression unittest methods protect business evidence disclaimers and researched change-ledger states
+Source test commit: 882465fb47b4aee02319ebd4a64ceb8c77b87e3c
+Owner instruction: continue projects and website while studying; previous published pages remain unchanged, new Support Operations private project NOT published
+Gate: Python site tests + source/reference/visual asset audits + Astro npm build + Pages deployment must all succeed; direct browser mobile inspection still a separate test
