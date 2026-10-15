@@ -21,3 +21,9 @@ Scope: new public synthetic GRC decision brief and linked README; website Cyber 
 Authorization: user explicitly asked to proceed with projects and website on 2026-10-15, following the approved public case-study release
 Preflight: 17 static content/privacy/route checks pass. GitHub Actions must run existing site audit tests and Astro npm build before Pages deployment
 No modifications to LinkedIn, CV, job applications, private checkpoints, global identity or unrelated site pages
+
+Release: 2026-10-15 evidence-led operations and vendor-risk business brief
+Scope: homepage cross-disciplinary project link; Projects business-brief link; Cyber Risk page decision brief callout; E-Commerce operations next steps; README deployment documentation correction
+Privacy: synthetic supplier scenario only; no private checkpoints, recruiters, credentials, CV, LinkedIn or real customer/vendor data
+Verification: source preflight PASS 10/10; CI must pass source/reference/assets audits, Python tests, Astro build and GitHub Pages deploy; visual mobile follow-up remains separately required
+Owner authorization: continue projects and website, with prior approval to publish polished case study
