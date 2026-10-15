@@ -15,3 +15,9 @@ Release: 2026-10-14 cyber case study smartphone readability refinement
 Scope: one approved public case-study page only; mobile label fit, vertical rhythm, paragraph clarity, and duplication cleanup
 QA: static source review passed; GitHub Pages workflow required to pass Python source/reference/asset audits and Astro build before deployment
 Authorization context: user provided smartphone screenshot review after the previously approved public case-study release; no changes to CV, LinkedIn, global styles, or unrelated projects
+
+Release: 2026-10-15 business-facing portfolio case study evidence refresh
+Scope: new public synthetic GRC decision brief and linked README; website Cyber decision callout, E-Commerce operational follow-up, homepage cross-disciplinary link, Projects link; site README corrected
+Authorization: user explicitly asked to proceed with projects and website on 2026-10-15, following the approved public case-study release
+Preflight: 17 static content/privacy/route checks pass. GitHub Actions must run existing site audit tests and Astro npm build before Pages deployment
+No modifications to LinkedIn, CV, job applications, private checkpoints, global identity or unrelated site pages
