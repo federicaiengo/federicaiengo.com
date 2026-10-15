@@ -32,6 +32,16 @@ const source = 'https://github.com/federicaiengo/data-analytics-portfolio/tree/m
 <tr><th scope="row">11+</th><td>325</td><td>24</td><td>7.385%</td></tr>
 </tbody></table></div>
 <p class="note">On smaller screens, scroll the table horizontally to inspect all columns.</p>
+<section class="operations-next" aria-labelledby="operations-next">
+<h2 id="operations-next">What an operations team could investigate next</h2>
+<p>The 303 mismatches are a <strong>review queue, not 303 proven errors or financial losses</strong>. A practical follow-up would prioritize cases without changing source amounts automatically.</p>
+<ol>
+<li><strong>Confirm definitions:</strong> ask finance and payments owners whether the two recorded amounts should match when installment fees, adjustments or other business rules apply.</li>
+<li><strong>Review cases proportionately:</strong> compare representative mismatches by payment method, installment group, order status and difference size; preserve missing data separately.</li>
+<li><strong>Track resolution:</strong> document the cause if verified, the responsible team and any approved correction, then rerun the reconciliation before reporting a resolved total.</li>
+</ol>
+<p class="note">These are proposed next steps, not investigations performed with a client or changes implemented in a payment system.</p>
+</section>
 <h2>What the evidence does <em>not</em> prove</h2>
 <p>The association with installment count does not establish why the differences occurred. The available data do not identify whether they reflect interest, processing fees, adjustments or source-system errors. I therefore kept the two financial measures distinct and left discrepancies visible for further investigation instead of silently correcting them.</p>
 <h2>What was tested</h2>
@@ -49,4 +59,5 @@ const source = 'https://github.com/federicaiengo/data-analytics-portfolio/tree/m
 <style>
 .breadcrumbs{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap;margin-bottom:1.6rem;font-size:.84rem;color:#aaa49a}.breadcrumbs a{color:#FFD554}.breadcrumbs span[aria-current]{color:#c6c2b8}.table-wrap:focus-visible{outline:2px solid #FFD554;outline-offset:4px}
 .lead{font-size:clamp(1.08rem,2vw,1.25rem);max-width:850px}.evidence-summary{margin:2.5rem 0;padding:1.5rem;border:1px solid #3c3528;border-radius:14px;background:#12110e}.evidence-summary .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}.evidence-summary .card{display:flex;flex-direction:column;gap:.65rem}.evidence-summary strong{color:#FFD554;font-size:clamp(1.4rem,2.5vw,2rem)}.evidence-summary span{font-size:.87rem;line-height:1.5}.note{font-size:.85rem;color:#aaa49a}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;margin:1.2rem 0 2rem;min-width:560px}caption{text-align:left;color:#bcb8ac;margin-bottom:.75rem}th,td{padding:.8rem;border-bottom:1px solid #39342b;text-align:left}thead th{color:#FFD554}.source-links{display:flex;flex-wrap:wrap;gap:1rem;margin:1.2rem 0 2rem}.source-links a{color:#FFD554;font-weight:700}@media(max-width:850px){.evidence-summary .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.evidence-summary .grid{grid-template-columns:1fr}.evidence-summary{padding:1.1rem}}
+.operations-next{border:1px solid #403626;border-radius:12px;background:#110f0b;padding:1.5rem;margin:2.3rem 0}.operations-next h2{margin:0 0 1rem}.operations-next p{line-height:1.65}.operations-next ol{padding-left:1.3rem;margin:1.2rem 0}.operations-next li{margin:.8rem 0;line-height:1.65}.operations-next .note{font-size:.9rem;color:#aba69d}@media(max-width:680px){.operations-next{padding:1.1rem;margin:1.7rem 0}}
 </style>
