@@ -13,7 +13,7 @@ npm install
 npm run build
 ```
 
-**Important:** the current `package.json` specifies `latest` versions without a committed lockfile. Builds are therefore not yet dependency-reproducible. The previous public release passed the Astro build in [GitHub Actions run 38626391698](https://github.com/federicaiengo/federicaiengo.com/actions/runs/38626391698) on 14 October 2026. **Changes committed after that run must pass a new build before they can be called deployed or build-verified.** Browser rendering, dependency pinning and lockfile work remain distinct QA tasks.
+**Important:** the current `package.json` specifies `latest` versions without a committed lockfile. Builds are therefore not yet dependency-reproducible. The latest verified production release completed the source checks, 78 Python tests, Astro build and Pages deploy in [GitHub Actions run 38741320173](https://github.com/federicaiengo/federicaiengo.com/actions/runs/38741320173) on 15 October 2026. **Later source changes require their own checks and deploy verification before they can be called live.** Browser rendering, dependency pinning and lockfile work remain distinct QA tasks.
 
 ### Source-only preflight (no npm or network required)
 
