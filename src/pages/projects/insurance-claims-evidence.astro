@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 const repo = 'https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/insurance-claims-analytics';
+const repoFiles = 'https://github.com/federicaiengo/data-analytics-portfolio/blob/main/projects/insurance-claims-analytics';
 const dashboard = 'https://public.tableau.com/app/profile/federica.iengo/viz/insurance_claims_dashboard/Dashboard1';
 ---
 <Base title="Insurance Claims Analytics: Evidence & Decisions | Federica Iengo" description="An accessible, evidence-linked insurance claims case study: 10,000 claims, product-specific exposure, fair comparisons and the limits of descriptive analysis.">
@@ -17,7 +18,7 @@ const dashboard = 'https://public.tableau.com/app/profile/federica.iengo/viz/ins
 <article class="card"><strong>55.23%</strong><span>Share of total claim value from Life Insurance</span></article>
 <article class="card"><strong>103</strong><span>Claims at or above the 95,000 threshold</span></article>
 </div>
-<p class="note">Headline figures have now also been independently cross-checked by reading the original 10,000-row CSV. This validates the selected aggregate counts, not every SQL view or the external Tableau dashboard. This is an independent portfolio analysis, not a live insurer's operating dashboard.</p>
+<p class="note">Headline figures were independently cross-checked against the 10,000-row source in the historical October 2026 audit. That validates selected aggregate counts from that audit, not every SQL view or the external Tableau dashboard. This is an independent portfolio analysis, not a live insurer's operating dashboard.</p>
 </section>
 
 <h2>The question</h2>
@@ -35,16 +36,16 @@ const dashboard = 'https://public.tableau.com/app/profile/federica.iengo/viz/ins
 <p>The project uses PostgreSQL and SQL to audit claim records, check relationships with employee and vendor reference data, calculate portfolio KPIs and test candidate findings. A Tableau dashboard presents the results for executive review. Findings that did not support a meaningful standalone conclusion were retained in a separate rejected-findings log rather than promoted into recommendations.</p>
 
 <h2>What was independently checked</h2>
-<p>The reported total claim value, product counts and all 103 claims at or above the 95,000 threshold were cross-checked against the original 10,000-row CSV. The independent Python audit includes <strong>eight locally passing regression tests</strong> covering valid totals, missing or duplicate identifiers, invalid amounts and prevention of identifier-value disclosure in the aggregate result. These checks validate a defined subset of source evidence, not every SQL view or the Tableau dashboard.</p>
+<p>The reported total claim value, product counts and all 103 claims at or above the 95,000 threshold were cross-checked against the original 10,000-row CSV in October 2026. <strong>The raw source files are not currently distributed on the public branch</strong> while their provenance and redistribution rights remain unverified. The independent Python audit now has <strong>11 locally passing tests on synthetic inputs</strong>, including safe CLI behavior and missing-source handling. These tests are not a fresh reproduction of the historical 10,000-claim totals, a licensing review or a verification of the external Tableau dashboard.</p>
 <h2>What the data cannot tell us</h2>
 <p>This analysis describes the supplied dataset. It does not prove causal relationships, establish that an agent or vendor performs poorly, identify fraud, or validate a production insurance decision. Product-specific review thresholds are <strong>recommendations to evaluate</strong>, not implemented controls or demonstrated business improvements.</p>
 
 <h2>Explore the evidence</h2>
 <p>Start with the business findings for a plain-language explanation, or inspect the KPI report and SQL for reproducible definitions and calculations.</p>
 <div class="links">
-<a href={repo + '/reports/BUSINESS_FINDINGS.md'} target="_blank" rel="noopener noreferrer">Read business findings ↗</a>
-<a href={repo + '/reports/KPI_REPORT.md'} target="_blank" rel="noopener noreferrer">Inspect KPI report ↗</a><a href={repo + '/reports/RAW_SOURCE_KPI_SPOT_CHECK_2026-10-09.md'} target="_blank" rel="noopener noreferrer">Check independent source validation ↗</a><a href={repo + '/python/verify_public_kpis.py'} target="_blank" rel="noopener noreferrer">Inspect Python audit code ↗</a><a href={repo + '/tests/test_verify_public_kpis.py'} target="_blank" rel="noopener noreferrer">Inspect eight regression tests ↗</a>
-<a href={repo + '/docs/business_rejected_findings.md'} target="_blank" rel="noopener noreferrer">Review rejected findings ↗</a>
+<a href={repoFiles + '/reports/BUSINESS_FINDINGS.md'} target="_blank" rel="noopener noreferrer">Read business findings ↗</a>
+<a href={repoFiles + '/reports/KPI_REPORT.md'} target="_blank" rel="noopener noreferrer">Inspect KPI report ↗</a><a href={repoFiles + '/reports/RAW_SOURCE_KPI_SPOT_CHECK_2026-10-09.md'} target="_blank" rel="noopener noreferrer">Check independent source validation ↗</a><a href={repoFiles + '/python/verify_public_kpis.py'} target="_blank" rel="noopener noreferrer">Inspect Python audit code ↗</a><a href={repoFiles + '/tests/test_verify_public_kpis.py'} target="_blank" rel="noopener noreferrer">Inspect eleven regression tests ↗</a>
+<a href={repoFiles + '/docs/business_rejected_findings.md'} target="_blank" rel="noopener noreferrer">Review rejected findings ↗</a>
 <a href={repo + '/sql'} target="_blank" rel="noopener noreferrer">Inspect SQL analyses ↗</a>
 <a href={dashboard} target="_blank" rel="noopener noreferrer">Open Tableau dashboard ↗</a>
 </div>
