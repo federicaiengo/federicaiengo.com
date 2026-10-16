@@ -44,12 +44,32 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
         self.assertIn("not 303 proven errors or financial losses", page)
         self.assertIn("not investigations performed with a client", page)
 
+    def test_insurance_evidence_discloses_historical_limits_and_uses_file_links(self):
+        page = read("src/pages/projects/insurance-claims-evidence.astro")
+        self.assertIn("raw source files are not currently distributed", page)
+        self.assertIn("provenance and redistribution rights remain unverified", page)
+        self.assertIn("11 locally passing tests on synthetic inputs", page)
+        self.assertIn("not a fresh reproduction", page)
+        self.assertIn("data-analytics-portfolio/blob/main/projects/insurance-claims-analytics", page)
+        for path in (
+            "/reports/BUSINESS_FINDINGS.md",
+            "/reports/KPI_REPORT.md",
+            "/reports/RAW_SOURCE_KPI_SPOT_CHECK_2026-10-09.md",
+            "/python/verify_public_kpis.py",
+            "/tests/test_verify_public_kpis.py",
+            "/docs/business_rejected_findings.md",
+        ):
+            with self.subTest(file=path):
+                self.assertIn(f"repoFiles + '{path}'", page)
+        self.assertIn("repo + '/sql'", page)
+
     def test_no_private_checkpoint_references_on_selected_public_pages(self):
         for relative in (
             "src/pages/index.astro",
             "src/pages/projects.astro",
             "src/pages/projects/cyber-risk-assessment.astro",
             "src/pages/projects/ecommerce-technical-evidence.astro",
+            "src/pages/projects/insurance-claims-evidence.astro",
         ):
             with self.subTest(page=relative):
                 page = read(relative)
