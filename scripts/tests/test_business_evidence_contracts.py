@@ -63,6 +63,20 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
                 self.assertIn(f"repoFiles + '{path}'", page)
         self.assertIn("repo + '/sql'", page)
 
+    def test_hr_analysis_preserves_observational_and_excel_qa_limits(self):
+        page = read("src/pages/projects/hr-attrition-evidence.astro")
+        self.assertIn("not a live employer's workforce", page)
+        self.assertIn("not proof that overtime itself caused anyone to leave", page)
+        self.assertIn("Desktop Excel compatibility and verified XLSX regeneration remain pending", page)
+
+    def test_ai_search_does_not_present_protocol_as_measured_results(self):
+        hub = read("src/pages/ai-search.astro")
+        study = read("src/pages/projects/ai-search-competitive-intelligence.astro")
+        self.assertIn("not observed model outputs or measured results", hub)
+        self.assertIn("not client work for any benchmarked company", study)
+        self.assertIn("actual AI mentions, citations, recommendations or performance differences", study)
+        self.assertIn("Passing software tests is not evidence of product visibility", study)
+
     def test_no_private_checkpoint_references_on_selected_public_pages(self):
         for relative in (
             "src/pages/index.astro",
@@ -70,6 +84,9 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
             "src/pages/projects/cyber-risk-assessment.astro",
             "src/pages/projects/ecommerce-technical-evidence.astro",
             "src/pages/projects/insurance-claims-evidence.astro",
+            "src/pages/projects/hr-attrition-evidence.astro",
+            "src/pages/projects/ai-search-competitive-intelligence.astro",
+            "src/pages/ai-search.astro",
         ):
             with self.subTest(page=relative):
                 page = read(relative)
