@@ -34,6 +34,7 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
         page = read("src/pages/projects/cyber-risk-assessment.astro")
         self.assertIn("No real supplier was assessed.", page)
         self.assertIn("51 of 51 unittest methods", page)
+        self.assertIn("executed on the published synthetic files on 14 October 2026", page)
         self.assertIn("not an external audit", page)
         self.assertIn("not deployed IAM controls", page)
         self.assertIn("DECISION_BRIEF.md", page)
