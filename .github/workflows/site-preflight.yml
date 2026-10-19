@@ -1,0 +1,42 @@
+name: Site source preflight
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - 'data/**'
+      - 'astro.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/site-preflight.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - 'data/**'
+      - 'astro.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/site-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit site source and references
+        run: |
+          python scripts/audit_site_source.py
+          python scripts/audit_site_references.py
+      - name: Audit visual assets
+        run: python scripts/audit_visual_assets.py
+      - name: Run Python regression tests
+        run: python -m unittest discover -s scripts/tests -v
