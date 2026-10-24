@@ -33,7 +33,7 @@ jobs:
           python3 -m unittest discover -s scripts/tests -v
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '24'
       - run: npm install
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
