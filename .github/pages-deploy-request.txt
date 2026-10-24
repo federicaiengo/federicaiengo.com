@@ -40,3 +40,8 @@ Authorization: owner explicitly approved publication of Federica's portfolio pro
 Language QA: professional, natural English; correct spelling, grammar, punctuation and accurate evidence claims.
 Exclusions: confidential Gossmere materials, private checkpoints, personal data, and unrelated repositories.
 Verification gate: existing GitHub Actions source/reference/asset audits, Python tests, Astro build, and Pages deployment must pass; browser/mobile QA remains separate.
+
+Release retry: 2026-10-24 Astro 7 / Node runtime compatibility fix
+Reason: prior run 40077335136 passed all 81 Python tests and source/asset audits, but Astro build failed because Node 22.23.3 did not satisfy Astro 7.4.2 minimum 22.23.4.
+Change: deployment workflow now requests Node 24; rerun the full guarded Pages pipeline to verify build and deployment.
+Authorization: site owner approved portfolio publication and requested retry if needed.
