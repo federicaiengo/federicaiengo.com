@@ -33,3 +33,10 @@ Scope: test-only website source update; six source-regression unittest methods p
 Source test commit: 882465fb47b4aee02319ebd4a64ceb8c77b87e3c
 Owner instruction: continue projects and website while studying; previous published pages remain unchanged, new Support Operations private project NOT published
 Gate: Python site tests + source/reference/visual asset audits + Astro npm build + Pages deployment must all succeed; direct browser mobile inspection still a separate test
+
+Release: 2026-10-24 portfolio project evidence alignment
+Scope: publish the existing Projects page corrections for AI Search Visibility Lab and Cyber Risk & IAM test-status descriptions.
+Authorization: owner explicitly approved publication of Federica's portfolio projects on 2026-10-24.
+Language QA: professional, natural English; correct spelling, grammar, punctuation and accurate evidence claims.
+Exclusions: confidential Gossmere materials, private checkpoints, personal data, and unrelated repositories.
+Verification gate: existing GitHub Actions source/reference/asset audits, Python tests, Astro build, and Pages deployment must pass; browser/mobile QA remains separate.
