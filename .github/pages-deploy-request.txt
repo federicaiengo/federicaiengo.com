@@ -45,3 +45,10 @@ Release retry: 2026-10-24 Astro 7 / Node runtime compatibility fix
 Reason: prior run 40077335136 passed all 81 Python tests and source/asset audits, but Astro build failed because Node 22.23.3 did not satisfy Astro 7.4.2 minimum 22.23.4.
 Change: deployment workflow now requests Node 24; rerun the full guarded Pages pipeline to verify build and deployment.
 Authorization: site owner approved portfolio publication and requested retry if needed.
+
+Release: 2026-10-25 SEO metadata batch
+Scope: About, Research, E-Commerce evidence and SEO/AEO/GEO Notion case study meta descriptions; no visual changes.
+Privacy: Gossmere name alone is public-allowable, but its nature, activities, products, architecture and private materials remain confidential. No new Gossmere information added.
+Evidence: no unverified ranking or AI visibility improvements claimed.
+Verification: existing CI audits, Python tests, Astro build and GitHub Pages deploy must succeed; live inspection remains a separate check.
+Authorization: site owner requested continuation and publication of authorized portfolio work.
