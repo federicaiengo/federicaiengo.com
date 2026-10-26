@@ -52,3 +52,9 @@ Privacy: Gossmere name alone is public-allowable, but its nature, activities, pr
 Evidence: no unverified ranking or AI visibility improvements claimed.
 Verification: existing CI audits, Python tests, Astro build and GitHub Pages deploy must succeed; live inspection remains a separate check.
 Authorization: site owner requested continuation and publication of authorized portfolio work.
+
+Release: 2026-10-26 Google Search Console URL-prefix verification
+Scope: publish only public/google7a47c0c48ec38d61.html as supplied by the domain owner for Google Search Console HTML-file ownership verification.
+No visual changes, DNS changes, analytics tracking scripts or private project disclosures.
+Verification gate: existing source/reference/asset audits, Python tests, Astro build and Pages deploy.
+Owner authorization: uploaded verification file and requested continuation of Search Console setup.
