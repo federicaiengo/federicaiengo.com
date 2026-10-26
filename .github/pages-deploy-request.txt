@@ -58,3 +58,9 @@ Scope: publish only public/google7a47c0c48ec38d61.html as supplied by the domain
 No visual changes, DNS changes, analytics tracking scripts or private project disclosures.
 Verification gate: existing source/reference/asset audits, Python tests, Astro build and Pages deploy.
 Owner authorization: uploaded verification file and requested continuation of Search Console setup.
+
+Release: 2026-10-26 verified LinkedIn identity disambiguation
+Scope: publish previously committed Person JSON-LD sameAs association with official LinkedIn profile
+Source commit: c448f791f1c7e8fdbb92187ae20af6f32ed2f84b
+Constraints: no visual changes; no disclosure of private work; existing CI and Pages checks required
+Authorization: user explicitly requested deployment
