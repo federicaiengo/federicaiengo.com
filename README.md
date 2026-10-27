@@ -39,7 +39,7 @@ GitHub Pages deployment is intentionally triggered only by `workflow_dispatch` o
 - [Website SEO/AEO/GEO measurement protocol](data/visibility/MEASUREMENT_PROTOCOL.md)
 - [Website intervention ledger](data/visibility/change-ledger-v1.csv)
 
-**Measurement state:** Google Search Console/GA4 have not been connected or configured; AI Search observation ledgers do not contain actual verified visibility results. Static source changes are not traffic improvements. The existing detailed FI eclipse identity remains subject to visual signoff; do not replace branding based only on placeholder assets.
+**Measurement state (27 October 2026):** The owner verified the `https://federicaiengo.com/` Google Search Console URL-prefix property and submitted `sitemap-index.xml`, which was processed with 11 discovered URLs. Discovered URLs are **not** a count of indexed pages. The indexing report was still processing at last owner inspection; no Search Console performance metrics or GA4 configuration have been verified here. The owner observed variable Google AI Overview identity-disambiguation outputs, including a response correctly distinguishing a namesake; these observations are not a controlled baseline or proof of causal improvement. No public personal correspondence, screenshots, private checkpoints, or raw observation logs are stored in this repository. Static source changes are not traffic improvements. The existing detailed FI eclipse identity remains subject to visual signoff; do not replace branding based only on placeholder assets.
 
 ## Guardrails
 
