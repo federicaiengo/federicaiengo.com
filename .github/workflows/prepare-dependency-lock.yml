@@ -1,0 +1,31 @@
+name: Prepare reproducible dependency lock
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lock-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Resolve dependencies into a genuine npm lockfile
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Verify clean installation from generated lockfile
+        run: npm ci --no-audit --no-fund
+      - name: Run source and reference audits
+        run: |
+          python3 scripts/audit_site_source.py
+          python3 scripts/audit_site_references.py
+          python3 scripts/audit_visual_assets.py
+          python3 -m unittest discover -s scripts/tests -v
+      - name: Verify Astro build
+        run: npm run build
+      - name: Upload generated lockfile for review and commit
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-lock-for-review
+          path: package-lock.json
+          if-no-files-found: error
