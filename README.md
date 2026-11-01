@@ -15,6 +15,12 @@ npm run build
 
 **Important:** the current `package.json` specifies `latest` versions without a committed lockfile. Builds are therefore not yet dependency-reproducible. The latest verified production release completed the source checks, 78 Python tests, Astro build and Pages deploy in [GitHub Actions run 38741320173](https://github.com/federicaiengo/federicaiengo.com/actions/runs/38741320173) on 15 October 2026. **Later source changes require their own checks and deploy verification before they can be called live.** Browser rendering, dependency pinning and lockfile work remain distinct QA tasks.
 
+### Dependency lockfile preparation (manual, no deployment)
+
+The [Prepare reproducible dependency lock](.github/workflows/prepare-dependency-lock.yml) workflow is triggered manually from GitHub Actions. On Node 24 it generates an npm lockfile, verifies a clean `npm ci` installation, runs source/reference/visual-asset audits and Python tests, then builds the Astro site. If all steps pass, it uploads the lockfile and attempts to open a reviewable pull request for `package-lock.json`.
+
+**This workflow does not publish the website.** A successful run alone does not mean the lockfile has been merged or the deployment workflow has switched to `npm ci`. The PR creation step depends on repository Actions permissions; if it cannot open a PR, inspect the run logs and uploaded artifact. Only after a reviewed, verified lockfile is committed should the deploy workflow be changed from `npm install` to `npm ci`. Keep the existing explicit deployment trigger.
+
 ### Source-only preflight (no npm or network required)
 
 ```bash
