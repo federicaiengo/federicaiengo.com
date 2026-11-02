@@ -44,6 +44,10 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
         self.assertIn("303 mismatches are a", page)
         self.assertIn("not 303 proven errors or financial losses", page)
         self.assertIn("not investigations performed with a client", page)
+        self.assertIn("data-analytics-portfolio/blob/main/projects/ecommerce-revenue-operations-analytics", page)
+        self.assertNotIn("data-analytics-portfolio/tree/main/projects/ecommerce-revenue-operations-analytics", page)
+        self.assertIn("/local_validation/README.md", page)
+        self.assertIn("This does not rerun the historical dbt tests", page)
 
     def test_insurance_evidence_discloses_historical_limits_and_uses_file_links(self):
         page = read("src/pages/projects/insurance-claims-evidence.astro")
