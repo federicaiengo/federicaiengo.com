@@ -24,7 +24,7 @@ jobs:
           from html.parser import HTMLParser
 
           origin = 'https://federicaiengo.com'
-          paths = ['/', '/about/', '/projects/', '/research/', '/ai-search/', '/robots.txt', '/sitemap-index.xml']
+          paths = ['/', '/about/', '/projects/', '/research/', '/ai-search/', '/projects/ai-search-competitive-intelligence/', '/projects/cyber-risk-assessment/', '/projects/ecommerce-technical-evidence/', '/projects/hr-attrition-evidence/', '/projects/insurance-claims-evidence/', '/projects/seo-aeo-geo-optimization/', '/robots.txt', '/sitemap-index.xml']
           class Metadata(HTMLParser):
               def __init__(self):
                   super().__init__()
