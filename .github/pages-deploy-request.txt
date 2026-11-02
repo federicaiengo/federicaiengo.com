@@ -64,3 +64,11 @@ Scope: publish previously committed Person JSON-LD sameAs association with offic
 Source commit: c448f791f1c7e8fdbb92187ae20af6f32ed2f84b
 Constraints: no visual changes; no disclosure of private work; existing CI and Pages checks required
 Authorization: user explicitly requested deployment
+
+Release: 2026-11-03 evidence-led E-Commerce technical links and CI verification
+Scope: deploy already-reviewed E-Commerce technical evidence page and public source/test updates on site main; fix GitHub file URLs tree/main -> blob/main, add scoped DuckDB synthetic mart QA evidence, no global layout or design changes.
+Source preflight: GitHub Actions run 41544694272, commit 59a420de032f39b300dc913f1f86c5cb6afb1a6d, completed SUCCESS (audits, tests, Astro build).
+Evidence limitations: DuckDB synthetic checks are not a Snowflake run, 249-test dbt rerun, benchmark result, real-world financial improvement or SEO outcome.
+Owner authorization: 2026-11-03, "Procedi" when asked to approve release of previously verified website source changes.
+Exclusions: no LinkedIn/Pinterest posts, CV changes, confidential repositories, new cases/pages or unmeasured performance claims.
+Gate: existing guarded deploy workflow must pass before release is described as live.
