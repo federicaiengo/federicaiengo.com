@@ -1,0 +1,71 @@
+name: Live site smoke audit (no deployment)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/live-site-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  live-http-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Inspect public pages and sitemap (read-only)
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request
+          from urllib.parse import urlparse
+          from html.parser import HTMLParser
+
+          origin = 'https://federicaiengo.com'
+          paths = ['/', '/about/', '/projects/', '/research/', '/ai-search/', '/robots.txt', '/sitemap-index.xml']
+          class Metadata(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.titles = []
+                  self.in_title = False
+                  self.canonicals = []
+                  self.descriptions = []
+              def handle_starttag(self, tag, attrs):
+                  a = dict(attrs)
+                  if tag == 'title': self.in_title = True
+                  if tag == 'link' and a.get('rel') == 'canonical': self.canonicals.append(a.get('href'))
+                  if tag == 'meta' and a.get('name') == 'description': self.descriptions.append(a.get('content'))
+              def handle_endtag(self, tag):
+                  if tag == 'title': self.in_title = False
+              def handle_data(self, data):
+                  if self.in_title: self.titles.append(data)
+          errors = []
+          for path in paths:
+              url = origin + path
+              try:
+                  req = urllib.request.Request(url, headers={'User-Agent': 'PortfolioReadOnlyAudit/1.0'})
+                  with urllib.request.urlopen(req, timeout=18) as response:
+                      final = response.url
+                      data = response.read(1000000).decode('utf-8', errors='replace')
+                      code = response.status
+                  print(f'{code} {url} -> {final} bytes={len(data)}')
+                  if urlparse(final).netloc not in ('federicaiengo.com', 'www.federicaiengo.com'):
+                      errors.append(f'Unexpected redirect host: {final}')
+                  if path.endswith('.txt'):
+                      if 'sitemap-index.xml' not in data: errors.append('robots.txt missing sitemap reference')
+                  elif path.endswith('.xml'):
+                      if 'sitemap' not in data.lower(): errors.append('sitemap index missing sitemap content')
+                  else:
+                      m = Metadata(); m.feed(data)
+                      if not ''.join(m.titles).strip(): errors.append(f'{path} missing HTML title')
+                      if not m.descriptions: errors.append(f'{path} missing description')
+                      if not m.canonicals: errors.append(f'{path} missing canonical')
+              except Exception as exc:
+                  errors.append(f'{url}: {type(exc).__name__}: {exc}')
+          for err in errors: print('FAIL:', err)
+          if errors: raise SystemExit(1)
+          print('PASS: public HTTP pages and basic metadata reachable.')
+          print('Scope: HTTP smoke check only; no Google indexing or Search Console claims.')
+          PY
