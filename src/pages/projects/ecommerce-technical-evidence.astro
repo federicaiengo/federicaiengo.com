@@ -46,6 +46,7 @@ const source = 'https://github.com/federicaiengo/data-analytics-portfolio/tree/m
 <p>The association with installment count does not establish why the differences occurred. The available data do not identify whether they reflect interest, processing fees, adjustments or source-system errors. I therefore kept the two financial measures distinct and left discrepancies visible for further investigation instead of silently correcting them.</p>
 <h2>What was tested</h2>
 <p>The broader Snowflake/dbt pipeline includes 28 models and a documented regression result of 249 passing dbt checks, covering structural and business-rule integrity. Those checks are not equivalent to 249 independent scientific experiments, nor do they establish the economic cause of the differences. Incremental loading and idempotent reruns were also documented in the project.</p>
+<p>A separate <a href="https://github.com/federicaiengo/data-analytics-portfolio/actions/runs/41484382346" target="_blank" rel="noopener noreferrer">GitHub Actions run on 2 November 2026</a> passed two DuckDB checks on a four-order synthetic dataset, including the original monthly reconciliation mart with a documented SQL-dialect adaptation. This does not rerun the historical dbt tests, execute Snowflake, or measure production performance.</p>
 <h2>Inspect the evidence</h2>
 <p>Technical reviewers can trace the numbers to the underlying SQL model, diagnostic queries and written findings. Readers without a technical background can start with the findings report.</p>
 <div class="source-links">
@@ -53,6 +54,7 @@ const source = 'https://github.com/federicaiengo/data-analytics-portfolio/tree/m
 <a href={source + '/sql/06_financial_reconciliation_analysis.sql'} target="_blank" rel="noopener noreferrer">Inspect diagnostic SQL ↗</a>
 <a href={source + '/dbt/ecommerce_revenue_operations/models/intermediate/int_order_financial_reconciliation.sql'} target="_blank" rel="noopener noreferrer">Inspect reconciliation model ↗</a>
 <a href={source + '/README.md'} target="_blank" rel="noopener noreferrer">Full project and Power BI report ↗</a>
+<a href={source + '/local_validation/README.md'} target="_blank" rel="noopener noreferrer">Inspect synthetic mart QA and limitations ↗</a>
 </div>
 <p class="note">Independent portfolio analysis of a public e-commerce dataset. No client engagement, financial-loss estimate or production intervention is claimed.</p>
 </Base>
