@@ -72,3 +72,10 @@ Evidence limitations: DuckDB synthetic checks are not a Snowflake run, 249-test 
 Owner authorization: 2026-11-03, "Procedi" when asked to approve release of previously verified website source changes.
 Exclusions: no LinkedIn/Pinterest posts, CV changes, confidential repositories, new cases/pages or unmeasured performance claims.
 Gate: existing guarded deploy workflow must pass before release is described as live.
+
+Release: 2026-11-03 portfolio evidence alignment after project QA
+Scope: existing Projects hub + Cyber Risk & IAM + E-Commerce technical-evidence Astro pages, and source regression guards. Cyber educational case study v1 complete with 58 Python unittest methods and 24 synthetic IAM scenarios; E-Commerce synthetic DuckDB 12 original-SQL-model subset across two marts, 11 CI scripts. Preserve historical Snowflake numbers as historical and prohibit claims of production migration or performance.
+Preflight: site source test/audit/build GitHub Actions run 41580573423 on commit e0621a03b5092d0c26911f0e35cfbb781e82c996 COMPLETED SUCCESS. Portfolio original SQL models validated by E-Commerce GitHub Actions run 41580374588 COMPLETED SUCCESS, and Cyber suite run 41565390636 COMPLETED SUCCESS.
+Owner authorization: 2026-11-03 "Ok, procedi coi progetti ed il sito." Continuation of already-approved public portfolio case studies and website release workflow.
+No global CSS, logos, imagery, new routes, confidential Gossmere data, private checkpoint URLs, LinkedIn/Pinterest posts, CV, or inferred SEO/AI ranking improvements.
+Gate: current GitHub Pages build/deploy workflow must pass; browser/mobile live inspection remains a separate check.
