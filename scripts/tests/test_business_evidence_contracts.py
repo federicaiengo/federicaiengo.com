@@ -32,6 +32,9 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
         self.assertIn("58/58 Python unittest methods passed", page)
         self.assertIn("11/11 synthetic DuckDB QA scripts passed separately", page)
         self.assertIn("14 original SQL models", page)
+        self.assertIn("21/21 Python unittest methods passed in GitHub Actions", page)
+        self.assertIn("CLOSURE_REVIEW_2026-11-03.md", page)
+        self.assertIn("fictional observations, not measured AI Search performance", page)
 
     def test_cyber_study_discloses_fictional_scope_and_test_limits(self):
         page = read("src/pages/projects/cyber-risk-assessment.astro")

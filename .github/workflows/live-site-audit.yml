@@ -29,7 +29,11 @@ jobs:
           origin = 'https://federicaiengo.com'
           paths = ['/', '/about/', '/projects/', '/research/', '/ai-search/', '/projects/ai-search-competitive-intelligence/', '/projects/cyber-risk-assessment/', '/projects/ecommerce-technical-evidence/', '/projects/hr-attrition-evidence/', '/projects/insurance-claims-evidence/', '/projects/seo-aeo-geo-optimization/', '/robots.txt', '/sitemap-index.xml']
           expected_content = {
-              '/projects/': ('14 original SQL models', '58/58 Python unittest methods'),
+              '/projects/': (
+                  '14 original SQL models',
+                  '58/58 Python unittest methods',
+                  '21/21 Python unittest methods passed in GitHub Actions'
+              ),
               '/projects/cyber-risk-assessment/': (
                   '58 Python unittest methods', 'NOT ASSESSED'
               ),
