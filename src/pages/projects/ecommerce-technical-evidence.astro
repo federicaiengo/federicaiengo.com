@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 const source = 'https://github.com/federicaiengo/data-analytics-portfolio/blob/main/projects/ecommerce-revenue-operations-analytics';
 ---
-<Base title="E-Commerce Analytics: Technical Evidence | Federica Iengo" description="Explore Federica Iengo’s e-commerce data engineering case study: Python, Snowflake, 28 dbt models, 249 baseline tests and 303 investigated payment discrepancies.">
+<Base title="E-Commerce Analytics: Technical Evidence | Federica Iengo" description="Explore e-commerce financial reconciliation with Python, Snowflake and dbt; historical results and reproducible synthetic DuckDB validation of 11 SQL models.">
 <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/projects/">Projects</a><span aria-hidden="true"> / </span><span aria-current="page">E-Commerce Technical Evidence</span></nav>
 <p class="eyebrow">Data Analytics · Evidence-led case study</p>
 <h1>When payment totals and order values disagree</h1>
@@ -46,7 +46,8 @@ const source = 'https://github.com/federicaiengo/data-analytics-portfolio/blob/m
 <p>The association with installment count does not establish why the differences occurred. The available data do not identify whether they reflect interest, processing fees, adjustments or source-system errors. I therefore kept the two financial measures distinct and left discrepancies visible for further investigation instead of silently correcting them.</p>
 <h2>What was tested</h2>
 <p>The broader Snowflake/dbt pipeline includes 28 models and a documented regression result of 249 passing dbt checks, covering structural and business-rule integrity. Those checks are not equivalent to 249 independent scientific experiments, nor do they establish the economic cause of the differences. Incremental loading and idempotent reruns were also documented in the project.</p>
-<p>A separate <a href="https://github.com/federicaiengo/data-analytics-portfolio/actions/runs/41484382346" target="_blank" rel="noopener noreferrer">GitHub Actions run on 2 November 2026</a> passed two DuckDB checks on a four-order synthetic dataset, including the original monthly reconciliation mart with a documented SQL-dialect adaptation. This does not rerun the historical dbt tests, execute Snowflake, or measure production performance.</p>
+<p>After the original Snowflake environment became unavailable, I extended the project's reproducible checks using DuckDB and fabricated data. A <a href="https://github.com/federicaiengo/data-analytics-portfolio/actions/runs/41565773421" target="_blank" rel="noopener noreferrer">GitHub Actions run on 3 November 2026</a> passed <strong>11 Python validation scripts</strong>. One connects SQL from <strong>11 of the original 28 dbt models</strong>, from synthetic RAW inputs through staging and reconciliation to the monthly mart, with explicit SQL-dialect adaptations. Other scripts check incorrect JOIN grain, missing values, local incremental updates, late corrections, rollback and a limited two-connection DuckDB conflict scenario.</p>
+<p class="note">These tests use synthetic fixtures. They do not rerun the historical 249 dbt checks, execute Snowflake or its original data, establish a complete dbt migration, or measure warehouse performance. The local DuckDB MERGE and concurrency tests do not establish production safety.</p>
 <h2>Inspect the evidence</h2>
 <p>Technical reviewers can trace the numbers to the underlying SQL model, diagnostic queries and written findings. Readers without a technical background can start with the findings report.</p>
 <div class="source-links">
@@ -54,7 +55,7 @@ const source = 'https://github.com/federicaiengo/data-analytics-portfolio/blob/m
 <a href={source + '/sql/06_financial_reconciliation_analysis.sql'} target="_blank" rel="noopener noreferrer">Inspect diagnostic SQL ↗</a>
 <a href={source + '/dbt/ecommerce_revenue_operations/models/intermediate/int_order_financial_reconciliation.sql'} target="_blank" rel="noopener noreferrer">Inspect reconciliation model ↗</a>
 <a href={source + '/README.md'} target="_blank" rel="noopener noreferrer">Full project and Power BI report ↗</a>
-<a href={source + '/local_validation/README.md'} target="_blank" rel="noopener noreferrer">Inspect synthetic mart QA and limitations ↗</a>
+<a href={source + '/local_validation/README.md'} target="_blank" rel="noopener noreferrer">Inspect DuckDB tests and limitations ↗</a>
 </div>
 <p class="note">Independent portfolio analysis of a public e-commerce dataset. No client engagement, financial-loss estimate or production intervention is claimed.</p>
 </Base>
