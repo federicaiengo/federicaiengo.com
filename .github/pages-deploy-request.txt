@@ -79,3 +79,11 @@ Preflight: site source test/audit/build GitHub Actions run 41580573423 on commit
 Owner authorization: 2026-11-03 "Ok, procedi coi progetti ed il sito." Continuation of already-approved public portfolio case studies and website release workflow.
 No global CSS, logos, imagery, new routes, confidential Gossmere data, private checkpoint URLs, LinkedIn/Pinterest posts, CV, or inferred SEO/AI ranking improvements.
 Gate: current GitHub Pages build/deploy workflow must pass; browser/mobile live inspection remains a separate check.
+
+Release: 2026-11-03 E-Commerce delivery-operations original SQL evidence update
+Scope: existing E-Commerce technical evidence page, Projects card and source-test assertions only. Updated from 12 to 13 connected original SQL models: four RAW-backed staging views, intermediate/fact models, and financial, reviews, delivery monthly marts. All three on fabricated input data. Added explicit caution: a temporally impossible order is counted as on time by the original delivery mart, while also flagged as anomalous.
+GitHub portfolio CI: run 41593637218 on commit 4358939dc092288fe8b0adb48a7f903ad4e8f134, COMPLETED SUCCESS (11/11 scripts).
+Site source preflight: run 41594000141 on commit 54869551db04de8d0bf3bf6c677c8feb450a2ee5, COMPLETED SUCCESS (site audits, test suite and Astro build).
+User authorization context: 2026-11-03 "Ok, procedi coi progetti ed il sito" followed by "Procedi".
+Preserve design, CSS, identity, SEO structure and existing routes; no CV or social posting, private checkpoints, Snowflake access/data, real-client claims, rank/traffic measurements, or inferred performance improvements.
+Publish only after guarded Pages build/deploy jobs complete successfully. Live HTTP and mobile rendering require separate checks.
