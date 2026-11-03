@@ -2,16 +2,18 @@ name: Live site smoke audit (no deployment)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/live-site-audit.yml'
+  # Verify the live site AFTER a successful Pages deploy, not when source
+  # changes precede publication (which would create expected false failures).
+  workflow_run:
+    workflows: ['Deploy to GitHub Pages']
+    types: [completed]
 
 permissions:
   contents: read
 
 jobs:
   live-http-check:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
