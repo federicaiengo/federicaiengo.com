@@ -31,7 +31,7 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
         self.assertIn('href="/projects/cyber-risk-assessment/"', page)
         self.assertIn("58/58 Python unittest methods passed", page)
         self.assertIn("11/11 synthetic DuckDB QA scripts passed separately", page)
-        self.assertIn("13-model SQL subset", page)
+        self.assertIn("14 original SQL models", page)
 
     def test_cyber_study_discloses_fictional_scope_and_test_limits(self):
         page = read("src/pages/projects/cyber-risk-assessment.astro")
@@ -54,10 +54,13 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
         self.assertNotIn("data-analytics-portfolio/tree/main/projects/ecommerce-revenue-operations-analytics", page)
         self.assertIn("/local_validation/README.md", page)
         self.assertIn("11 Python validation scripts", page)
-        self.assertIn("41593637218", page)
-        self.assertIn("13 of the original 28 dbt models", page)
+        self.assertIn("41599836721", page)
+        self.assertIn("14 of the original 28 dbt models", page)
+        self.assertIn("order and item-grain fact tables", page)
         self.assertIn("three monthly marts", page)
         self.assertIn("still counts that anomalous order as on time", page)
+        self.assertIn("2/3 on time (66.67%)", page)
+        self.assertIn("1/2 (50%)", page)
         self.assertIn("do not rerun the historical 249 dbt checks", page)
         self.assertIn("do not establish production safety", page)
 
