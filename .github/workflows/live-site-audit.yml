@@ -20,15 +20,28 @@ jobs:
         run: |
           python3 - <<'PY'
           import urllib.request
+          import re
           from urllib.parse import urlparse
           from html.parser import HTMLParser
 
           origin = 'https://federicaiengo.com'
           paths = ['/', '/about/', '/projects/', '/research/', '/ai-search/', '/projects/ai-search-competitive-intelligence/', '/projects/cyber-risk-assessment/', '/projects/ecommerce-technical-evidence/', '/projects/hr-attrition-evidence/', '/projects/insurance-claims-evidence/', '/projects/seo-aeo-geo-optimization/', '/robots.txt', '/sitemap-index.xml']
+          expected_content = {
+              '/projects/': ('13-model SQL subset', '58/58 Python unittest methods'),
+              '/projects/cyber-risk-assessment/': (
+                  '58 Python unittest methods', 'NOT ASSESSED'
+              ),
+              '/projects/ecommerce-technical-evidence/': (
+                  '13 of the original 28 dbt models',
+                  'three monthly marts',
+                  'still counts that anomalous order as on time'
+              ),
+          }
           class Metadata(HTMLParser):
               def __init__(self):
                   super().__init__()
                   self.titles = []
+                  self.text_bits = []
                   self.in_title = False
                   self.canonicals = []
                   self.descriptions = []
@@ -40,6 +53,7 @@ jobs:
               def handle_endtag(self, tag):
                   if tag == 'title': self.in_title = False
               def handle_data(self, data):
+                  self.text_bits.append(data)
                   if self.in_title: self.titles.append(data)
           errors = []
           for path in paths:
@@ -62,10 +76,14 @@ jobs:
                       if not ''.join(m.titles).strip(): errors.append(f'{path} missing HTML title')
                       if not m.descriptions: errors.append(f'{path} missing description')
                       if not m.canonicals: errors.append(f'{path} missing canonical')
+                      visible_text = re.sub(r'\s+', ' ', ' '.join(m.text_bits))
+                      for expected in expected_content.get(path, ()):
+                          if expected not in visible_text:
+                              errors.append(f'{path} missing verified public text: {expected}')
               except Exception as exc:
                   errors.append(f'{url}: {type(exc).__name__}: {exc}')
           for err in errors: print('FAIL:', err)
           if errors: raise SystemExit(1)
-          print('PASS: public HTTP pages and basic metadata reachable.')
+          print('PASS: public HTTP pages, basic metadata and expected case-study evidence reachable.')
           print('Scope: HTTP smoke check only; no Google indexing or Search Console claims.')
           PY
