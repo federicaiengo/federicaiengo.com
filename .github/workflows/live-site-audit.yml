@@ -27,14 +27,15 @@ jobs:
           origin = 'https://federicaiengo.com'
           paths = ['/', '/about/', '/projects/', '/research/', '/ai-search/', '/projects/ai-search-competitive-intelligence/', '/projects/cyber-risk-assessment/', '/projects/ecommerce-technical-evidence/', '/projects/hr-attrition-evidence/', '/projects/insurance-claims-evidence/', '/projects/seo-aeo-geo-optimization/', '/robots.txt', '/sitemap-index.xml']
           expected_content = {
-              '/projects/': ('13-model SQL subset', '58/58 Python unittest methods'),
+              '/projects/': ('14 original SQL models', '58/58 Python unittest methods'),
               '/projects/cyber-risk-assessment/': (
                   '58 Python unittest methods', 'NOT ASSESSED'
               ),
               '/projects/ecommerce-technical-evidence/': (
-                  '13 of the original 28 dbt models',
+                  '14 of the original 28 dbt models',
                   'three monthly marts',
-                  'still counts that anomalous order as on time'
+                  'still counts that anomalous order as on time',
+                  '1/2 (50%)'
               ),
           }
           class Metadata(HTMLParser):
