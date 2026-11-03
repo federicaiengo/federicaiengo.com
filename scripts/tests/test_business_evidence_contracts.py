@@ -29,12 +29,17 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
         self.assertIn("DECISION_BRIEF.md", page)
         self.assertIn("Inspect synthetic source and tests", page)
         self.assertIn('href="/projects/cyber-risk-assessment/"', page)
+        self.assertIn("58/58 Python unittest methods passed", page)
+        self.assertIn("11/11 synthetic DuckDB QA scripts passed separately", page)
 
     def test_cyber_study_discloses_fictional_scope_and_test_limits(self):
         page = read("src/pages/projects/cyber-risk-assessment.astro")
         self.assertIn("No real supplier was assessed.", page)
-        self.assertIn("51 of 51 unittest methods", page)
-        self.assertIn("executed on the published synthetic files on 14 October 2026", page)
+        self.assertIn("58 Python unittest methods", page)
+        self.assertIn("GitHub Actions regression run", page)
+        self.assertIn("41565390636", page)
+        self.assertIn("CLOSURE_REVIEW_2026-11-03.md", page)
+        self.assertIn("NOT ASSESSED", page)
         self.assertIn("not an external audit", page)
         self.assertIn("not deployed IAM controls", page)
         self.assertIn("DECISION_BRIEF.md", page)
@@ -47,7 +52,11 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
         self.assertIn("data-analytics-portfolio/blob/main/projects/ecommerce-revenue-operations-analytics", page)
         self.assertNotIn("data-analytics-portfolio/tree/main/projects/ecommerce-revenue-operations-analytics", page)
         self.assertIn("/local_validation/README.md", page)
-        self.assertIn("This does not rerun the historical dbt tests", page)
+        self.assertIn("11 Python validation scripts", page)
+        self.assertIn("41565773421", page)
+        self.assertIn("11 of the original 28 dbt models", page)
+        self.assertIn("do not rerun the historical 249 dbt checks", page)
+        self.assertIn("do not establish production safety", page)
 
     def test_insurance_evidence_discloses_historical_limits_and_uses_file_links(self):
         page = read("src/pages/projects/insurance-claims-evidence.astro")
