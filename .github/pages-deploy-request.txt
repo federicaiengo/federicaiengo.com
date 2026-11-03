@@ -93,3 +93,10 @@ Scope: existing E-Commerce evidence case-study page and Projects hub, no route/s
 Owner authorization: 2026-11-03 "Ok, procedi coi progetti ed il sito" and continuation "Procedi".
 E-Commerce CI 41599836721: COMPLETED SUCCESS 11 scripts. Website source-preflight 41600256516: COMPLETED SUCCESS, source tests and Astro build. Post-deploy read-only HTTP audit runs only after successful Pages workflow to avoid pre-publication false failures.
 Guardrails: no confidential repositories, user datasets, Snowflake connection, private checkpoints, CV/social posts, redesign or claimed real KPI/SEO results. Publication subject to official Pages build/deploy success.
+
+
+Release: 2026-11-03 AI Search Visibility Lab educational v1.0 closure
+Scope: update existing /projects/ card to reflect completed synthetic educational lab, final 21/21 unittest methods, GitHub Actions source run 41688614267 and public project closure review. No separate real-world AI Search, SEO lift or citations are claimed. Original site brand/layout/CSS and all routes unchanged.
+Portfolio closure revision 887700193f8311e9dd8231e103dbcfae0f56ea7c. All source report tests pass in action 41688614267, and synthetic demo metrics remain unchanged.
+Site source/test/smoke single batched commit d6a6e2929aa3072990611f75cf1a46d947a09884. Site Source preflight 41689330868 COMPLETED/SUCCESS (static audits, unit checks, Astro build). Owner instruction: 2026-11-03 "(ai search) chiudilo" following ongoing project/site updates.
+Do not infer live AI-platform observation, third-party ranking changes, Gossmere results, independent cyber audits, privacy permission, new cost or externally validated employment outcomes. Deploy on existing official GitHub Pages pipeline only; read-only live HTTP audit follows only a successful deployment.
