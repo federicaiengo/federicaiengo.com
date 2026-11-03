@@ -87,3 +87,9 @@ Site source preflight: run 41594000141 on commit 54869551db04de8d0bf3bf6c677c8fe
 User authorization context: 2026-11-03 "Ok, procedi coi progetti ed il sito" followed by "Procedi".
 Preserve design, CSS, identity, SEO structure and existing routes; no CV or social posting, private checkpoints, Snowflake access/data, real-client claims, rank/traffic measurements, or inferred performance improvements.
 Publish only after guarded Pages build/deploy jobs complete successfully. Live HTTP and mobile rendering require separate checks.
+
+Release: 2026-11-03 E-Commerce item-grain fact and punctuality sensitivity
+Scope: existing E-Commerce evidence case-study page and Projects hub, no route/style/branding changes. Updated to 14 original SQL models connected via controlled synthetic DuckDB test, including original fct_order_items and three monthly marts. Includes delivery policy sensitivity 2/3 versus 1/2 on fabricated February data, with alternative explicitly not adopted.
+Owner authorization: 2026-11-03 "Ok, procedi coi progetti ed il sito" and continuation "Procedi".
+E-Commerce CI 41599836721: COMPLETED SUCCESS 11 scripts. Website source-preflight 41600256516: COMPLETED SUCCESS, source tests and Astro build. Post-deploy read-only HTTP audit runs only after successful Pages workflow to avoid pre-publication false failures.
+Guardrails: no confidential repositories, user datasets, Snowflake connection, private checkpoints, CV/social posts, redesign or claimed real KPI/SEO results. Publication subject to official Pages build/deploy success.
