@@ -53,8 +53,9 @@ class BusinessEvidenceSourceTests(unittest.TestCase):
         self.assertNotIn("data-analytics-portfolio/tree/main/projects/ecommerce-revenue-operations-analytics", page)
         self.assertIn("/local_validation/README.md", page)
         self.assertIn("11 Python validation scripts", page)
-        self.assertIn("41565773421", page)
-        self.assertIn("11 of the original 28 dbt models", page)
+        self.assertIn("41580374588", page)
+        self.assertIn("12 of the original 28 dbt models", page)
+        self.assertIn("two monthly marts", page)
         self.assertIn("do not rerun the historical 249 dbt checks", page)
         self.assertIn("do not establish production safety", page)
 
