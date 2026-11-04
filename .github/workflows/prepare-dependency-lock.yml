@@ -1,6 +1,12 @@
 name: Prepare reproducible dependency lock
 on:
   workflow_dispatch:
+  # One explicit repository request can prepare a reviewable lockfile PR.
+  # This workflow never deploys the public site.
+  push:
+    branches: [main]
+    paths:
+      - '.github/lockfile-prepare-request.txt'
 permissions:
   contents: write
   pull-requests: write
