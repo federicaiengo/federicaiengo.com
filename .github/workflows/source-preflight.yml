@@ -50,3 +50,11 @@ jobs:
           fi
       - name: Verify Astro build
         run: npm run build
+      - name: Upload npm lockfile candidate for code review (no deployment)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-npm-lockfile
+          path: package-lock.json
+          if-no-files-found: error
+          retention-days: 7
