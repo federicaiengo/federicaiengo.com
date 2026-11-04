@@ -58,6 +58,11 @@ def validate_observations(rows: list[dict[str, str]], prompts: dict[str, str],
     for idx, row in enumerate(rows, 2):
         if None in row:
             raise ValueError(f"Extra CSV fields on line {idx}")
+        for field in REQUIRED:
+            if not isinstance(row.get(field), str):
+                raise ValueError(f"Missing or invalid {field} on line {idx}")
+        if not row["evidence_note"].strip():
+            raise ValueError(f"Evidence note required on line {idx}")
         for field in ("run_id", "run_date", "engine", "prompt_id", "brand"):
             if not (row.get(field) or "").strip():
                 raise ValueError(f"Missing {field} on line {idx}")
