@@ -9,17 +9,17 @@ Independent professional portfolio and research hub for Federica Iengo.
 Astro source lives in `src/pages/`, with shared layout in `src/layouts/Base.astro`. Existing `public/robots.txt` and the Astro sitemap integration reference `https://federicaiengo.com`.
 
 ```bash
-npm install
+npm ci --no-audit --no-fund
 npm run build
 ```
 
-**Important:** the current `package.json` specifies `latest` versions without a committed lockfile. Builds are therefore not yet dependency-reproducible. The last independently verified public release (as of 4 November 2026) used source commit `f954995` and completed its [GitHub Pages deployment 41689513930](https://github.com/federicaiengo/federicaiengo.com/actions/runs/41689513930) on 3 November 2026, followed by a successful [HTTP smoke audit 41689683757](https://github.com/federicaiengo/federicaiengo.com/actions/runs/41689683757). Later DuckDB-oriented source changes through `289a808` passed [source preflight 41720459346](https://github.com/federicaiengo/federicaiengo.com/actions/runs/41720459346) (81 Python tests, source/reference/asset audits and Astro build) but had **not** been deployed to the public site as of 4 November 2026. Additional AI Search validation changes require their own CI checks. A source test run is not a publication or search-indexing measurement. Browser rendering, dependency pinning and lockfile work remain distinct QA tasks.
+**Reproducible dependencies (4 November 2026):** `package.json` pins Astro `7.4.5` and `@astrojs/sitemap` `3.7.4`. The reviewed npm v3 `package-lock.json` was merged in [PR #2](https://github.com/federicaiengo/federicaiengo.com/pull/2). A clean Node 24 `npm ci` install, 83 Python unit tests, source/reference/asset audits and the Astro build passed in [PR preflight 41928173058](https://github.com/federicaiengo/federicaiengo.com/actions/runs/41928173058). This pins dependency artifacts for the tested environment; it does not substitute for security reviews or browser QA.
 
-### Dependency lockfile preparation (manual, no deployment)
+**Publication state:** the last independently verified public site release used commit `f954995` on 3 November 2026 ([Pages deploy 41689513930](https://github.com/federicaiengo/federicaiengo.com/actions/runs/41689513930), [live HTTP smoke 41689683757](https://github.com/federicaiengo/federicaiengo.com/actions/runs/41689683757)). Later DuckDB and AI Search source changes, including the 15-model E-Commerce validation description, passed [site source preflight 41927133381](https://github.com/federicaiengo/federicaiengo.com/actions/runs/41927133381) but have **not** yet received a new authorized Pages deployment. Source checks do not establish Google indexing, mobile appearance or professional conversions.
 
-The [Prepare reproducible dependency lock](.github/workflows/prepare-dependency-lock.yml) workflow is triggered manually from GitHub Actions. On Node 24 it generates an npm lockfile, verifies a clean `npm ci` installation, runs source/reference/visual-asset audits and Python tests, then builds the Astro site. If all steps pass, it uploads the lockfile and attempts to open a reviewable pull request for `package-lock.json`.
+### Updating npm dependencies (manual, no deployment)
 
-**This workflow does not publish the website.** A successful run alone does not mean the lockfile has been merged or the deployment workflow has switched to `npm ci`. The PR creation step depends on repository Actions permissions; if it cannot open a PR, inspect the run logs and uploaded artifact. Only after a reviewed, verified lockfile is committed should the deploy workflow be changed from `npm install` to `npm ci`. Keep the existing explicit deployment trigger.
+The [Prepare reproducible dependency lock](.github/workflows/prepare-dependency-lock.yml) workflow can manually prepare and verify a new lockfile using Node 24, `npm ci`, source audits, unit tests and Astro build. It uploads the candidate for review but does **not** commit, open a PR or deploy the website. Review package integrity and changed dependencies, then propose any updates through the authorized GitHub account. The production Pages release remains independently gated.
 
 ### Source-only preflight (no npm or network required)
 
