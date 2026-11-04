@@ -13,7 +13,7 @@ npm install
 npm run build
 ```
 
-**Important:** the current `package.json` specifies `latest` versions without a committed lockfile. Builds are therefore not yet dependency-reproducible. The latest verified production release completed the source checks, 78 Python tests, Astro build and Pages deploy in [GitHub Actions run 38741320173](https://github.com/federicaiengo/federicaiengo.com/actions/runs/38741320173) on 15 October 2026. **Later source changes require their own checks and deploy verification before they can be called live.** Browser rendering, dependency pinning and lockfile work remain distinct QA tasks.
+**Important:** the current `package.json` specifies `latest` versions without a committed lockfile. Builds are therefore not yet dependency-reproducible. The last independently verified public release (as of 4 November 2026) used source commit `f954995` and completed its [GitHub Pages deployment 41689513930](https://github.com/federicaiengo/federicaiengo.com/actions/runs/41689513930) on 3 November 2026, followed by a successful [HTTP smoke audit 41689683757](https://github.com/federicaiengo/federicaiengo.com/actions/runs/41689683757). Later DuckDB-oriented source changes through `289a808` passed [source preflight 41720459346](https://github.com/federicaiengo/federicaiengo.com/actions/runs/41720459346) (81 Python tests, source/reference/asset audits and Astro build) but had **not** been deployed to the public site as of 4 November 2026. Additional AI Search validation changes require their own CI checks. A source test run is not a publication or search-indexing measurement. Browser rendering, dependency pinning and lockfile work remain distinct QA tasks.
 
 ### Dependency lockfile preparation (manual, no deployment)
 
