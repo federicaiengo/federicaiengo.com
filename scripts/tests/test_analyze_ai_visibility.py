@@ -94,6 +94,22 @@ class CompetitiveVisibilityTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.validate([record(position="1")])
 
+    def test_missing_csv_cells_fail_with_explicit_validation_error(self):
+        for field in ("cited", "recommended", "source_url", "evidence_note"):
+            row = record()
+            row[field] = None  # csv.DictReader uses None for a short input row.
+            with self.subTest(field=field), self.assertRaisesRegex(
+                ValueError, "Missing or invalid " + field
+            ):
+                self.validate([row])
+
+    def test_blank_evidence_note_is_rejected(self):
+        for note in ("", "   "):
+            with self.subTest(note=note), self.assertRaisesRegex(
+                ValueError, "Evidence note required"
+            ):
+                self.validate([record(evidence_note=note)])
+
     def test_wrong_header_rejected(self):
         with self.assertRaises(ValueError):
             validate_observations([record()], PROMPTS, ["run_id", "prompt_id"])
