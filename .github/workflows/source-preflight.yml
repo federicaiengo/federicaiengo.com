@@ -40,21 +40,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Install dependencies using lockfile when available
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci --no-audit --no-fund
-          else
-            echo "::warning::No committed package-lock.json; using npm install until lockfile PR is merged"
-            npm install --no-audit --no-fund
-          fi
+      - name: Install pinned dependencies from reviewed lockfile
+        run: npm ci --no-audit --no-fund
       - name: Verify Astro build
         run: npm run build
-      - name: Upload npm lockfile candidate for code review (no deployment)
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: candidate-npm-lockfile
-          path: package-lock.json
-          if-no-files-found: error
-          retention-days: 7
