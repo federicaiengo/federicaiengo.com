@@ -1,4 +1,0 @@
-# Explicit source-only dependency lockfile preparation
-Requested: 2026-11-04
-Goal: test a genuine npm lockfile with pinned Astro 7.4.5 and @astrojs/sitemap 3.7.4.
-Guardrail: upload artifact and propose a pull request for review only; no GitHub Pages deployment.
