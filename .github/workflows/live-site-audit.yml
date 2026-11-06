@@ -14,13 +14,16 @@ permissions:
 jobs:
   live-http-check:
     if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Windows, X64, federica-home]
     timeout-minutes: 8
     steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
       - name: Inspect public pages and sitemap (read-only)
         shell: bash
         run: |
-          python3 - <<'PY'
+          python - <<'PY'
           import urllib.request
           import re
           from urllib.parse import urlparse
