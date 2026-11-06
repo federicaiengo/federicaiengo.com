@@ -17,20 +17,24 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, Windows, X64, federica-home]
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
       - name: Render the canonical SVG social card to its LinkedIn-compatible PNG
+        shell: pwsh
         run: |
-          python3 -m venv /tmp/fi-social-venv
-          /tmp/fi-social-venv/bin/pip install --quiet cairosvg
-          /tmp/fi-social-venv/bin/python -c "import cairosvg; cairosvg.svg2png(url='public/social-preview.svg', write_to='public/social-preview.png', output_width=1200, output_height=630)"
+          python -m pip install --quiet cairosvg
+          python -c "import cairosvg; cairosvg.svg2png(url='public/social-preview.svg', write_to='public/social-preview.png', output_width=1200, output_height=630)"
       - name: Validate official FI icon and social assets
         run: |
-          python3 scripts/audit_site_source.py
-          python3 scripts/audit_site_references.py
-          python3 scripts/audit_visual_assets.py
-          python3 -m unittest discover -s scripts/tests -v
+          python scripts/audit_site_source.py
+          python scripts/audit_site_references.py
+          python scripts/audit_visual_assets.py
+          python -m unittest discover -s scripts/tests -v
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -43,7 +47,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Windows, X64, federica-home]
     needs: build
     steps:
       - name: Deploy
