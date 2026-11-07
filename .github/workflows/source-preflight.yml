@@ -56,20 +56,19 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Site venv pip missing' }
           (Join-Path $venv 'Scripts') | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           Write-Host 'PASS: isolated Federica site Python available'
-      - name: Render social preview required by asset checks
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install pinned dependencies from reviewed lockfile
+        run: npm ci --no-audit --no-fund
+      - name: Render social preview using the already pinned Sharp dependency
         run: |
-          python -m pip install --quiet cairosvg
-          python -c "import cairosvg; cairosvg.svg2png(url='public/social-preview.svg', write_to='public/social-preview.png', output_width=1200, output_height=630)"
+          node --input-type=module -e "import sharp from 'sharp'; await sharp('public/social-preview.svg').resize(1200, 630).png().toFile('public/social-preview.png');"
       - name: Run source, reference and visual audits
         run: |
           python scripts/audit_site_source.py
           python scripts/audit_site_references.py
           python scripts/audit_visual_assets.py
           python -m unittest discover -s scripts/tests -v
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-      - name: Install pinned dependencies from reviewed lockfile
-        run: npm ci --no-audit --no-fund
       - name: Verify Astro build
         run: npm run build
