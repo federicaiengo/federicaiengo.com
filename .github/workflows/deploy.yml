@@ -19,27 +19,61 @@ jobs:
   build:
     if: github.ref == 'refs/heads/main'
     runs-on: [self-hosted, Windows, X64, federica-home]
+    env:
+      PSExecutionPolicyPreference: Bypass
+    defaults:
+      run:
+        shell: powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command ". '{0}'"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-      - name: Render the canonical SVG social card to its LinkedIn-compatible PNG
-        shell: pwsh
+      - name: Verify dedicated Federica site runner identity
         run: |
-          python -m pip install --quiet cairosvg
-          python -c "import cairosvg; cairosvg.svg2png(url='public/social-preview.svg', write_to='public/social-preview.png', output_width=1200, output_height=630)"
+          if ($env:RUNNER_OS -ne 'Windows') { throw 'Windows home runner required' }
+          if ($env:RUNNER_NAME -ne 'federica-site-pc') { throw "Wrong runner: $env:RUNNER_NAME" }
+          Write-Host 'PASS: Federica personal site runner verified'
+      - uses: actions/checkout@v4
+      - name: Prepare isolated Python environment from an existing local installation
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $venv = Join-Path $env:RUNNER_TEMP 'federica-site-venv'
+          $candidates = @(
+            @{ Executable = 'python'; Prefix = @() },
+            @{ Executable = 'py'; Prefix = @('-3.13') },
+            @{ Executable = 'py'; Prefix = @('-3.12') },
+            @{ Executable = 'py'; Prefix = @('-3.11') }
+          )
+          $ready = $false
+          foreach ($candidate in $candidates) {
+            if (-not (Get-Command $candidate.Executable -ErrorAction SilentlyContinue)) { continue }
+            $probe = @($candidate.Prefix) + @('-c', 'import sys; assert (3, 11) <= sys.version_info[:2] < (3, 14)')
+            & ($candidate.Executable) @probe 2>$null
+            if ($LASTEXITCODE -ne 0) { continue }
+            $create = @($candidate.Prefix) + @('-m', 'venv', $venv)
+            & ($candidate.Executable) @create
+            if ($LASTEXITCODE -eq 0) { $ready = $true; break }
+          }
+          if (-not $ready) { throw 'Python 3.11-3.13 is not available to this runner; no global installation or elevation will be attempted' }
+          $python = Join-Path $venv 'Scripts\python.exe'
+          if (-not (Test-Path -LiteralPath $python)) { throw 'Site venv Python missing' }
+          & $python -m pip --version
+          if ($LASTEXITCODE -ne 0) { throw 'Site venv pip missing' }
+          (Join-Path $venv 'Scripts') | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          Write-Host 'PASS: isolated Federica site Python available'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install pinned dependencies from reviewed lockfile
+        run: npm ci --no-audit --no-fund
+      - name: Render social preview using the pinned Sharp dependency
+        run: |
+          node --input-type=module -e "import sharp from 'sharp'; await sharp('public/social-preview.svg').resize(1200, 630).png().toFile('public/social-preview.png');"
       - name: Validate official FI icon and social assets
         run: |
           python scripts/audit_site_source.py
           python scripts/audit_site_references.py
           python scripts/audit_visual_assets.py
           python -m unittest discover -s scripts/tests -v
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-      - run: npm ci --no-audit --no-fund
-      - run: npm run build
+      - name: Verify Astro build
+        run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -50,6 +84,11 @@ jobs:
     runs-on: [self-hosted, Windows, X64, federica-home]
     needs: build
     steps:
+      - name: Verify dedicated Federica site runner identity
+        shell: powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command ". '{0}'"
+        run: |
+          if ($env:RUNNER_OS -ne 'Windows') { throw 'Windows home runner required' }
+          if ($env:RUNNER_NAME -ne 'federica-site-pc') { throw "Wrong deployment runner: $env:RUNNER_NAME" }
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
