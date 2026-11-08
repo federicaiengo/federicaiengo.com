@@ -38,6 +38,7 @@ GitHub Pages deployment is intentionally triggered only by `workflow_dispatch` o
 ## Evidence-led projects
 
 - [Projects and portfolio code](src/pages/projects.astro)
+- [CSV Data Quality Audit — read-only synthetic demonstration](src/pages/projects/csv-data-quality-audit.astro) with a [Python source and test suite](https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/csv-data-quality-audit)
 - [Business-first Cyber Risk & IAM case-study evidence](https://github.com/federicaiengo/data-analytics-portfolio/blob/main/projects/cyber-risk-iam-decision-study/DECISION_BRIEF.md)
 - [Research and methods](src/pages/research.astro)
 - [AI Search measurement](src/pages/ai-search.astro)

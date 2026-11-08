@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+const repo = 'https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/csv-data-quality-audit';
+---
+<Base title="CSV Data Quality Audit: Read-only Python Demo | Federica Iengo" description="A practical, reproducible Python CSV data-quality demonstration: duplicate detection, missing values, invalid dates and privacy-minimal reporting on fictional records.">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/projects/">Projects</a><span aria-hidden="true"> / </span><span aria-current="page">CSV Data Quality Audit</span></nav>
+<p class="eyebrow">Data Engineering · Python · Data Quality</p>
+<h1>Find the data problems <span class="title-accent">before they enter a report.</span></h1>
+<p class="lead">A spreadsheet can look complete while hiding repeated identifiers, missing fields or inconsistent dates. This independent Python mini-project demonstrates how to identify common CSV quality issues without changing the source data.</p>
+<p class="scope"><strong>Scope:</strong> a read-only portfolio demonstration using invented customer records. It is not a client engagement or a claim about real customer data.</p>
+
+<section aria-labelledby="checks">
+<h2 id="checks">What gets checked</h2>
+<div class="grid">
+<article class="card"><h3>Keys and missing values</h3><p>Compare nonempty record keys after trimming and case-folding, and flag blanks in explicitly required columns.</p></article>
+<article class="card"><h3>Formats and structure</h3><p>Check strict calendar dates, basic email syntax, inconsistent CSV field counts and unnecessary surrounding spaces.</p></article>
+<article class="card"><h3>Evidence without disclosure</h3><p>Produce a deterministic JSON report of aggregate findings. No original row values appear in the report, and nothing is silently corrected.</p></article>
+</div>
+</section>
+
+<section aria-labelledby="demo">
+<h2 id="demo">One fictional example, with known defects</h2>
+<p>The demonstration file contains six deliberately invented CSV rows. Five have the expected number of fields; one has an extra field. Among the five structurally valid rows, the audit is expected to detect a duplicate identifier, a missing identifier, a missing email, one invalid email shape, an impossible calendar date and outer whitespace.</p>
+<div class="stat-grid">
+<div><strong>6</strong><span>Fictional rows read</span></div>
+<div><strong>1</strong><span>Duplicate key observation</span></div>
+<div><strong>1</strong><span>Invalid date observation</span></div>
+<div><strong>8</strong><span>Overlapping issue observations</span></div>
+</div>
+<p class="note">The figures describe fixed expectations from a synthetic fixture, not live business measurements. Multiple checks may flag the same record; eight observations do not mean eight different defective rows.</p>
+</section>
+
+<section aria-labelledby="workflow">
+<h2 id="workflow">From a messy export to a reviewable decision</h2>
+<ol>
+<li><strong>Define the contract.</strong> Identify the actual key, required columns, relevant date rules and permissible file scope.</li>
+<li><strong>Run read-only validation.</strong> Record aggregate inconsistencies without deleting rows, filling blanks or overwriting the input file.</li>
+<li><strong>Review causes before changing data.</strong> Confirm which issues are genuine mistakes and which are legitimate business exceptions.</li>
+<li><strong>Document remediation.</strong> Only apply explicitly approved corrections, then rerun the checks and preserve a change log.</li>
+</ol>
+<p>This is an example of how a small data-quality review can be structured. The last two steps describe a possible follow-up process, not remediation completed on a real client dataset.</p>
+</section>
+
+<section class="limits" aria-labelledby="limits">
+<h2 id="limits">What this does not establish</h2>
+<p>Passing a syntactic check is not proof that an email address exists, that a date reflects a real event, or that a business identifier is correct. The mini-project does not join multiple files, assess legal compliance, handle every national data format or provide automatic repairs. Source authorization and appropriate handling of sensitive data must be agreed before any real engagement.</p>
+</section>
+
+<section class="next" aria-labelledby="next">
+<h2 id="next">Inspect the method, or discuss a specific problem</h2>
+<p>The example, Python source, synthetic CSV and regression tests are available for technical review. For an actual data-quality task, the first step is agreeing on the dataset, scope and expected deliverable—not sending private customer files unsolicited.</p>
+<div class="links">
+<a href={repo} target="_blank" rel="noopener noreferrer">View source, tests and limitations ↗</a>
+<a href="https://www.linkedin.com/in/federica-iengo" target="_blank" rel="noopener noreferrer">Discuss a scoped data-quality task on LinkedIn ↗</a>
+<a href="/projects/">Explore other projects →</a>
+</div>
+</section>
+</Base>
+<style>
+.breadcrumbs{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap;margin-bottom:1.6rem;font-size:.84rem;color:#a9a49a}.breadcrumbs a{color:#FFD554}.breadcrumbs span[aria-current]{color:#c6c2b8}
+.lead{font-size:clamp(1.06rem,2vw,1.27rem);max-width:850px}.scope{padding:1.1rem 1.25rem;border-left:2px solid var(--gold);background:#12100b;max-width:870px}
+section{margin-top:3.8rem}section h2{margin-bottom:1.2rem}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.card{min-height:0}
+.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;max-width:930px;margin:1.6rem 0}.stat-grid div{display:flex;flex-direction:column;gap:.5rem;border:1px solid #373021;background:#12110e;border-radius:12px;padding:1.4rem}.stat-grid strong{font-size:clamp(1.6rem,3vw,2.2rem);color:#FFD554}.stat-grid span{font-size:.82rem;line-height:1.4;color:#c5bcab}
+.note{font-size:.87rem;color:#b3aaa0}ol{padding-left:1.4rem;max-width:880px}li{padding:.45rem 0;color:#c9c5bb;line-height:1.75}.limits{border-top:1px solid #302b23;padding-top:1.6rem}
+.next{padding:1.65rem;border:1px solid #403526;border-radius:14px;background:#15120d}.next h2{margin-top:.4rem}.links{display:flex;flex-wrap:wrap;gap:1rem 1.6rem}.links a{color:#FFD554;font-weight:700;font-size:.9rem;text-underline-offset:.25em}
+@media(max-width:860px){.grid{grid-template-columns:1fr 1fr}.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}.stat-grid div{padding:1rem}.next{padding:1.1rem}section{margin-top:2.5rem}}
+</style>
