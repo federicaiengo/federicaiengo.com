@@ -74,6 +74,25 @@ jobs:
           python -m unittest discover -s scripts/tests -v
       - name: Verify Astro build
         run: npm run build
+      - name: Expose existing Git for Windows Bash for Pages archive
+        shell: powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command ". '{0}'"
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $git = Get-Command git.exe -ErrorAction Stop
+          $gitRoot = Split-Path -Parent (Split-Path -Parent $git.Source)
+          $candidates = @(
+            (Join-Path $gitRoot 'bin\bash.exe'),
+            'C:\Program Files\Git\bin\bash.exe',
+            'C:\Program Files (x86)\Git\bin\bash.exe'
+          )
+          $bash = $candidates | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1
+          if (-not $bash) { throw 'Git Bash is missing on the Federica runner; Pages upload cannot proceed safely' }
+          $bashDir = Split-Path -Parent $bash
+          & $bash --version
+          if ($LASTEXITCODE -ne 0) { throw 'Git Bash executable failed verification' }
+          $env:PATH = "$bashDir;$env:PATH"
+          $bashDir | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          Write-Host 'PASS: existing Git Bash enabled for Pages archive'
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
