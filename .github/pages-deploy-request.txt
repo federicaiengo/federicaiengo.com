@@ -100,3 +100,10 @@ Scope: update existing /projects/ card to reflect completed synthetic educationa
 Portfolio closure revision 887700193f8311e9dd8231e103dbcfae0f56ea7c. All source report tests pass in action 41688614267, and synthetic demo metrics remain unchanged.
 Site source/test/smoke single batched commit d6a6e2929aa3072990611f75cf1a46d947a09884. Site Source preflight 41689330868 COMPLETED/SUCCESS (static audits, unit checks, Astro build). Owner instruction: 2026-11-03 "(ai search) chiudilo" following ongoing project/site updates.
 Do not infer live AI-platform observation, third-party ranking changes, Gossmere results, independent cyber audits, privacy permission, new cost or externally validated employment outcomes. Deploy on existing official GitHub Pages pipeline only; read-only live HTTP audit follows only a successful deployment.
+
+Release: 2026-11-11 SQL Visual Laboratory v0.8.2
+Scope: publish approved PR #3 (merge a0b36437913bb9e0e082a0d2cbaded5e79a460e0) on Federica's portfolio: static /tools/sql/ laboratory, Projects card, sitemap and SEO metadata, plus source audit tests.
+Privacy: demonstration uses synthetic orders/payments; reviewed changed paths and scanned lab text sources for credentials, local paths, network calls and unintended external links. No private datasets, checkpoint files or Gossmere repository changes.
+QA: local 85/85 Python site unit tests passed, Astro build PASS, generated sitemap contains /tools/sql/, required SQLite WASM assets present, local Projects navigation and laboratory confirmed working.
+Authorization: site owner explicitly instructed to proceed with publication on 2026-11-11 after PR #3 merge.
+Gate: official guarded GitHub Pages workflow must complete successful build, audits and deployment before claiming public release.
