@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050505"><title>SQL Visual Laboratory | Interactive SQL JOIN & SQLite — Federica Iengo</title><meta name="description" content="Explore SQL JOIN cardinality, row duplication and aggregation with interactive synthetic data. Run SELECT queries locally using SQLite WebAssembly."><link rel="canonical" href="https://federicaiengo.com/tools/sql/"><meta name="robots" content="index,follow"><meta property="og:type" content="website"><meta property="og:title" content="SQL Visual Laboratory | Federica Iengo"><meta property="og:description" content="Interactive SQL JOIN and SQLite exercises using synthetic data, with guided explanations of cardinality and aggregation."><meta property="og:url" content="https://federicaiengo.com/tools/sql/">
+<style>
+:root{color-scheme:dark;--bg:#0c1520;--panel:#142331;--line:#30475a;--text:#e9f5fa;--muted:#abc2ce;--cyan:#73e6d5;--pink:#fac5e8;--warn:#ffd29c}html,body{max-width:100%;overflow-x:hidden}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}main{width:100%;max-width:1180px;margin:0 auto;padding:24px 18px 60px;min-width:0;overflow-x:clip}header{margin-bottom:22px}h1{font-size:clamp(1.65rem,3.5vw,2.35rem);margin:.2em 0}h2{font-size:1.14rem;margin:0 0 12px}p{line-height:1.55}.tag{display:inline-block;border:1px solid var(--line);color:var(--cyan);padding:5px 10px;border-radius:30px;font-size:.83rem}.muted,small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.panel{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--panel);min-width:0}.wide{grid-column:1/-1}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.controls>*{max-width:100%}button,select{border-radius:9px;border:1px solid #537084;padding:11px 13px;min-height:44px;background:#1c3244;color:var(--text);font:inherit;cursor:pointer}button:hover{border-color:var(--cyan)}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}.primary{background:#164c48;border-color:#399b89}.danger{color:#ffb9b9}select{padding-right:25px}.table-wrap{overflow-x:auto;overflow-y:hidden;width:100%;max-width:100%;min-width:0;display:block}table{border-collapse:collapse;width:100%;white-space:nowrap;font-variant-numeric:tabular-nums}td,th{padding:9px 10px;text-align:left;border-bottom:1px solid #2c4354}th{color:var(--cyan);font-size:.82rem}tbody tr:hover{background:#20394a}td input{background:#0c1c29;border:1px solid #466075;color:var(--text);padding:8px;border-radius:7px;width:110px;font-size:1rem}td .amount{width:86px}td .row-delete{padding:6px 10px;min-height:36px}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}pre{padding:15px;background:#09131d;border:1px solid #254253;border-radius:12px;overflow:auto;line-height:1.5;font-size:.86rem}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.metric{padding:13px;border-radius:11px;background:#0e1e2c}.metric strong{display:block;font-size:1.32rem;margin:4px 0}.metric span{font-size:.79rem;color:var(--muted)}.pill{border-radius:20px;padding:3px 8px;font-size:.76rem;display:inline-block;background:#25594d;color:#dafff4}.pill.red{background:#613d3c;color:#ffe0d6}.note{padding:14px;border-left:4px solid var(--warn);background:#302b29;border-radius:4px;margin-top:12px;line-height:1.55}.help{color:var(--muted);font-size:.91rem}.row-index{color:var(--muted);font-size:.8rem}.kpi{font-size:1.8rem;color:var(--pink);font-weight:750}.visual-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:7px 0}.visual-chip{padding:7px 10px;background:#223c4e;border:1px solid #375b6c;border-radius:8px;font-size:.86rem}.visual-chip.duplicate{border-color:#d9a77f;background:#503d35}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@media(max-width:750px){.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}main{padding:16px 10px 45px}.panel{padding:14px}}@media(max-width:360px){.metrics{grid-template-columns:1fr}}@media(prefers-reduced-motion:no-preference){button{transition:background .15s,border-color .15s}}
+
+/* v0.2 additions */
+.hero{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.hero-mark{flex:none;width:62px;height:62px;border:1px solid #5eada0;border-radius:17px;display:grid;place-items:center;color:#a7f5df;background:#143d3a;font-size:1.55rem;font-weight:850}.tab-title{display:flex;gap:10px;align-items:center}.step{display:inline-grid;place-items:center;border-radius:100px;width:30px;height:30px;background:#224e4b;color:#b2fff0;font-size:.88rem}.hint{border-radius:11px;border:1px solid #37546c;padding:11px 13px;background:#132b3a;color:#c4dbe4;font-size:.91rem;line-height:1.45}.lineage-row{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #2b4656}.lineage-order{min-width:145px;flex:0 0 auto;white-space:nowrap;font-size:.9rem}.lineage-arrow{color:#70dece}.lineage-group{display:flex;gap:7px;flex-wrap:wrap;min-width:0}.lineage-payment,.lineage-none,.lineage-empty{border-radius:8px;background:#21443f;padding:6px 9px;border:1px solid #4e8a78;font-size:.85rem}.lineage-payment.fanout{background:#563e39;border-color:#d5a47b}.lineage-none{background:#263444;border-color:#50657e}.lineage-empty{background:#4a343a;border-color:#a56e7a}textarea{background:#0c1c29;color:var(--text);width:100%;min-height:105px;border:1px solid #537084;border-radius:11px;padding:12px;font: .9rem ui-monospace,monospace;resize:vertical}textarea:focus-visible{outline:3px solid var(--cyan)}.inline-code{color:#b5e8f2}.tip-list{padding-left:22px;line-height:1.6}.note-info{border-left:4px solid var(--cyan);background:#15342f;padding:14px;border-radius:5px}.footerline{border-top:1px solid var(--line);padding-top:15px;margin-top:22px}
+@media(max-width:550px){.hero-mark{width:48px;height:48px;font-size:1.1rem}.lineage-row{align-items:flex-start}.lineage-order{min-width:102px;max-width:102px;white-space:normal}.controls>label{width:auto}}
+
+@media(max-width:740px){.office-panel #officeTable{min-width:0;table-layout:auto;white-space:normal}.office-panel #officeTable td,.office-panel #officeTable th{padding:6px;font-size:.76rem;overflow-wrap:anywhere}}
+/* v0.4 mobile containment */
+.office-result{min-width:0;overflow:hidden}.office-result .table-wrap{overflow-x:auto;max-width:100%}
+/* v0.4 editor */
+.editor-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:15px}.editor-code{min-height:210px}.editor-output{max-height:380px;overflow:auto}.editor-badge{padding:5px 10px;border-radius:20px;background:#243f51;color:#c6e8f4;font-size:.82rem}.editor-panel{border-color:#587890}@media(max-width:780px){.editor-grid{grid-template-columns:1fr}}
+/* v0.3 office mode */
+.office-pill{background:#204d45;color:#b6f8eb;border-radius:999px;padding:5px 10px;font-size:.84rem}
+.office-panel{border-color:#4a9387;background:linear-gradient(160deg,#152a35,#132e31)}
+.office-panel #officeTable{min-width:460px}.office-result .table-wrap{contain:paint}.office-intro{max-width:760px}.office-grid{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr);gap:14px}.office-grid>div{min-width:0}.office-result{padding:12px;border:1px solid #375e69;border-radius:12px;background:#0f202c}.office-step{font-size:.85rem;color:var(--cyan);font-weight:700}
+input[type=number]{background:#0c1c29;border:1px solid #537084;color:var(--text);border-radius:9px;padding:11px;min-height:44px;font-size:1rem;width:130px}
+@media(max-width:740px){.office-grid{grid-template-columns:minmax(0,1fr)}.office-panel #officeTable{min-width:370px}}
+@media(max-width:480px){.editor-grid,.office-grid{min-width:0}.editor-panel .table-wrap{max-width:100%}.editor-code{font-size:16px}button{min-height:44px}#officeMin{font-size:16px;max-width:100%}}
+
+/* v0.8 — FI portfolio palette. Presentation-only; existing IDs and JS untouched. */
+:root{
+ --bg:#050505;--panel:#11100e;--line:#383226;--text:#f3f1ec;
+ --muted:#b9b2a5;--cyan:#f9cd51;--pink:#f1c76e;--warn:#e7af60;
+}
+body{background:radial-gradient(circle at 85% 0%,rgba(246,186,18,.065),transparent 30rem),var(--bg)}
+.panel{background:var(--panel);border-color:var(--line)}
+.tag{background:#18140d;color:#f9cd51;border-color:#715a2a}
+button,select{background:#201c15;border-color:#625436;color:var(--text)}
+button:hover,select:hover{background:#302819;border-color:#f9cd51}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,
+.fi-home:focus-visible{outline:3px solid #f9cd51;outline-offset:3px}
+.primary{background:#f9cd51;border-color:#f9cd51;color:#15110a;font-weight:700}
+.primary:hover{background:#ffe18a;border-color:#ffe18a;color:#15110a}
+th{color:#f9cd51}td,th{border-bottom-color:#373024}
+tbody tr:hover{background:#252017}
+td input,input[type=number],textarea{background:#0b0a09;color:var(--text);border-color:#65583e}
+pre{background:#0b0a09;border-color:#514329}
+.metric{background:#1b1812}.metric strong{color:#f3f1ec}
+.pill{background:#3b321b;color:#ffe1a0}.pill.red{background:#633331;color:#ffe6db}
+.note{background:#312619}.hint{background:#221c13;border-color:#6b5429;color:#e4d7be}
+.kpi{color:#f3ca73}
+.visual-chip{background:#262017;border-color:#65502c}
+.visual-chip.duplicate{background:#49311f;border-color:#bf8b45}
+.step{background:#624a20;color:#ffecb8}
+.lineage-row{border-bottom-color:#423627}.lineage-arrow{color:#f9cd51}
+.lineage-payment,.lineage-none,.lineage-empty{background:#2b251a;border-color:#71603d}
+.lineage-payment.fanout{background:#50321c;border-color:#c0934f}
+.lineage-none{background:#282421;border-color:#70665a}
+.lineage-empty{background:#4a292a;border-color:#ae7272}
+.inline-code{color:#ffe0a2}.note-info{background:#272113}
+.editor-badge{background:#3b301c;color:#ffe2a0}.editor-panel{border-color:#82622a}
+.office-pill{background:#41321c;color:#ffe2a2}
+.office-panel{background:linear-gradient(160deg,#191610,#13110f);border-color:#80622f}
+.office-result{background:#0e0d0b;border-color:#56482b}
+.office-step{color:#f9cd51}
+.fi-home{display:grid;place-items:center;width:64px;height:64px;flex:none;border:1px solid #68542c;border-radius:15px;background:#0a0907;text-decoration:none;transition:border-color .15s,background .15s}
+.fi-home:hover{border-color:#f9cd51;background:#19140d}
+.fi-home img{display:block;width:55px;height:55px;max-width:100%;object-fit:contain}
+@media(max-width:550px){.fi-home{width:52px;height:52px;border-radius:12px}.fi-home img{width:45px;height:45px}}
+@media(prefers-reduced-motion:reduce){.fi-home{transition:none}}
+
+
+/* v0.8.1 — mobile containment; functional scripts and IDs unchanged. */
+.editor-panel,.editor-grid,.editor-grid>div,.office-panel,.office-grid,.office-grid>div{min-width:0;max-width:100%}
+.editor-grid>.table-wrap,.editor-grid>div>.table-wrap{min-width:0;max-width:100%}
+.editor-panel select,.editor-panel textarea{display:block;box-sizing:border-box;min-width:0;max-width:100%}
+.editor-panel .editor-code{width:100%;max-width:100%;overflow-x:auto}
+.editor-panel .table-wrap{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.editor-panel .table-wrap table{width:max-content;min-width:100%}
+.editor-panel .controls{min-width:0;max-width:100%}
+.editor-panel .editor-badge,.editor-panel .pill{max-width:100%;overflow-wrap:anywhere;white-space:normal}
+@media(max-width:550px){
+ .panel{min-width:0}
+ .editor-panel .editor-grid{display:grid;grid-template-columns:minmax(0,1fr)}
+ .editor-panel .controls{gap:8px}
+ .editor-panel select{width:100%!important}
+ .editor-panel .editor-code{width:100%;min-height:210px;font-size:14px;line-height:1.45}
+ .editor-panel .table-wrap{display:block;max-width:100%;overflow-x:auto}
+ .editor-panel #sqlEditorMeta{max-width:100%;font-size:.73rem}
+ /* Keep Scenario and JOIN labels adjacent to their respective controls. */
+ #scenario,#joinType{max-width:100%;min-width:0}
+ section.panel:first-of-type>.controls{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:9px}
+ section.panel:first-of-type>.controls>button#reset{grid-column:1/-1;justify-self:start}
+ .office-panel>.controls>.office-pill{flex:none}
+}
+
+</style></head><body><main>
+<header class="hero"><div><span class="tag">SQL · DATA QUALITY · VISUAL LEARNING</span><h1>SQL Visual Laboratory <span style="color:var(--cyan)">✧</span></h1><p class="muted">La tua calcolatrice visuale per JOIN, duplicati, aggregazioni e attività d’ufficio. Modifica i dati, confronta le strategie e capisci <em>perché</em> il risultato cambia.</p></div><a class="fi-home" href="https://federicaiengo.com/" aria-label="Torna al portfolio di Federica Iengo" title="Portfolio di Federica Iengo"><img src="fi-mark.svg" alt="FI — Federica Iengo" width="56" height="56"></a></header>
+<section class="panel"><div class="controls"><label for="scenario">Scenario</label><select id="scenario" aria-label="Scenario dati"><option value="duplication">Duplicazione dopo JOIN</option><option value="unmatched">Ordini senza pagamenti</option><option value="nulls">NULL e aggregazioni</option></select><label for="joinType">JOIN</label><select id="joinType"><option value="LEFT">LEFT JOIN</option><option value="INNER">INNER JOIN</option></select><button type="button" id="reset">Ripristina scenario</button></div><p class="help">Tabelle di esempio sintetiche: i dati restano nel browser. Celle vuote = SQL NULL. Gli identificativi sono confrontati come testo; NULL non corrisponde mai a NULL.</p></section>
+<section class="panel office-panel" id="officeMode" style="margin-top:16px">
+ <div class="controls" style="justify-content:space-between"><h2 style="margin:0">✨ Modalità Ufficio — senza conoscere SQL</h2><span class="office-pill">Modalità guidata</span></div>
+ <p class="help office-intro">Scegli cosa vuoi ottenere: la calcolatrice usa i dati delle due tabelle qui sotto, mostra il risultato e scrive la query SQL equivalente. Nessun file viene inviato online. Per ora gli esempi usano gli schemi <code>orders</code> e <code>payments</code>.</p>
+ <div class="office-grid"><div><label class="office-step" for="officeTask">1 · Che cosa devi fare?</label><select id="officeTask" style="width:100%;margin-top:8px"><option value="summary">Riepilogo per cliente</option><option value="missing">Trova ordini senza pagamento</option><option value="duplicates">Trova codici ordine duplicati</option><option value="filter">Filtra per importo</option><option value="paymentcount">Conta pagamenti per ordine</option></select>
+ <p id="officeDescription" class="help"></p><div id="officeThreshold" hidden><label for="officeMin">Importo minimo</label><input type="number" step="any" id="officeMin" value="50"></div>
+ <div class="controls" style="margin-top:12px"><button type="button" id="officeRun" class="primary">Calcola risultato</button><button type="button" id="officeDownload">Scarica risultato CSV</button></div><p id="officeError" role="alert" class="help"></p><p id="officeAction" role="status" class="help"></p></div>
+ <div class="office-result"><div class="controls" style="justify-content:space-between"><span class="office-step">2 · Risultato</span><span class="pill" id="officeCount">0 righe</span></div><div class="table-wrap"><table id="officeTable" aria-label="Risultato dell'operazione guidata"></table></div><p id="officeExplanation" class="help"></p></div></div>
+ <details style="margin-top:12px"><summary style="cursor:pointer">3 · Guarda la query SQL generata</summary><pre id="officeSQL"></pre><button type="button" id="officeCopy">Copia questa query</button></details>
+ </section>
+<section class="panel editor-panel" id="sqlEditor" style="margin-top:16px">
+ <div class="controls" style="justify-content:space-between"><h2 style="margin:0">⌨️ Editor SQL — motore SQLite</h2><span class="editor-badge">SQLite · WebAssembly</span></div>
+ <p class="help">Esegui query <code>SELECT</code> sulle tabelle <code>orders</code> e <code>payments</code> con i dati presenti nella pagina. <strong>SQLite funziona nel browser</strong> tramite WebAssembly e Web Worker: crea un database temporaneo in memoria a ogni esecuzione, senza inviare i dati a un backend. Richiede i file locali <code>vendor/sql-wasm.js</code> e <code>vendor/sql-wasm.wasm</code>; se non si caricano, controlla la scheda Rete di DevTools. JOIN e Modalità Ufficio restano utilizzabili anche senza SQLite.</p>
+ <div class="editor-grid"><div><label for="sqlEditorExample">Query di esempio</label><select id="sqlEditorExample" style="width:100%;margin:8px 0 10px"><option value="join">LEFT JOIN: dettaglio righe</option><option value="summary">Riepilogo clienti</option><option value="missing">Ordini senza pagamenti</option><option value="fanout">Mostra fan-out</option></select><label for="sqlEditorCode" class="sr-only">Codice SQL da eseguire</label><textarea id="sqlEditorCode" class="editor-code" spellcheck="false" aria-label="Editor SQL"></textarea><div class="controls" style="margin-top:10px"><button type="button" id="sqlEditorRun" class="primary">▶ Esegui SELECT</button><button type="button" id="sqlEditorReset">Ripristina query</button></div><p id="sqlEditorStatus" class="help" role="status" aria-live="polite">Editor pronto. Premi «Esegui SELECT». Se SQLite non è disponibile, controlla i file vendor e apri la pagina via HTTP/HTTPS.</p></div>
+ <div><div class="controls" style="justify-content:space-between"><strong>Risultato SQLite</strong><span id="sqlEditorMeta" class="pill">Nessuna query eseguita</span></div><div class="table-wrap editor-output" style="margin-top:10px"><table id="sqlEditorResult" aria-label="Righe risultato SQLite"></table></div><p class="help">Una SELECT/WITH per volta · massimo 250 righe · timeout del Worker · database in memoria. L’esecuzione di SQL arbitrario non è una sandbox: non usare file sensibili senza una revisione privacy e sicurezza.</p></div></div>
+</section>
+<div class="grid" style="margin-top:16px">
+<section class="panel"><h2>1. orders <span class="muted">— tabella principale</span></h2><div class="table-wrap"><table><thead><tr><th>order_id</th><th>customer_id</th><th>amount</th><th><span class="sr-only">Azioni</span></th></tr></thead><tbody id="ordersRows"></tbody></table></div><div class="controls" style="margin-top:12px"><button id="addOrder" type="button">+ Ordine</button><small>Max 40 righe</small></div></section>
+<section class="panel"><h2>2. payments <span class="muted">— tabella collegata</span></h2><div class="table-wrap"><table><thead><tr><th>payment_id</th><th>order_id</th><th>channel</th><th><span class="sr-only">Azioni</span></th></tr></thead><tbody id="paymentsRows"></tbody></table></div><div class="controls" style="margin-top:12px"><button id="addPayment" type="button">+ Pagamento</button><small>Una riga orders può avere più pagamenti</small></div></section>
+<section class="panel wide"><div class="controls" style="justify-content:space-between"><h2>3. Risultato della JOIN</h2><span id="rowCount" class="pill"></span></div><div class="table-wrap"><table><thead><tr><th>order_id</th><th>customer_id</th><th>amount</th><th>payment_id</th><th>channel</th><th>Origine</th></tr></thead><tbody id="resultRows"></tbody></table></div><div id="visualMap" aria-label="Molteplicità delle righe per ordine" style="margin-top:14px"></div><div id="sqlText"></div></section>
+<section class="panel wide"><h2>4. Effetto sulle aggregazioni</h2><div class="metrics" id="metrics"></div><div id="warning" role="status" aria-live="polite"></div><details style="margin-top:16px"><summary style="cursor:pointer;min-height:36px">Mostra query SQL delle aggregazioni</summary><pre id="metricSQL"></pre></details></section>
+</div>
+<section class="panel" style="margin-top:16px"><div class="tab-title"><span class="step">5</span><h2 style="margin:0">Traccia delle righe — da dove arriva il risultato?</h2></div><p class="help">Ogni etichetta rappresenta una riga prodotta. In ambra, un ordine ripetuto per più pagamenti.</p><div id="lineage"></div></section>
+<section class="panel" style="margin-top:16px"><div class="tab-title"><span class="step">6</span><h2 style="margin:0">Come evitare somme sbagliate</h2></div><p class="help">Tre approcci a confronto. Attenzione: rispondono a domande diverse e non sono sempre intercambiabili.</p><div id="solutions"></div><p id="strategyNote" class="hint" style="margin-top:13px"></p><div id="advErrors" role="alert"></div></section>
+<div class="grid" style="margin-top:16px">
+<section class="panel"><div class="tab-title"><span class="step">7</span><h2 style="margin:0">Importa o esporta CSV</h2></div><p class="help">Incolla CSV di esempio; le celle rimangono su questo dispositivo. Limite: 40 righe per tabella, 25 KB per importazione.</p><div class="controls"><label for="csvTarget">Tabella</label><select id="csvTarget"><option value="orders">orders</option><option value="payments">payments</option></select></div><textarea id="csvText" aria-label="Testo CSV" placeholder="order_id,customer_id,amount&#10;O-1,C-1,100"></textarea><div class="controls" style="margin-top:10px"><button id="importCSV" type="button" class="primary">Importa CSV</button><button id="exportCSV" type="button">Esporta CSV</button></div><p id="csvMessage" class="help" role="status" aria-live="polite"></p></section>
+<section class="panel"><div class="tab-title"><span class="step">8</span><h2 style="margin:0">Query da copiare</h2></div><p class="help">SQL di riferimento per SQLite e PostgreSQL, da adattare al tuo schema. Non viene eseguito codice arbitrario.</p><div class="controls"><label for="sqlVariant">Esempio</label><select id="sqlVariant"><option value="metrics">Metriche JOIN</option><option value="grouped">Preaggregazione</option><option value="exists">EXISTS</option></select></div><pre id="selectedSQL" aria-label="Query SQL scelta"></pre><div class="controls"><button id="copySQL" type="button" class="primary">Copia SQL</button><button id="downloadSQL" type="button">Scarica .sql</button></div><p id="copyMessage" class="help" role="status"></p><textarea id="copyFallback" hidden aria-label="Query da copiare manualmente"></textarea><div hidden><pre id="groupedSQL"></pre><pre id="existsSQL"></pre></div></section>
+</div>
+<div class="footerline"><strong>Nota sulla precisione.</strong> La parte JOIN/Ufficio usa un motore didattico JavaScript; l’editor esegue SQLite WebAssembly nel browser quando i file locali sono caricati. Gli importi sono numeri in virgola mobile: non usarlo per contabilità o dati sensibili. Modalità Ufficio usa operazioni predefinite, non accetta SQL arbitrario. La fonte di verità resta il tuo DBMS. Nessuna pubblicità o tracciamento. Le SELECT sono elaborate nel Web Worker del browser; nessun servizio di raccolta dati è implementato.</div>
+<p class="help" style="margin-top:20px">SQL Visual Laboratory v0.8.2 · Progetto didattico di Federica Iengo. JOIN e Modalità Ufficio illustrativi; editor SQLite WebAssembly eseguito nel browser.</p>
+</main><script src="engine.js"></script><script src="advanced.js"></script><script src="ui.js"></script><script src="office.js"></script><script src="office-ui.js"></script><script src="sql-editor-core.js"></script><script src="sql-editor-ui.js"></script></body></html>

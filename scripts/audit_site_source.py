@@ -46,7 +46,12 @@ def audit(root: Path = ROOT) -> dict:
         "/" + p.relative_to(public).as_posix()
         for p in public.rglob("*") if p.is_file()
     } if public.is_dir() else set()
-    targets = set(routes) | assets
+    # Static index.html files under public/ also serve directory URLs.
+    static_indexes = {
+        path[:-len("index.html")]
+        for path in assets if path.endswith("/index.html")
+    }
+    targets = set(routes) | assets | static_indexes
     all_sources = pages + ([root / "src/layouts/Base.astro"] if
                            (root / "src/layouts/Base.astro").is_file() else [])
     static_links = dynamic_links = 0

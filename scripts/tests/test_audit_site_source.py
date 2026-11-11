@@ -98,6 +98,19 @@ class SiteAuditTests(unittest.TestCase):
         self.assertTrue(any("CNAME" in x for x in errors))
         self.assertTrue(any("sitemap" in x for x in errors))
 
+    def test_static_directory_index_link_is_valid(self):
+        sql_dir = self.root / "public/tools/sql"
+        sql_dir.mkdir(parents=True)
+        (sql_dir / "index.html").write_text("<h1>SQL</h1>", encoding="utf-8")
+        self.page("projects.astro", "Projects", '<a href="/tools/sql/">Try SQL</a>')
+        self.assertEqual(audit(self.root)["errors"], [])
+
+    def test_static_directory_link_without_index_is_invalid(self):
+        (self.root / "public/tools/sql").mkdir(parents=True)
+        self.page("projects.astro", "Projects", '<a href="/tools/sql/">Missing SQL</a>')
+        self.assertTrue(any("unresolved internal href" in error
+                            for error in audit(self.root)["errors"]))
+
     def test_literal_static_asset_is_valid(self):
         (self.root / "public/sheet.css").write_text("body{}", encoding="utf-8")
         self.page("index.astro", "Home", '<link href="/sheet.css" rel="stylesheet">')
