@@ -107,3 +107,10 @@ Privacy: demonstration uses synthetic orders/payments; reviewed changed paths an
 QA: local 85/85 Python site unit tests passed, Astro build PASS, generated sitemap contains /tools/sql/, required SQLite WASM assets present, local Projects navigation and laboratory confirmed working.
 Authorization: site owner explicitly instructed to proceed with publication on 2026-11-11 after PR #3 merge.
 Gate: official guarded GitHub Pages workflow must complete successful build, audits and deployment before claiming public release.
+
+Release retry: 2026-11-11 SQL Visual Laboratory Windows Pages artifact fix
+Previous deploy request commit: 6db8af531a27bd180a00c9c309df22c418fa268d
+Failure: build, audits and Astro build succeeded, but actions/upload-pages-artifact@v3 archive failed on Windows runner with 'bash: command not found'. Deploy job did not execute.
+Fix: commit acd44aafbe9b71745ff40fb4d1bb5869d9b15e31 exposes existing Git for Windows bash to the guarded build job; no global software installation, no runner replacement, no Gossmere changes.
+Authorization: user requested continuation of approved SQL Visual Laboratory public release.
+Gate: only claim live after GitHub Actions build and deploy both pass, then verify HTTPS /tools/sql/.
