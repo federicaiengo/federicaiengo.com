@@ -121,3 +121,11 @@ QA: 85/85 Python tests PASS; Astro v7.4.5 build PASS; owner visually checked hom
 Privacy: three text-only changes, no new external dependencies, private files, trackers or user datasets. No Gossmere repo changes, CV edits or social posting.
 Authorization: owner asked to proceed with the approved PR #4 release on 2026-11-13.
 Gate: existing GitHub Pages workflow must pass build, tests and deployment; check live site before claiming public availability.
+
+
+Release: 2026-11-13 homepage header-to-hero spacing refinement (PR #5)
+Scope: deploy approved homepage-only visual spacing correction already squash-merged in main commit 85fd1f7c4c8a9cd3fdd995b72256c552363576d7.
+Changes: opt-in home-main top padding, desktop clamp(28px,3.5vw,44px), mobile <=680px 22px; all other page paddings unchanged.
+QA: owner visually checked local Astro in Chrome at 375, 680, 681, 768, 1264 px and confirmed computed CSS at 768 px. Production requires separately verified CI build/deploy and live browser review.
+Authorization: owner explicitly approved merge then confirmed 'si' to separate deploy request on 2026-11-13.
+Guardrails: no new site content, SEO, private files, Gossmere materials, CV or social publication. Use existing dedicated self-hosted Federica runner; no paid hosted Actions requested.
