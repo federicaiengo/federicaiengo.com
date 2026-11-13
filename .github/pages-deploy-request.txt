@@ -114,3 +114,10 @@ Failure: build, audits and Astro build succeeded, but actions/upload-pages-artif
 Fix: commit acd44aafbe9b71745ff40fb4d1bb5869d9b15e31 exposes existing Git for Windows bash to the guarded build job; no global software installation, no runner replacement, no Gossmere changes.
 Authorization: user requested continuation of approved SQL Visual Laboratory public release.
 Gate: only claim live after GitHub Actions build and deploy both pass, then verify HTTPS /tools/sql/.
+
+Release: 2026-11-13 SQL Visual Laboratory professional positioning (PR #4)
+Scope: publish reviewed merge d56c057c9db42985c9314bb9d2d7f3d449c2a07c on Federica's portfolio, adding a homepage link and refining Projects and SQL lab introductory copy to describe a technical demonstration rather than a beginner exercise.
+QA: 85/85 Python tests PASS; Astro v7.4.5 build PASS; owner visually checked homepage, Projects and SQL lab locally (PASS).
+Privacy: three text-only changes, no new external dependencies, private files, trackers or user datasets. No Gossmere repo changes, CV edits or social posting.
+Authorization: owner asked to proceed with the approved PR #4 release on 2026-11-13.
+Gate: existing GitHub Pages workflow must pass build, tests and deployment; check live site before claiming public availability.
