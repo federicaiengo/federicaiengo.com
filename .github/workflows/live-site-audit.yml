@@ -17,9 +17,29 @@ jobs:
     runs-on: [self-hosted, Windows, X64, federica-home]
     timeout-minutes: 8
     steps:
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
+      - name: Use existing Python on Federica site runner (no download)
+        shell: powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command ". '{0}'"
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:RUNNER_NAME -ne 'federica-site-pc') { throw "Unexpected runner: $env:RUNNER_NAME" }
+          $candidates = @(
+            @{ Executable = 'python'; Prefix = @() },
+            @{ Executable = 'py'; Prefix = @('-3.13') },
+            @{ Executable = 'py'; Prefix = @('-3.12') },
+            @{ Executable = 'py'; Prefix = @('-3.11') }
+          )
+          $python = $null
+          foreach ($candidate in $candidates) {
+            if (-not (Get-Command $candidate.Executable -ErrorAction SilentlyContinue)) { continue }
+            $args = @($candidate.Prefix) + @('-c', 'import sys; assert (3, 11) <= sys.version_info[:2] < (3, 14); print(sys.executable)')
+            $result = & ($candidate.Executable) @args 2>$null
+            if ($LASTEXITCODE -eq 0 -and $result) { $python = $result[-1]; break }
+          }
+          if (-not $python -or -not (Test-Path -LiteralPath $python -PathType Leaf)) {
+            throw 'No existing Python 3.11-3.13 available on Federica runner'
+          }
+          (Split-Path -Parent $python) | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          Write-Host 'PASS: existing runner Python selected without installation'
       - name: Inspect public pages and sitemap (read-only)
         shell: bash
         run: |
@@ -30,7 +50,7 @@ jobs:
           from html.parser import HTMLParser
 
           origin = 'https://federicaiengo.com'
-          paths = ['/', '/about/', '/projects/', '/research/', '/ai-search/', '/projects/ai-search-competitive-intelligence/', '/projects/cyber-risk-assessment/', '/projects/ecommerce-technical-evidence/', '/projects/hr-attrition-evidence/', '/projects/insurance-claims-evidence/', '/projects/seo-aeo-geo-optimization/', '/robots.txt', '/sitemap-index.xml']
+          paths = ['/', '/articles/', '/articles/reliable-data-pipelines/', '/about/', '/projects/', '/research/', '/ai-search/', '/projects/ai-search-competitive-intelligence/', '/projects/cyber-risk-assessment/', '/projects/ecommerce-technical-evidence/', '/projects/hr-attrition-evidence/', '/projects/insurance-claims-evidence/', '/projects/seo-aeo-geo-optimization/', '/robots.txt', '/sitemap-index.xml']
           expected_content = {
               '/projects/': (
                   '15 original SQL models',
