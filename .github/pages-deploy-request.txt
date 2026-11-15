@@ -129,3 +129,12 @@ Changes: opt-in home-main top padding, desktop clamp(28px,3.5vw,44px), mobile <=
 QA: owner visually checked local Astro in Chrome at 375, 680, 681, 768, 1264 px and confirmed computed CSS at 768 px. Production requires separately verified CI build/deploy and live browser review.
 Authorization: owner explicitly approved merge then confirmed 'si' to separate deploy request on 2026-11-13.
 Guardrails: no new site content, SEO, private files, Gossmere materials, CV or social publication. Use existing dedicated self-hosted Federica runner; no paid hosted Actions requested.
+
+
+Release: 2026-11-15 first Articles section and approved DuckDB validation article
+Scope: PR #7 merged to main as b30c375d667b7f96fe31edecd447ba17050a0a02; new /articles/ hub, /articles/reliable-data-pipelines/ article, Articles primary navigation link only.
+Owner authorization: 2026-11-15 explicitly requested "pubblichiamo il primo articolo", then asked to be shown the result.
+Evidence: 15 of 28 original Snowflake/dbt models validated on synthetic inputs with DuckDB; most recent 11 Python script CI run documented in portfolio; NOT full original warehouse execution or production validation.
+Editorial: owner-approved prose "Reliable Data Pipelines Need More Than Successful Executions"; no private source/project details, no tutorials, no unsubstantiated professional claims.
+Safety gate: existing dedicated Federica Pages workflow must pass site audits, Python unit tests, Astro build and Pages deployment. Do not claim public success until workflow green and live page independently verified.
+Exclusions: draft documentation PR #6 not merged; no CV, LinkedIn, Pinterest, confidential checkpoints, brand logo/image redesign or Gossmere materials.
