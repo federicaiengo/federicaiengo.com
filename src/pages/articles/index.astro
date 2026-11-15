@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Articles | Data Engineering, Cybersecurity & Technology | Federica Iengo" description="Technical articles by Federica Iengo on data engineering, validation, tools and technologies, cybersecurity and evidence-led analysis.">
+  <section class="articles">
+    <header class="intro">
+      <p class="eyebrow">Articles</p>
+      <h1>Technical work, <span class="title-accent">clear thinking.</span></h1>
+      <p class="lead">Articles on the technologies, design decisions and analytical questions behind my projects. Grounded in practical work, with a clear distinction between what was tested and what remains outside the evidence.</p>
+    </header>
+    <div class="topics" aria-label="Article topics">
+      <span>Data Engineering</span><span>Tools &amp; Technologies</span><span>Cybersecurity</span><span>AI Search &amp; Research</span>
+    </div>
+    <section aria-labelledby="latest">
+      <p class="eyebrow">Latest article</p>
+      <div class="article-card">
+        <div class="card-meta"><span>Data Engineering · Data Quality · DuckDB</span><time datetime="2026-11-15">15 November 2026</time></div>
+        <h2 id="latest"><a href="/articles/reliable-data-pipelines/">Reliable Data Pipelines Need More Than Successful Executions</a></h2>
+        <p>Reproducible validation matters when analytical models become more complex. A look at what a connected DuckDB test suite can establish alongside an original Snowflake/dbt project—and where its scope ends.</p>
+        <a class="read" href="/articles/reliable-data-pipelines/">Read article <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </section>
+</Base>
+<style>
+.articles{max-width:1030px;margin:0 auto}
+.intro{max-width:840px;margin-bottom:2.3rem}
+.intro h1{max-width:840px}
+.lead{font-size:clamp(1.07rem,2vw,1.22rem);color:#c1bdb4;max-width:760px}
+.topics{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:4.2rem}
+.topics span{border:1px solid #403822;color:#D8C699;padding:.5rem .8rem;border-radius:999px;font-size:.76rem}
+.article-card{border:1px solid #403824;border-radius:16px;background:linear-gradient(140deg,#16130e,#0b0b0b);padding:2.3rem;max-width:870px}
+.card-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;color:#cbb475;font-size:.77rem}
+.article-card h2{margin:1.45rem 0 1rem;font-size:clamp(1.55rem,3vw,2.3rem);line-height:1.2}
+.article-card h2 a{text-decoration:none}
+.article-card h2 a:hover{text-decoration:underline}
+.article-card p{font-size:1rem;color:#bfbab1;max-width:760px}
+.read{display:inline-block;margin-top:1.25rem;color:#FFD554;font-weight:700;text-decoration:none}
+.read:hover{text-decoration:underline}
+@media(max-width:680px){.topics{margin-bottom:2.5rem}.article-card{padding:1.4rem}}
+</style>
