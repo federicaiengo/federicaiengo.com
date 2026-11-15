@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+const published = '2026-11-15';
+const url = 'https://federicaiengo.com/articles/reliable-data-pipelines/';
+const articleStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Reliable Data Pipelines Need More Than Successful Executions',
+  description: 'Why reproducible validation matters when analytical models become more complex, with evidence from a DuckDB and dbt e-commerce case study.',
+  datePublished: published,
+  dateModified: published,
+  inLanguage: 'en',
+  author: { '@type': 'Person', name: 'Federica Iengo', url: 'https://federicaiengo.com/' },
+  mainEntityOfPage: url,
+  isPartOf: { '@type': 'WebSite', name: 'Federica Iengo', url: 'https://federicaiengo.com/' }
+};
+---
+<Base title="Reliable Data Pipelines Need More Than Successful Executions | Federica Iengo" description="Why reproducible validation matters in data pipelines: a DuckDB and dbt e-commerce case study with clearly defined evidence and limitations.">
+  <article class="article">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a><span aria-hidden="true"> / </span><span aria-current="page">Data Engineering</span></nav>
+    <header class="article-head">
+      <p class="eyebrow">Data Engineering · Data Quality · DuckDB</p>
+      <h1>Reliable Data Pipelines Need More Than Successful Executions</h1>
+      <p class="deck">Why reproducible validation matters when analytical models become more complex.</p>
+      <p class="byline">By Federica Iengo <span aria-hidden="true">·</span> <time datetime={published}>15 November 2026</time></p>
+    </header>
+
+    <div class="article-body">
+      <p>A data pipeline can complete successfully, produce every expected table and still leave important questions unanswered.</p>
+      <p>Execution confirms that the process ran. Reliability depends on whether the resulting data preserves the relationships, definitions and business logic the analysis requires.</p>
+      <p>This distinction becomes particularly relevant when several transformations contribute to the same reporting environment.</p>
+
+      <h2>The complexity behind a final number</h2>
+      <p>In e-commerce analytics, an order, its individual items and the associated payments describe different parts of a transaction.</p>
+      <p>Each has its own level of detail. Bringing them together requires more than technically valid SQL: the relationships between those records must remain consistent with the metrics being calculated.</p>
+      <p>A financial total, for example, needs to reflect the correct transaction grain. An aggregation can be syntactically valid while producing a misleading figure if those relationships are not handled appropriately.</p>
+      <p>These issues are not always obvious in the finished report.</p>
+      <p>They become easier to investigate when validation is part of the analytical workflow, rather than a final check performed after the results have been produced.</p>
+
+      <h2>Extending validation beyond the original environment</h2>
+      <p>My E-Commerce Analytics project was developed using Snowflake and dbt, with transformations supporting financial reconciliation, operational analysis and reporting.</p>
+      <p>To extend its reproducibility, I built a separate validation layer using DuckDB.</p>
+      <p>It exercises 15 connected SQL models from the original 28-model project, covering staging transformations, order-level and item-level facts, a calendar dimension and three monthly reporting marts.</p>
+      <p>The validation uses controlled synthetic datasets and checks structural consistency alongside selected business rules.</p>
+      <p>In the latest documented CI run, all 11 Python validation scripts completed successfully.</p>
+      <p>This provides a repeatable way to assess the tested transformation chain independently of the original warehouse environment, while preserving the distinction between the two execution contexts.</p>
+
+      <h2>The value of clearly defined evidence</h2>
+      <p>Validation results are meaningful only in relation to what was actually tested.</p>
+      <p>The DuckDB suite covers a connected subset of the original SQL models. It does not reproduce the complete Snowflake/dbt environment, execute the full 28-model pipeline or establish production performance.</p>
+      <p>Those boundaries do not diminish the value of the tests. They make the results interpretable.</p>
+      <p>A documented validation process should make it possible to distinguish between confirmed behavior, assumptions and areas that still require investigation.</p>
+      <p>That clarity becomes especially important when analytical outputs are used to support financial or operational decisions.</p>
+
+      <h2>Reliability as an ongoing responsibility</h2>
+      <p>Analytical systems evolve. Models change, new data arrives and reporting requirements become more complex.</p>
+      <p>Maintaining confidence in their outputs requires checks that can be repeated and understood beyond the moment they were first written.</p>
+      <p>The additional DuckDB validation layer strengthens the reproducibility of the E-Commerce Analytics project by providing evidence for a defined portion of its transformation logic.</p>
+      <p>It complements the original Snowflake/dbt work without claiming to replace it.</p>
+      <p>Reliable analytics depends on more than a successful execution. It depends on being able to substantiate the results that execution produces.</p>
+    </div>
+
+    <aside class="related" aria-label="Related project">
+      <p class="eyebrow">Related project</p>
+      <h2>E-Commerce Revenue &amp; Operations Analytics</h2>
+      <p>Explore the documented financial reconciliation analysis, original Snowflake/dbt architecture and reproducible DuckDB validation.</p>
+      <a href="/projects/ecommerce-technical-evidence/">Read the project evidence <span aria-hidden="true">→</span></a>
+    </aside>
+    <script type="application/ld+json" set:html={JSON.stringify(articleStructuredData)} />
+  </article>
+</Base>
+<style>
+.article{max-width:980px;margin:0 auto}
+.breadcrumbs{display:flex;align-items:center;gap:.55rem;font-size:.82rem;color:#aaa;margin-bottom:3.4rem}
+.breadcrumbs a{color:#EFCB67}
+.article-head{max-width:880px;margin-bottom:3.5rem}
+.article-head h1{font-size:clamp(2.4rem,5vw,4.2rem);max-width:940px;margin:1rem 0 1.2rem}
+.deck{font-size:clamp(1.12rem,2vw,1.33rem);color:#c7c4bb;max-width:690px}
+.byline{font-size:.8rem;color:#aaa;margin-top:1.75rem}
+.article-body{max-width:760px}
+.article-body p{font-size:1.045rem;line-height:1.9;color:#c8c6bf;margin:0 0 1.4rem}
+.article-body p:first-child{font-size:1.16rem;color:#e4e0d6}
+.article-body h2{font-size:clamp(1.5rem,3vw,2.08rem);margin:3.5rem 0 1.3rem;line-height:1.25}
+.related{max-width:760px;margin:4.5rem 0 1rem;border:1px solid #4a3d22;border-radius:14px;background:linear-gradient(135deg,#17140d,#0d0d0c);padding:2rem}
+.related h2{font-size:1.35rem;margin:.5rem 0 1rem}
+.related p:not(.eyebrow){font-size:.94rem;color:#bcb8ae}
+.related a{display:inline-block;color:#FFD554;font-weight:700;margin-top:.5rem}
+@media(max-width:680px){.breadcrumbs{margin-bottom:2rem}.article-head{margin-bottom:2.4rem}.article-body p{font-size:1rem;line-height:1.8}.article-body h2{margin-top:2.6rem}.related{padding:1.3rem;margin-top:3rem}}
+</style>
