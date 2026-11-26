@@ -126,8 +126,12 @@ jobs:
                       data = response.read(1000000).decode('utf-8', errors='replace')
                       code = response.status
                   print(f'{code} {url} -> {final} bytes={len(data)}')
-                  if urlparse(final).netloc not in ('federicaiengo.com', 'www.federicaiengo.com'):
-                      errors.append(f'Unexpected redirect host: {final}')
+                  final_url = urlparse(final)
+                  if code != 200: errors.append(f'{path} unexpected HTTP status: {code}')
+                  if final_url.scheme != 'https' or final_url.netloc not in ('federicaiengo.com', 'www.federicaiengo.com'):
+                      errors.append(f'Unexpected redirect origin: {final}')
+                  if final_url.path.rstrip('/') != path.rstrip('/'):
+                      errors.append(f'{path} unexpected redirect path: {final_url.path}')
                   if path.endswith('.txt'):
                       if 'sitemap-index.xml' not in data: errors.append('robots.txt missing sitemap reference')
                   elif path.endswith('.xml'):
@@ -135,8 +139,10 @@ jobs:
                   else:
                       m = Metadata(); m.feed(data)
                       if not ''.join(m.titles).strip(): errors.append(f'{path} missing HTML title')
-                      if not m.descriptions: errors.append(f'{path} missing description')
-                      if not m.canonicals: errors.append(f'{path} missing canonical')
+                      if len(m.descriptions) != 1 or not (m.descriptions[0] or '').strip():
+                          errors.append(f'{path} expected exactly one nonempty description')
+                      if m.canonicals != [origin + path]:
+                          errors.append(f'{path} expected exactly one canonical: {origin + path}')
                       visible_text = re.sub(r'\s+', ' ', ' '.join(m.text_bits))
                       for expected in expected_content.get(path, ()):
                           if expected not in visible_text:
