@@ -14,8 +14,17 @@ import Base from '../../layouts/Base.astro';
     <section aria-labelledby="latest">
       <p class="eyebrow">Latest article</p>
       <div class="article-card">
+        <div class="card-meta"><span>Data Engineering · Architecture · DuckDB</span></div>
+        <h2 id="latest"><a href="/articles/what-is-duckdb/">What Is DuckDB and When Does It Make Sense?</a></h2>
+        <p>An architectural assessment of embedded analytics, SQL portability and the role of independent validation alongside a managed data warehouse.</p>
+        <a class="read" href="/articles/what-is-duckdb/">Read article <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+    <section class="previous" aria-labelledby="previous">
+      <p class="eyebrow" id="previous">Previous articles</p>
+      <div class="article-card">
         <div class="card-meta"><span>Data Engineering · Data Quality · DuckDB</span><time datetime="2026-11-15">15 November 2026</time></div>
-        <h2 id="latest"><a href="/articles/reliable-data-pipelines/">Reliable Data Pipelines Need More Than Successful Executions</a></h2>
+        <h2><a href="/articles/reliable-data-pipelines/">Reliable Data Pipelines Need More Than Successful Executions</a></h2>
         <p>Reproducible validation matters when analytical models become more complex. A look at what a connected DuckDB test suite can establish alongside an original Snowflake/dbt project—and where its scope ends.</p>
         <a class="read" href="/articles/reliable-data-pipelines/">Read article <span aria-hidden="true">→</span></a>
       </div>
@@ -29,6 +38,7 @@ import Base from '../../layouts/Base.astro';
 .lead{font-size:clamp(1.07rem,2vw,1.22rem);color:#c1bdb4;max-width:760px}
 .topics{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:4.2rem}
 .topics span{border:1px solid #403822;color:#D8C699;padding:.5rem .8rem;border-radius:999px;font-size:.76rem}
+.previous{margin-top:3rem}
 .article-card{border:1px solid #403824;border-radius:16px;background:linear-gradient(140deg,#16130e,#0b0b0b);padding:2.3rem;max-width:870px}
 .card-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;color:#cbb475;font-size:.77rem}
 .article-card h2{margin:1.45rem 0 1rem;font-size:clamp(1.55rem,3vw,2.3rem);line-height:1.2}
