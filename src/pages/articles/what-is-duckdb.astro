@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+// Publication date is intentionally unset until the authorized release.
+const articleStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What Is DuckDB and When Does It Make Sense?',
+  description: 'An architectural assessment of DuckDB for embedded analytics and SQL validation, with trade-offs against managed warehouses and evidence from an e-commerce project.',
+  inLanguage: 'en',
+  author: { '@type': 'Person', '@id': 'https://federicaiengo.com/#person', name: 'Federica Iengo', url: 'https://federicaiengo.com/' },
+  mainEntityOfPage: 'https://federicaiengo.com/articles/what-is-duckdb/'
+};
+---
+<Base title="What Is DuckDB and When Does It Make Sense? | Federica Iengo" description="An architectural assessment of DuckDB for embedded analytics and SQL validation, with trade-offs against managed warehouses and evidence from an e-commerce project.">
+  <article class="article">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a><span aria-hidden="true"> / </span><span aria-current="page">DuckDB</span></nav>
+    <header class="article-head">
+      <p class="eyebrow">Data Engineering · Architecture · DuckDB</p>
+      <h1>What Is DuckDB and When Does It Make Sense?</h1>
+      <p class="deck">Choosing where analytical work runs is as much an architectural decision as choosing the database itself.</p>
+      <p class="byline">By Federica Iengo</p>
+    </header>
+    <div class="article-body">
+      <p>The most interesting question about DuckDB is not whether it can execute analytical SQL. It is which parts of an analytical system actually need a separate database service, and which can be evaluated closer to the application, the data or the test environment.</p>
+      <p>In a data engineering architecture, reducing infrastructure dependencies can improve the practicality of validation. But removing a service boundary also changes where resource management, coordination and operational responsibility sit.</p>
+      <p>That distinction is more useful than framing DuckDB as a smaller or cheaper version of a cloud warehouse.</p>
+      <h2>The architectural trade-off behind embedded analytics</h2>
+      <p>DuckDB is a relational analytical database engine whose default execution model embeds the engine in its host process. Its column-oriented, vectorized execution design targets analytical operations such as scans, joins and aggregations.</p>
+      <p>The absence of a separately managed server in the embedded configuration reduces the operational dependencies of a local analytical task. Direct access to formats such as CSV and Parquet can also remove the need for a preliminary loading stage when the objective is to examine a file or test a transformation.</p>
+      <p>The trade-off is that the surrounding application or execution environment becomes responsible for resources and the lifecycle of the work. A local process is not, merely by virtue of running SQL, a shared governed data platform.</p>
+      <p>This changes the criteria for evaluating the engine. A validation workload benefits from repeatability and isolation; a shared production workload may instead depend on coordination, access management, availability and an operational model for many consumers.</p>
+      <h2>A separate validation environment, not a warehouse migration</h2>
+      <p>My E-Commerce Revenue &amp; Operations Analytics project illustrates a specific reason to choose DuckDB without replacing the original technology stack.</p>
+      <p>The original architecture uses Snowflake and dbt across 28 models. Its financial reconciliation depends on preserving order grain when combining item values and recorded payments.</p>
+      <p>In one deliberately constructed validation scenario, an order has two item records and three payment records. A raw join between those relations produces six rows. The arithmetic is simple; the architectural issue is whether each transformation preserves the grain on which the financial metric depends.</p>
+      <p>The original reconciliation models aggregate items and payments independently at order level before joining them. A local DuckDB check exercises the original intermediate SQL on synthetic inputs, including this join-multiplication case. The result is evidence about the tested logic, not evidence about real financial losses.</p>
+      <p>The broader local harness exercises a connected subset of 15 original SQL models, spanning four RAW-backed staging views, intermediate transformations, order and item facts, a calendar dimension and three monthly marts.</p>
+      <p>The documented self-hosted CI run of 7 November 2026 completed successfully across 11 Python validation scripts. These include isolated model checks, the connected subset and separate local incremental, reconciliation and transaction experiments.</p>
+      <p>This design allows part of the validation work to remain reproducible independently of the original warehouse. It does not imply that the original warehouse has become redundant.</p>
+      <p><a href="https://github.com/federicaiengo/data-analytics-portfolio/blob/main/projects/ecommerce-revenue-operations-analytics/local_validation/check_original_intermediate_reconciliation.py" target="_blank" rel="noopener noreferrer">Inspect the original intermediate reconciliation test</a> · <a href="https://github.com/federicaiengo/data-analytics-portfolio/tree/main/projects/ecommerce-revenue-operations-analytics/local_validation" target="_blank" rel="noopener noreferrer">Validation scope and limits</a> · <a href="https://github.com/federicaiengo/data-analytics-portfolio/actions/runs/42410298875" target="_blank" rel="noopener noreferrer">CI evidence</a>.</p>
+      <h2>Portability is not semantic equivalence</h2>
+      <p>The decision to reuse SQL across different analytical engines introduces another risk: a query can be made executable in a second engine without preserving every behavior of the first.</p>
+      <p>In the local harness, dbt references and selected Snowflake dialect expressions are substituted through deliberately narrow adaptations. The original source is preserved. The connected synthetic execution is not a full dbt compilation or a reproduction of Snowflake materializations.</p>
+      <p>The distinction becomes particularly important for incremental processing. A locally assembled MERGE can support a meaningful test of a stated contract, including replay or missed backdated changes. It cannot certify the SQL generated by the Snowflake dbt adapter, warehouse transaction semantics or operational behavior under production load.</p>
+      <p>Portability should therefore be evaluated at the level of specific expressions, assumptions and observed outputs rather than inferred from the successful execution of an adapted query.</p>
+      <p>The local suite is evidence for its tested subset. The historical warehouse regression remains a separate result. No cross-engine performance benchmark has been established in this project.</p>
+      <h2>When the architecture needs more than an embedded engine</h2>
+      <p>The embedded execution model is an advantage when independence from a database service is part of the design objective. It is not automatically an advantage when coordination across users and processes is central to the workload.</p>
+      <p>The current DuckDB documentation distinguishes single-process embedded access from alternative deployment patterns. Within the embedded mode, multiple writer threads can operate inside the writer process, subject to conflict rules. Cross-process writes introduce a different architectural choice: the Quack remote protocol offers a client-server model, while DuckLake can coordinate multiple instances through a central catalog.</p>
+      <p>These options matter because the relevant comparison is no longer simply DuckDB versus a cloud warehouse. It is the complete deployment architecture, including its access pattern, operational responsibilities and requirements for governance, reliability and scale.</p>
+      <p>Neither a lightweight embedded configuration nor a managed warehouse is intrinsically the right answer. Their suitability depends on which system responsibilities the workload must fulfill.</p>
+      <h2>My assessment</h2>
+      <p>DuckDB makes sense when analytical execution can be moved closer to the problem without losing the guarantees required by that problem. In my project, the benefit is a reproducible environment for investigating transformation logic and validating explicitly defined data contracts.</p>
+      <p>Snowflake remains the original warehouse environment. The local harness has a different purpose: reducing dependencies for a bounded set of checks, not proving warehouse equivalence or production readiness.</p>
+      <p>The value of that distinction is architectural. It allows validation to become less dependent on infrastructure without making the evidence less precise.</p>
+      <h2>Technical references</h2>
+      <p><a href="https://duckdb.org/why_duckdb" target="_blank" rel="noopener noreferrer">DuckDB design characteristics</a> · <a href="https://duckdb.org/docs/2.0/data/overview" target="_blank" rel="noopener noreferrer">Data access and formats</a> · <a href="https://duckdb.org/docs/2.0/connect/concurrency" target="_blank" rel="noopener noreferrer">Concurrency and deployment boundaries</a>.</p>
+    </div>
+    <aside class="related" aria-label="Related reading">
+      <p class="eyebrow">Related reading</p>
+      <h2>From architecture to evidence</h2>
+      <p>Explore the original warehouse architecture and the scope of its reproducible validation.</p>
+      <p><a href="/projects/ecommerce-technical-evidence/">E-Commerce technical evidence →</a></p>
+      <p><a href="/articles/reliable-data-pipelines/">Reliable Data Pipelines Need More Than Successful Executions →</a></p>
+    </aside>
+    <script type="application/ld+json" set:html={JSON.stringify(articleStructuredData)} />
+  </article>
+</Base>
+<style>
+.article{max-width:980px;margin:0 auto}
+.breadcrumbs{display:flex;align-items:center;gap:.55rem;font-size:.82rem;color:#aaa;margin-bottom:3.4rem}
+.breadcrumbs a{color:#EFCB67}
+.article-head{max-width:880px;margin-bottom:3.5rem}
+.article-head h1{font-size:clamp(2.4rem,5vw,4.2rem);max-width:940px;margin:1rem 0 1.2rem}
+.deck{font-size:clamp(1.12rem,2vw,1.33rem);color:#c7c4bb;max-width:690px}
+.byline{font-size:.8rem;color:#aaa;margin-top:1.75rem}
+.article-body{max-width:760px}
+.article-body p{font-size:1.045rem;line-height:1.9;color:#c8c6bf;margin:0 0 1.4rem}
+.article-body p:first-child{font-size:1.16rem;color:#e4e0d6}
+.article-body h2{font-size:clamp(1.5rem,3vw,2.08rem);margin:3.5rem 0 1.3rem;line-height:1.25}
+.related{max-width:760px;margin:4.5rem 0 1rem;border:1px solid #4a3d22;border-radius:14px;background:linear-gradient(135deg,#17140d,#0d0d0c);padding:2rem}
+.related h2{font-size:1.35rem;margin:.5rem 0 1rem}
+.related p:not(.eyebrow){font-size:.94rem;color:#bcb8ae}
+.related a{display:inline-block;color:#FFD554;font-weight:700;margin-top:.5rem}
+@media(max-width:680px){.breadcrumbs{margin-bottom:2rem}.article-head{margin-bottom:2.4rem}.article-body p{font-size:1rem;line-height:1.8}.article-body h2{margin-top:2.6rem}.related{padding:1.3rem;margin-top:3rem}}
+</style>
