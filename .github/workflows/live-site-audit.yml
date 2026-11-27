@@ -76,12 +76,17 @@ jobs:
           from html.parser import HTMLParser
 
           origin = 'https://federicaiengo.com'
-          paths = ['/', '/articles/', '/articles/reliable-data-pipelines/', '/about/', '/projects/', '/research/', '/ai-search/', '/projects/ai-search-competitive-intelligence/', '/projects/cyber-risk-assessment/', '/projects/ecommerce-technical-evidence/', '/projects/hr-attrition-evidence/', '/projects/insurance-claims-evidence/', '/projects/seo-aeo-geo-optimization/', '/robots.txt', '/sitemap-index.xml']
+          paths = ['/', '/articles/', '/articles/reliable-data-pipelines/', '/about/', '/projects/', '/projects/csv-data-quality-audit/', '/research/', '/ai-search/', '/projects/ai-search-competitive-intelligence/', '/projects/cyber-risk-assessment/', '/projects/ecommerce-technical-evidence/', '/projects/hr-attrition-evidence/', '/projects/insurance-claims-evidence/', '/projects/seo-aeo-geo-optimization/', '/robots.txt', '/sitemap-index.xml']
           expected_content = {
               '/projects/': (
                   '15 original SQL models',
                   '58/58 Python unittest methods',
                   '21/21 Python unittest methods passed in GitHub Actions'
+              ),
+              '/projects/csv-data-quality-audit/': (
+                  'six deliberately invented CSV rows',
+                  'eight observations do not mean eight different defective rows',
+                  'Source authorization and appropriate handling of sensitive data'
               ),
               '/projects/cyber-risk-assessment/': (
                   '58 Python unittest methods', 'NOT ASSESSED'
@@ -121,8 +126,12 @@ jobs:
                       data = response.read(1000000).decode('utf-8', errors='replace')
                       code = response.status
                   print(f'{code} {url} -> {final} bytes={len(data)}')
-                  if urlparse(final).netloc not in ('federicaiengo.com', 'www.federicaiengo.com'):
-                      errors.append(f'Unexpected redirect host: {final}')
+                  final_url = urlparse(final)
+                  if code != 200: errors.append(f'{path} unexpected HTTP status: {code}')
+                  if final_url.scheme != 'https' or final_url.netloc not in ('federicaiengo.com', 'www.federicaiengo.com'):
+                      errors.append(f'Unexpected redirect origin: {final}')
+                  if final_url.path.rstrip('/') != path.rstrip('/'):
+                      errors.append(f'{path} unexpected redirect path: {final_url.path}')
                   if path.endswith('.txt'):
                       if 'sitemap-index.xml' not in data: errors.append('robots.txt missing sitemap reference')
                   elif path.endswith('.xml'):
@@ -130,8 +139,10 @@ jobs:
                   else:
                       m = Metadata(); m.feed(data)
                       if not ''.join(m.titles).strip(): errors.append(f'{path} missing HTML title')
-                      if not m.descriptions: errors.append(f'{path} missing description')
-                      if not m.canonicals: errors.append(f'{path} missing canonical')
+                      if len(m.descriptions) != 1 or not (m.descriptions[0] or '').strip():
+                          errors.append(f'{path} expected exactly one nonempty description')
+                      if m.canonicals != [origin + path]:
+                          errors.append(f'{path} expected exactly one canonical: {origin + path}')
                       visible_text = re.sub(r'\s+', ' ', ' '.join(m.text_bits))
                       for expected in expected_content.get(path, ()):
                           if expected not in visible_text:
